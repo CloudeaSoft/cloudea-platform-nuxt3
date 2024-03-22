@@ -1,0 +1,15 @@
+{
+    "head": {
+        "title": "Cloudea Platform",
+        "description": "",
+        "keywords": ""
+    },
+    "header": {
+        "name": "Cloudea Platform",
+        "home": "主页",
+        "forum": "论坛",
+        "tool": "工具箱",
+        "book": "书架",
+        "about": "关于"
+    }
+}

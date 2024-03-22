@@ -1,0 +1,1 @@
+<template>With books we are living.</template>
