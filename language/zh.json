@@ -11,5 +11,8 @@
         "tool": "工具箱",
         "book": "书架",
         "about": "关于"
+    },
+    "warning": {
+        "test": "Test Warning"
     }
 }

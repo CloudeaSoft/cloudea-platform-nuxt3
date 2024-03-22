@@ -1,4 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const i18n = useI18n()
+
+const testMessage = ()=>{
+  const text = i18n.t('warning.test')
+  useMessage(text, `warn`, 2000)
+}
+</script>
 
 <template>
   <div class="forum-index-nav">
@@ -29,6 +36,7 @@
         </div>
       </div>
     </div>
+    <button @click="testMessage">xxx</button>
   </div>
   <div class="forum-index-container">
     <div class="forum-index-content">
@@ -87,7 +95,7 @@
   margin: 0 auto;
 }
 
-.forum-index-content{
+.forum-index-content {
   position: relative;
 }
 

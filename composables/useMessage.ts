@@ -1,5 +1,5 @@
 import { render, h, ref } from 'vue'
-import Message from '~/components/kun/alert/Message.vue'
+import Message from '~/components/cloudea/alert/Message.vue'
 
 type MessageType = `warn` | `success` | `error` | `info`
 
@@ -13,7 +13,7 @@ const messageCount = ref(0)
 export const useMessage = (
   message: string,
   type: MessageType,
-  duration?: number
+  duration: number = 3000
 ) => {
   messageCount.value++
   render(null, document.body)
@@ -24,7 +24,7 @@ export const useMessage = (
     duration
   })
 
-  const time = duration || 3000
+  const time = duration
 
   setTimeout(() => {
     messageCount.value--
