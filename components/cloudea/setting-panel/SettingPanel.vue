@@ -1,8 +1,12 @@
 <script setup lang="ts">
 const isShowTransparency = ref(true)
 
+const props = defineProps<{
+  show: boolean
+}>()
+
 const emits = defineEmits<{
-  close: [showKUNGalgamePanel: boolean]
+  close: [showcloudeaPanel: boolean]
 }>()
 
 const handelCloseSettingsPanel = () => {
@@ -11,16 +15,20 @@ const handelCloseSettingsPanel = () => {
 </script>
 
 <template>
-  <div class="root">
+  <div :class="props.show ? 'setting-panel active' : 'setting-panel'">
     <div class="container">
       <div class="title">
-        <span>{{ $t('header.settings.name') }}</span>
+        <span>{{ $t('settings.name') }}</span>
+        <div style="flex: 1"></div>
         <span><Icon class="settings-icon" name="uiw:setting-o" /></span>
+        <div class="close">
+          <Icon @click="handelCloseSettingsPanel" name="lucide:x" />
+        </div>
       </div>
 
-      <KunSettingPanelComponentsMode />
+      <CloudeaSettingPanelMode />
 
-      <KunSettingPanelComponentsSwitchLanguage />
+      <CloudeaSettingPanelLanguage />
 
       <div class="switch">
         <div class="menu">
@@ -28,13 +36,13 @@ const handelCloseSettingsPanel = () => {
             :class="isShowTransparency ? 'active' : ''"
             @click="isShowTransparency = true"
           >
-            {{ $t('header.settings.trans') }}
+            {{ $t('settings.trans') }}
           </span>
           <span
             :class="isShowTransparency ? '' : 'active'"
             @click="isShowTransparency = false"
           >
-            {{ $t('header.settings.font') }}
+            {{ $t('settings.font') }}
           </span>
         </div>
 
@@ -49,31 +57,35 @@ const handelCloseSettingsPanel = () => {
         </TransitionGroup>
       </div>
 
-      <KunSettingPanelComponentsBackground />
+      <CloudeaSettingPanelBackground />
 
-      <KunSettingPanelComponentsReset />
+      <CloudeaSettingPanelReset />
     </div>
 
     <KunSettingPanelComponentsLoli class="loli" />
-
-    <div class="close">
-      <Icon @click="handelCloseSettingsPanel" name="lucide:x" />
-    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.root {
+.setting-panel {
+  z-index: 9999;
+
   top: 75px;
-  right: 0;
-  position: absolute;
-  background-color: var(--kungalgame-trans-white-5);
+  right: -500px;
+  position: fixed;
+  background-color: var(--cloudea-trans-white-5);
   backdrop-filter: blur(5px);
   box-shadow: var(--shadow);
   border-radius: 10px;
   display: flex;
-  color: var(--kungalgame-font-color-3);
-  border: 1px solid var(--kungalgame-blue-2);
+  color: var(--cloudea-font-color-3);
+  border: 1px solid var(--cloudea-blue-2);
+
+  transition: right 0.5s;
+}
+
+.setting-panel.active {
+  right: 20px;
 }
 
 .container {
@@ -92,10 +104,19 @@ const handelCloseSettingsPanel = () => {
     display: flex;
     align-items: center;
   }
-}
 
-.settings-icon {
-  animation: settings 3s linear infinite;
+  .settings-icon {
+    margin-left: 20px;
+    animation: settings 3s linear infinite;
+  }
+
+  .close {
+    font-size: 25px;
+    width: 270px;
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+  }
 }
 
 @keyframes settings {
@@ -115,7 +136,7 @@ const handelCloseSettingsPanel = () => {
     display: flex;
     justify-content: space-between;
     margin-bottom: 17px;
-    border: 1px solid var(--kungalgame-blue-5);
+    border: 1px solid var(--cloudea-blue-5);
 
     span {
       cursor: pointer;
@@ -124,17 +145,17 @@ const handelCloseSettingsPanel = () => {
       display: flex;
       font-size: 15px;
       justify-content: center;
-      color: var(--kungalgame-blue-5);
+      color: var(--cloudea-blue-5);
       transition: all 0.2s;
 
       &:nth-child(1) {
-        border-right: 1px solid var(--kungalgame-blue-5);
+        border-right: 1px solid var(--cloudea-blue-5);
       }
     }
 
     .active {
-      background-color: var(--kungalgame-blue-5);
-      color: var(--kungalgame-white);
+      background-color: var(--cloudea-blue-5);
+      color: var(--cloudea-white);
     }
   }
 
@@ -142,15 +163,6 @@ const handelCloseSettingsPanel = () => {
     width: 100%;
     height: 73px;
   }
-}
-
-.close {
-  font-size: 25px;
-  width: 270px;
-  display: flex;
-  justify-content: flex-end;
-  margin: 20px;
-  cursor: pointer;
 }
 
 .item-move,
@@ -170,12 +182,12 @@ const handelCloseSettingsPanel = () => {
 }
 
 @media (max-width: 1000px) {
-  .root {
+  .setting-panel {
     display: none;
   }
 }
 @media (max-height: 600px) {
-  .root {
+  .setting-panel {
     right: -600px;
     transition: 0.5s;
   }

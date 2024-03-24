@@ -1,5 +1,13 @@
 <script setup lang="ts">
 const isShowSearch = ref(false)
+
+const emits = defineEmits<{
+  show: [showSettingPanel: boolean]
+}>()
+
+const handelShowSettingsPanel = () => {
+  emits('show', false)
+}
 </script>
 
 <template>
@@ -8,7 +16,7 @@ const isShowSearch = ref(false)
       <Icon name="lucide:search" />
     </span>
     <span class="settings">
-      <CloudeaSettingPanelMode></CloudeaSettingPanelMode>
+      <Icon name="uiw:setting-o" @click="handelShowSettingsPanel" />
     </span>
   </div>
 </template>

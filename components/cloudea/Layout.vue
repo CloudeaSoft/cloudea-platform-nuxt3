@@ -2,6 +2,7 @@
 const imageURL = ref('')
 
 onMounted(async () => {
+  useSettingStore().setPageBackground(2)
   imageURL.value = await useSettingStore().getCurrentPageBackground()
 })
 </script>

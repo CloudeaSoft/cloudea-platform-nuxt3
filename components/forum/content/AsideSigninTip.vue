@@ -6,9 +6,9 @@
         <span class="title">上午好！{{ 'xxx' }}</span>
         <div class="second-line">点亮在社区的每一天</div>
       </div>
-      <el-button class="signin-btn" type="primary" plain>
+      <div class="signin-btn" plain>
         <span class="btn-text">去签到</span>
-      </el-button>
+      </div>
     </div>
   </ForumContentAsideBlock>
 </template>

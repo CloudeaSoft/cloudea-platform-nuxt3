@@ -1,0 +1,28 @@
+{
+    "head": {
+        "title": "Cloudea Platform",
+        "description": "",
+        "keywords": ""
+    },
+    "settings": {
+        "name": "Setting Panel",
+        "language": "语言",
+        "languageOptions": {
+            "zh-cn": "中文 (简体)",
+            "en-us": "English (United States)"
+        },
+        "trans": "透明度",
+        "font": "字体"
+    },
+    "header": {
+        "name": "Cloudea Platform",
+        "home": "主页",
+        "forum": "论坛",
+        "tool": "工具箱",
+        "book": "书架",
+        "about": "关于"
+    },
+    "warning": {
+        "test": "Test Warning"
+    }
+}

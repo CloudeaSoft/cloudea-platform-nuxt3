@@ -30,7 +30,12 @@ export default defineNuxtConfig({
       {
         code: 'zh-cn',
         iso: 'zh-CN',
-        file: 'zh.json'
+        file: 'zh-cn.json'
+      },
+      {
+        code: 'en-us',
+        iso: 'en-US',
+        file: 'en-us.json'
       }
     ],
     baseUrl: process.env.CLOUDEA_PLATFORM_URL,
