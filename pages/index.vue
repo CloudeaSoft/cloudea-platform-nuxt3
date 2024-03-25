@@ -8,6 +8,6 @@
 
 <style lang="scss" scoped>
 .root {
-  height: 100dvh;
+  height: 100%;
 }
 </style>

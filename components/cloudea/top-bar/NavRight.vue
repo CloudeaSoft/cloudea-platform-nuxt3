@@ -1,13 +1,7 @@
 <script setup lang="ts">
 const isShowSearch = ref(false)
 
-const emits = defineEmits<{
-  show: [showSettingPanel: boolean]
-}>()
-
-const handelShowSettingsPanel = () => {
-  emits('show', false)
-}
+const { showSettingPanel } = storeToRefs(useTempSettingStore())
 </script>
 
 <template>
@@ -16,7 +10,10 @@ const handelShowSettingsPanel = () => {
       <Icon name="lucide:search" />
     </span>
     <span class="settings">
-      <Icon name="uiw:setting-o" @click="handelShowSettingsPanel" />
+      <Icon
+        name="uiw:setting-o"
+        @click="showSettingPanel = !showSettingPanel"
+      />
     </span>
   </div>
 </template>

@@ -35,17 +35,17 @@ export const useSettingStore = defineStore({
       }
     },
     // Set system bg
-    async setPageBackground(imgIndex: number) {
+    async setSystemBackground(imgIndex: number) {
       this.systemBackground = imgIndex
       await deleteImage(SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME)
     },
     // Set custom bg
-    async setCustomPageBackgroundImage(file: File) {
+    async setCustomBackgroundImage(file: File) {
       await saveImage(file, SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME)
       this.systemBackground = -1
     },
     // Get current bg
-    async getCurrentPageBackground() {
+    async getCurrentBackground() {
       const backgroundImageBlobData = await getImage(
         SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME
       )

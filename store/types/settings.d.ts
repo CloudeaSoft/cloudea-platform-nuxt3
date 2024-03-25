@@ -16,12 +16,9 @@ export interface SettingsStorePersist {
 }
 
 export interface SettingsStoreTemp {
-  showHamburger: boolean
-  showPanel: boolean
+  showCloudeaIcon: boolean
+  showSettingPanel: boolean
   showUserPanel: boolean
-
-  showMessageBox: boolean
-  messageStatus: MessageStatus
 }
 
 export const SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME = 'cloudea-custom-bg'

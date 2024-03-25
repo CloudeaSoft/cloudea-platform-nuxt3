@@ -1,4 +1,9 @@
 <script setup lang="ts">
+interface Mode {
+  name: string
+  icon: string
+}
+
 const modeItem: Mode[] = [
   {
     name: 'light',

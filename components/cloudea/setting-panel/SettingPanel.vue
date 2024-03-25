@@ -1,17 +1,11 @@
 <script setup lang="ts">
 const isShowTransparency = ref(true)
 
+const { showSettingPanel } = storeToRefs(useTempSettingStore())
+
 const props = defineProps<{
   show: boolean
 }>()
-
-const emits = defineEmits<{
-  close: [showcloudeaPanel: boolean]
-}>()
-
-const handelCloseSettingsPanel = () => {
-  emits('close', false)
-}
 </script>
 
 <template>
@@ -22,7 +16,7 @@ const handelCloseSettingsPanel = () => {
         <div style="flex: 1"></div>
         <span><Icon class="settings-icon" name="uiw:setting-o" /></span>
         <div class="close">
-          <Icon @click="handelCloseSettingsPanel" name="lucide:x" />
+          <Icon @click="showSettingPanel = false" name="lucide:x" />
         </div>
       </div>
 
@@ -48,11 +42,11 @@ const handelCloseSettingsPanel = () => {
 
         <TransitionGroup name="item" tag="div">
           <div class="item" v-if="isShowTransparency">
-            <KunSettingPanelComponentsTransparency />
+            <CloudeaSettingPanelTransparency />
           </div>
 
           <div class="item" v-else-if="!isShowTransparency">
-            <KunSettingPanelComponentsFont />
+            <CloudeaSettingPanelFont />
           </div>
         </TransitionGroup>
       </div>
@@ -61,8 +55,6 @@ const handelCloseSettingsPanel = () => {
 
       <CloudeaSettingPanelReset />
     </div>
-
-    <KunSettingPanelComponentsLoli class="loli" />
   </div>
 </template>
 
@@ -81,6 +73,7 @@ const handelCloseSettingsPanel = () => {
   color: var(--cloudea-font-color-3);
   border: 1px solid var(--cloudea-blue-2);
 
+  overflow: hidden;
   transition: right 0.5s;
 }
 

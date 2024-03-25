@@ -12,7 +12,13 @@
             "en-us": "English (United States)"
         },
         "trans": "透明度",
-        "font": "字体"
+        "font": "字体",
+        "fontInput": "请输入字体名称",
+        "background":"背景图片",
+        "backgroundSystem":"系统背景",
+        "confirm": "确认",
+        "default": "系统默认",
+        "reset": "恢复默认"
     },
     "header": {
         "name": "Cloudea Platform",
@@ -24,5 +30,11 @@
     },
     "warning": {
         "test": "Test Warning"
+    },
+    "meta": {
+        "forum": {
+            "title": "论坛",
+            "description": "论坛"
+        }
     }
 }

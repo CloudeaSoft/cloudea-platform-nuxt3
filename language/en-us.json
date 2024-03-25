@@ -6,21 +6,22 @@
     },
     "settings": {
         "name": "Setting Panel",
-        "language": "语言",
+        "language": "Language",
         "languageOptions": {
             "zh-cn": "中文 (简体)",
             "en-us": "English (United States)"
         },
-        "trans": "透明度",
-        "font": "字体"
+        "trans": "Transparency",
+        "font": "Font Style",
+        "confirm": "Confirm"
     },
     "header": {
         "name": "Cloudea Platform",
-        "home": "主页",
-        "forum": "论坛",
-        "tool": "工具箱",
-        "book": "书架",
-        "about": "关于"
+        "home": "Home",
+        "forum": "Forum",
+        "tool": "Toolbox",
+        "book": "Bookshelf",
+        "about": "About us"
     },
     "warning": {
         "test": "Test Warning"

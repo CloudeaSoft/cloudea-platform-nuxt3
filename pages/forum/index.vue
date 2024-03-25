@@ -1,4 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { t } = useI18n()
+
+useHead({
+  title: t('meta.forum.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('meta.forum.description')
+    }
+  ]
+})
+</script>
 
 <template>
   <div class="view forum-index-view">

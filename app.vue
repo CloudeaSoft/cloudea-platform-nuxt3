@@ -1,15 +1,15 @@
 <script setup lang="ts">
-const showSettingPanel = ref(false)
+const { showSettingPanel } = storeToRefs(useTempSettingStore())
 </script>
 
 <template>
   <div>
-    <CloudeaSettingPanel :show="showSettingPanel"></CloudeaSettingPanel>
+    <CloudeaSettingPanel :show="showSettingPanel"/>
     <NuxtLoadingIndicator
       :height="2"
       color="repeating-linear-gradient(90deg, #2ae0c8, #cbf5fb)"
     />
-    <CloudeaLayout @show="showSettingPanel = true">
+    <CloudeaLayout>
       <NuxtPage />
     </CloudeaLayout>
   </div>

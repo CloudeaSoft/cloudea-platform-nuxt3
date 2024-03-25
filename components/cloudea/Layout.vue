@@ -1,10 +1,18 @@
 <script setup lang="ts">
+const { systemBackground } = storeToRefs(useSettingStore())
+
 const imageURL = ref('')
 
 onMounted(async () => {
-  useSettingStore().setPageBackground(2)
-  imageURL.value = await useSettingStore().getCurrentPageBackground()
+  imageURL.value = await useSettingStore().getCurrentBackground()
 })
+
+watch(
+  () => systemBackground.value,
+  async () => {
+    imageURL.value = await useSettingStore().getCurrentBackground()
+  }
+)
 </script>
 
 <template>
