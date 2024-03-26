@@ -35,7 +35,7 @@ const handleRegister = () => {
       v-model="vercode"
       :placeholder="$t('login.registerForm.vercodePlaceholder')"
     />
-    <LoginForumButton class="button" @click.prevent="handleRegister">
+    <LoginForumButton class="button" @click="handleRegister">
       {{ $t('login.register') }}
     </LoginForumButton>
   </form>

@@ -23,8 +23,6 @@ const emit = defineEmits<ButtonEmits>()
 const handleClick = () => {
   if (!props.disabled) {
     emit('click')
-    console.log(props.type)
-    console.log(typeClass())
   }
 }
 
