@@ -1,47 +1,30 @@
 <script setup lang="ts">
 const i18n = useI18n()
 
-const testMessage = ()=>{
+const testMessage = () => {
   const text = i18n.t('warning.test')
   useMessage(text, `warn`, 2000)
 }
 </script>
 
 <template>
-  <div class="forum-index-nav">
+  <div class="forum-index-nav cloudea-area">
     <div class="side-navigator-wrap">
-      <div class="nav-item-wrap">
+      <div class="nav-item-wrap" v-for="i in 5">
         <div class="nav-item-content">
-          <a href="" class="nav-item">xxx</a>
-        </div>
-      </div>
-      <div class="nav-item-wrap">
-        <div class="nav-item-content">
-          <a href="" class="nav-item">xxx</a>
-        </div>
-      </div>
-      <div class="nav-item-wrap">
-        <div class="nav-item-content">
-          <a href="" class="nav-item">xxx</a>
-        </div>
-      </div>
-      <div class="nav-item-wrap">
-        <div class="nav-item-content">
-          <a href="" class="nav-item">xxx</a>
-        </div>
-      </div>
-      <div class="nav-item-wrap">
-        <div class="nav-item-content">
-          <a href="" class="nav-item">xxx</a>
+          <NuxtLinkLocale to="/forum" class="nav-item">xxx</NuxtLinkLocale>
         </div>
       </div>
     </div>
-    <button @click="testMessage">xxx</button>
   </div>
   <div class="forum-index-container">
     <div class="forum-index-content">
-      <ForumContentPostList></ForumContentPostList>
-      <ForumContentAside></ForumContentAside>
+      <div class="post-list">
+        <ForumContentPostList></ForumContentPostList>
+      </div>
+      <div class="forum-index-aside">
+        <ForumContentAside></ForumContentAside>
+      </div>
     </div>
   </div>
 </template>
@@ -56,8 +39,6 @@ const testMessage = ()=>{
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  border-radius: 10px;
-  background: var(--cloudea-trans-white-5);
   max-height: calc(100dvh - 101px);
   overflow-x: hidden;
 
@@ -97,26 +78,41 @@ const testMessage = ()=>{
 
 .forum-index-content {
   position: relative;
+
+  .post-list {
+    margin-right: 23.33rem;
+    width: 720px;
+    position: relative;
+    margin-bottom: 20px;
+    transition: margin 0.6s ease-in-out;
+  }
+}
+
+@media (max-width: 1220px) {
+  .forum-index-nav {
+    display: none;
+  }
 }
 
 @media (max-width: 1000px) {
-  .aside {
-    display: none;
-  }
+  .forum-index-content {
+    .post-list {
+      margin: 0 auto 20px;
+      width: 95vw;
+    }
 
-  .content-container {
-    width: 80%;
-    border: none;
+    .forum-index-aside {
+      display: none;
+    }
   }
 }
 
-@media (max-width: 700px) {
-  .aside {
-    display: none;
-  }
-
-  .main {
-    width: 95%;
+@media (max-width: 600px) {
+  .forum-index-content {
+    .post-list {
+      min-width: 100vw;
+      margin-bottom: 0;
+    }
   }
 }
 </style>

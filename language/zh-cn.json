@@ -14,8 +14,8 @@
         "trans": "透明度",
         "font": "字体",
         "fontInput": "请输入字体名称",
-        "background":"背景图片",
-        "backgroundSystem":"系统背景",
+        "background": "背景图片",
+        "backgroundSystem": "系统背景",
         "confirm": "确认",
         "default": "系统默认",
         "reset": "恢复默认"
@@ -26,7 +26,8 @@
         "forum": "论坛",
         "tool": "工具箱",
         "book": "书架",
-        "about": "关于"
+        "about": "关于",
+        "login": "登录/注册"
     },
     "warning": {
         "test": "Test Warning"
@@ -35,6 +36,29 @@
         "forum": {
             "title": "论坛",
             "description": "论坛"
+        }
+    },
+    "login": {
+        "login": "登录",
+        "loginWords":"在这里写一些登录描述文字",
+        "register": "注册",
+        "registerWords":"在这里写一些注册描述文字",
+        "loginForm": {
+            "accountPlaceholder": "用户名/邮箱",
+            "passwordPlaceholder": "密码",
+            "forgotPassword": "忘记密码?",
+            "messages": {
+                "loginSuccess": "登陆测试成功"
+            }
+        },
+        "registerForm": {
+            "usernamePlaceholder": "用户名",
+            "emailPlaceholder": "邮箱",
+            "passwordPlaceholder": "密码",
+            "vercodePlaceholder": "验证码",
+            "messages": {
+                "registerSuccess": "注册测试成功"
+            }
         }
     }
 }

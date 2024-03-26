@@ -22,12 +22,6 @@
   right: 0;
 }
 
-@media (max-width: 1000px) {
-  .index-aside {
-    display: none;
-  }
-}
-
 .sidebar-block {
   box-shadow: none;
 }

@@ -15,6 +15,14 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
         @click="showSettingPanel = !showSettingPanel"
       />
     </span>
+    <span class="user">
+      <Icon name="lucide:baby" />
+    </span>
+    <div class="login">
+      <NuxtLinkLocale to="/login">
+        {{ $t('header.login') }}
+      </NuxtLinkLocale>
+    </div>
   </div>
 </template>
 
@@ -28,7 +36,7 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
   margin: 0;
   order: 0;
 
-  .search {
+  & > * {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,13 +46,8 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
     margin-right: 20px;
   }
 
-  .settings {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--cloudea-font-color-2);
-    font-size: 25px;
-    cursor: pointer;
+  .login{
+    font-size: 1.33rem;
   }
 }
 </style>

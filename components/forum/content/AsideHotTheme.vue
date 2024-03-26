@@ -65,7 +65,7 @@ const itemList = ref([
 ])
 </script>
 <template>
-  <div class="list-box">
+  <div class="list-box cloudea-area">
     <p class="title">
       推荐话题
       <span class="refresh">
@@ -123,13 +123,6 @@ const itemList = ref([
   </div>
 </template>
 <style scoped>
-.list-box {
-  border-radius: 10px;
-  background-color: var(--cloudea-trans-white-5);
-  backdrop-filter: blur(10px);
-  box-shadow: var(--cloudea-shadow-0);
-}
-
 .title {
   justify-content: space-between;
   line-height: 46px;

@@ -12,8 +12,8 @@ const props = defineProps<{
   <div :class="props.show ? 'setting-panel active' : 'setting-panel'">
     <div class="container">
       <div class="title">
-        <span>{{ $t('settings.name') }}</span>
-        <div style="flex: 1"></div>
+        <span class="title-text">{{ $t('settings.name') }}</span>
+        <div class="title-text" style="flex: 1"></div>
         <span><Icon class="settings-icon" name="uiw:setting-o" /></span>
         <div class="close">
           <Icon @click="showSettingPanel = false" name="lucide:x" />
@@ -174,15 +174,27 @@ const props = defineProps<{
   position: absolute;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 600px) {
   .setting-panel {
-    display: none;
+    &.active {
+      right: calc((100vw - max(90vw, 350px)) / 2);
+      width: 90vw;
+      min-width: 350px;
+    }
+
+    .settings-icon {
+      margin-left: 0;
+    }
+
+    .title .title-text {
+      display: none;
+    }
   }
 }
 @media (max-height: 600px) {
   .setting-panel {
-    right: -600px;
-    transition: 0.5s;
+    height: 400px;
+    overflow: scroll;
   }
 }
 </style>

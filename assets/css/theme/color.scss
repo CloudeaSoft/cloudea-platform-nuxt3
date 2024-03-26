@@ -26,4 +26,11 @@ html {
   --cloudea-trans-blue-4: #218bff77;
 
   --cloudea-trans-pink-2: #ffadda77;
+
+  --cloudea-shadow-color: hsla(0, 0%, 0%, 0.05);
+  --cloudea-mask-color-0: #00000077;
+  --shadow: 0 1px 2px var(--cloudea-shadow-color),
+    0 1px 4px var(--cloudea-shadow-color), 0 2px 8px var(--cloudea-shadow-color);
+  --cloudea-shadow-0: 0px 0px 12px rgba(0, 0, 0, 0.2);
+  --cloudea-shadow-1: 0px 0px 17px var(--cloudea-trans-blue-3);
 }

@@ -7,7 +7,7 @@ const info = ref({
 })
 </script>
 <template>
-  <div class="index-aside-footer">
+  <div class="index-aside-footer cloudea-area">
     <ul class="more-list">
       <li class="item">
         <a href="" target="_blank" rel="nofollow">使用指南</a>
@@ -58,12 +58,6 @@ li {
 
 .index-aside-footer {
   padding: 15px;
-
-  border-radius: 10px;
-  background-color: var(--cloudea-trans-white-5);
-  backdrop-filter: blur(10px);
-  box-shadow: var(--cloudea-shadow-0);
-  box-shadow: none;
 }
 
 .index-aside-footer .more-list {

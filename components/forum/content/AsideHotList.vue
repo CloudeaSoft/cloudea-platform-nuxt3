@@ -11,7 +11,7 @@ const testList = ref([
 </script>
 
 <template>
-  <div class="hot-list-container">
+  <div class="hot-list-container cloudea-area">
     <div class="hot-list-item">
       <div class="hot-item-header">
         <div class="hot-title">
@@ -80,13 +80,6 @@ const testList = ref([
 </template>
 
 <style scoped>
-.hot-list-container {
-  border-radius: 10px;
-  background-color: var(--cloudea-trans-white-5);
-  backdrop-filter: blur(10px);
-  box-shadow: var(--cloudea-shadow-0);
-}
-
 .hot-list-item {
   border-radius: 4px;
   background-color: var(--Forum-Content-Color);

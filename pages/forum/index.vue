@@ -19,10 +19,6 @@ useHead({
 </template>
 
 <style lang="scss" scoped>
-.root {
-  height: 100dvh;
-}
-
 .forum-index-view {
   display: flex;
   flex-direction: row;

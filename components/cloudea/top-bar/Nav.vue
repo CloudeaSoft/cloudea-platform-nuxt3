@@ -3,18 +3,25 @@ import { topBarItemList } from './topBarItem'
 
 const navItemNum = topBarItemList.length
 const navItemLength = `${navItemNum * 100}px`
+
+const showPhoneHide = ref(false)
 </script>
 <template>
   <nav class="main-nav">
     <ul class="nav-list">
+      <li class="main-nav-entry">
+        <span @click="showPhoneHide = !showPhoneHide"
+          ><Icon name="lucide:menu"
+        /></span>
+      </li>
       <li class="main-nav-list">
-        <ul class="phone-hide">
+        <ul :class="showPhoneHide ? 'phone-hide active' : 'phone-hide'">
           <li v-for="linkItem in topBarItemList" :key="linkItem.index">
-            <NuxtLink :to="{ path: linkItem.router }">
-              {{ $t(`header.${linkItem.name}`) }}
-            </NuxtLink>
+            <NuxtLinkLocale :to="{ path: linkItem.router }">
+              <span class="item-wrap">{{ $t(`header.${linkItem.name}`) }}</span>
+            </NuxtLinkLocale>
+            <div class="underline"></div>
           </li>
-          <div class="box"></div>
         </ul>
       </li>
       <CloudeaTopBarNavRight></CloudeaTopBarNavRight>
@@ -39,6 +46,16 @@ $navNumber: v-bind(navItemNum);
   margin: 0;
 }
 
+.main-nav-entry {
+  display: none;
+  margin: 20px;
+  font-size: 25px;
+  align-items: center;
+  text-align: center;
+  line-height: 100%;
+  cursor: pointer;
+}
+
 .main-nav-list {
   position: relative;
   text-align: center;
@@ -50,59 +67,106 @@ $navNumber: v-bind(navItemNum);
     display: flex;
     width: 100%;
 
-    .box {
-      border-radius: 2px;
-      bottom: 0;
-      height: 7px;
-      left: 0;
-      position: absolute;
-      transition: 0.5s;
-      width: calc(100% / $navNumber);
-
-      &:hover {
-        z-index: -1;
-      }
-    }
-
-    a {
-      display: block;
-      color: var(--cloudea-blue-5);
-      width: 100%;
-      height: 100%;
-    }
-
     li {
       cursor: pointer;
       display: block;
-      font-weight: 700;
+      font-size: 1.33rem;
       line-height: 5rem;
       width: 100%;
 
-      &:nth-child(1):hover ~ .box {
-        background-color: var(--cloudea-red-3);
-        left: calc(100% / $navNumber * 0);
+      a {
+        display: block;
+        color: var(--cloudea-blue-5);
+        width: 100%;
+        height: 100%;
       }
 
-      &:nth-child(2):hover ~ .box {
-        background-color: var(--cloudea-blue-3);
-        left: calc(100% / $navNumber * 1);
+      &:hover a {
+        animation: word-bounce 0.4s;
       }
 
-      &:nth-child(3):hover ~ .box {
-        background-color: var(--cloudea-yellow-2);
-        left: calc(100% / $navNumber * 2);
+      @keyframes word-bounce {
+        0% {
+          transform: translate(0);
+        }
+        50% {
+          transform: translate(0, -10px);
+        }
+        100% {
+          transform: translate(0);
+        }
       }
 
-      &:nth-child(4):hover ~ .box {
-        filter: hue-rotate(240deg);
-        background-color: var(--cloudea-blue-3);
-        left: calc(100% / $navNumber * 3);
+      .underline {
+        position: absolute;
+        bottom: 0;
+        height: 3px;
+        width: 100px;
+        border-radius: 2px;
+        opacity: 0;
+        transition: all 0.5s;
+
+        background: linear-gradient(
+          90deg,
+          hsl(0, 100%, 50%),
+          hsl(30, 100%, 50%),
+          hsl(60, 100%, 50%),
+          hsl(90, 100%, 50%),
+          hsl(120, 100%, 50%),
+          hsl(150, 100%, 50%),
+          hsl(180, 100%, 50%),
+          hsl(210, 100%, 50%),
+          hsl(240, 100%, 50%),
+          hsl(270, 100%, 50%),
+          hsl(300, 100%, 50%),
+          hsl(330, 100%, 50%),
+          hsl(360, 100%, 50%)
+        );
+        background-size: 600% 600%;
+        animation: color-cycle 3s alternate linear infinite;
       }
 
-      &:nth-child(5):hover ~ .box {
-        filter: hue-rotate(60deg);
-        background-color: var(--cloudea-blue-3);
-        left: calc(100% / $navNumber * 4);
+      &:hover .underline {
+        opacity: 1;
+      }
+
+      @keyframes color-cycle {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 50% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .main-nav-entry {
+    display: flex;
+  }
+
+  .main-nav-list {
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    width: 100px;
+
+    z-index: 999;
+
+    .phone-hide {
+      transform: translateX(-100px);
+      transition: all 0.6s ease-in-out;
+      flex-direction: column;
+      height: calc(100dvh - 5rem);
+      background-color: var(--cloudea-trans-white-2);
+
+      &.active {
+        transform: translateX(0);
       }
     }
   }
