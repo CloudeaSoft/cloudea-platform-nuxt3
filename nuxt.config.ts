@@ -12,6 +12,12 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-icon'
   ],
+  runtimeConfig: {
+    public: {
+      CLOUDEA_URL: process.env.CLOUDEA_URL,
+      CLOUDEA_API: process.env.CLOUDEA_API
+    }
+  },
   imports: {
     dirs: ['./composables', './utils', './store/**/*.ts']
   },
