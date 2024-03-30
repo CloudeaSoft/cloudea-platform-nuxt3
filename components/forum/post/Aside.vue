@@ -1,8 +1,9 @@
-<template><div class="aside-container"></div></template>
+<template><div class="post-aside-content cloudea-area">xx</div></template>
 
 <style lang="scss" scoped>
-.aside-container {
-  width: 4rem;
-  height: 100px;
+.post-aside-content {
+  height: 800px;
+  width: 100%;
+  padding: 20px;
 }
 </style>

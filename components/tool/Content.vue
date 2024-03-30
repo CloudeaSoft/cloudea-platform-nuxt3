@@ -1,6 +1,6 @@
 <template>
   <div class="tool-container">
-    <div class="tool-menu cloudea-area">xxx</div>
+    <div class="tool-menu cloudea-area"><ToolMenu /></div>
     <div class="tool-content cloudea-area"><NuxtPage /></div>
   </div>
 </template>
