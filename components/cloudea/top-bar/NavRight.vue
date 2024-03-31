@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const isShowSearch = ref(false)
 
+const { isAuthorized } = useUserStore()
+
 const { showSettingPanel } = storeToRefs(useTempSettingStore())
 </script>
 
@@ -18,7 +20,7 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
     <span class="user">
       <Icon name="lucide:baby" />
     </span>
-    <div class="login">
+    <div class="login" v-if="!isAuthorized()">
       <NuxtLinkLocale to="/login">
         {{ $t('header.login') }}
       </NuxtLinkLocale>
@@ -46,7 +48,7 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
     margin-right: 20px;
   }
 
-  .login{
+  .login {
     font-size: 1.33rem;
   }
 }

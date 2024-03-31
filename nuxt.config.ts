@@ -14,8 +14,8 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      CLOUDEA_URL: process.env.CLOUDEA_URL,
-      CLOUDEA_API: process.env.CLOUDEA_API
+      CLOUDEA_URL: process.env.CLOUDEA_URL_DEV,
+      CLOUDEA_API: process.env.CLOUDEA_API_DEV
     }
   },
   imports: {
@@ -35,12 +35,12 @@ export default defineNuxtConfig({
     locales: [
       {
         code: 'zh-cn',
-        iso: 'zh-CN',
+        iso: 'zh-cn',
         file: 'zh-cn.json'
       },
       {
         code: 'en-us',
-        iso: 'en-US',
+        iso: 'en-us',
         file: 'en-us.json'
       }
     ],

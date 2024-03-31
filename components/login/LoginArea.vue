@@ -1,12 +1,31 @@
 <script setup lang="ts">
+import { sessionPostApi } from '~/api'
+
 const i18n = useI18n()
 
 const account = ref()
 
 const password = ref()
 
-const handleLogin = () => {
+const resetForm = () => {
+  account.value = undefined
+  password.value = undefined
+}
+
+const handleLogin = async () => {
+  const token = await sessionPostApi(account.value, password.value, 0)
+  if (token == undefined) {
+    // 登录失败
+    return
+  }
+  useUserStore().setToken(token.value?.Data!)
+  resetForm()
   useMessage(i18n.t('login.loginForm.messages.loginSuccess'), 'success')
+  handleLoginSuccess()
+}
+
+const handleLoginSuccess = () => {
+  navigateTo('/')
 }
 </script>
 

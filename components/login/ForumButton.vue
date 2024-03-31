@@ -66,13 +66,13 @@ const disabledClass = () => {
 }
 
 .custom-button--primary {
-  background-color: var(--cloudea-trans-white-5);
+  background-color: var(--cloudea-white);
   border: 1px solid var(--cloudea-blue-5);
   color: var(--cloudea-blue-5);
 
   &:hover {
     background-color: var(--cloudea-blue-5);
-    color: var(--cloudea-trans-white-5);
+    color: var(--cloudea-white);
   }
 }
 

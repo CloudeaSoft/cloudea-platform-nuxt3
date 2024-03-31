@@ -1,7 +1,11 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
   <div class="forum-post-container">
     <div class="post-content cloudea-area">
-      <ForumPostMainArea></ForumPostMainArea>
+      <ForumPostMain></ForumPostMain>
     </div>
     <!-- <div class="post-aside"><ForumPostAside></ForumPostAside></div> -->
     <div class="post-panel cloudea-area">

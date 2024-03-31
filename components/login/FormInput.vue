@@ -1,8 +1,26 @@
 <script setup lang="ts">
-const model = defineModel({ required: true })
+const model = defineModel<string | undefined>({ required: true })
+
+const isFocused = ref<boolean>(false)
+
+const handleInputFocus = () => {
+  isFocused.value = true
+}
+
+const handleInputBlur = () => {
+  if (model.value == undefined) {
+    isFocused.value = false
+    return
+  }
+  if (model.value!.trim()) {
+    isFocused.value = true
+    return
+  }
+  isFocused.value = false
+}
 
 const clear = () => {
-  model.value = null
+  model.value = ''
 }
 
 const showClear = () => {
@@ -100,8 +118,12 @@ const props = defineProps<Props>()
       :readonly="props.readonly"
       :tabindex="props.tabindex"
       :autofocus="props.autofocus"
+      @focus="handleInputFocus"
+      @blur="handleInputBlur"
     />
-    <label class="input-placeholder">{{ props.placeholder }}</label>
+    <label :class="['input-placeholder', isFocused ? 'active' : null]">
+      {{ props.placeholder }}
+    </label>
     <span
       class="input-clear"
       v-if="showClear"
@@ -137,8 +159,6 @@ const props = defineProps<Props>()
     }
 
     &:focus ~ .input-placeholder {
-      transform: translate(-10px, -25px);
-      font-size: 12px;
       color: var(--cloudea-blue-5);
     }
 
@@ -153,6 +173,11 @@ const props = defineProps<Props>()
     color: var(--cloudea-font-color-0);
     pointer-events: none;
     transition: all 0.3s ease;
+
+    &.active {
+      font-size: 10px;
+      transform: translate(-10px, -25px);
+    }
   }
 
   .input-clear {

@@ -1,3 +1,7 @@
+<script setup lang="ts">
+
+</script>
+
 <template><div class="post-aside-content cloudea-area">xx</div></template>
 
 <style lang="scss" scoped>

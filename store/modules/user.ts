@@ -19,8 +19,17 @@ export const useUserStore = defineStore({
     getToken() {
       return this.token
     },
+    setToken(token: string) {
+      this.token = token
+    },
     removeToken() {
       this.token = ''
+    },
+    isAuthorized() {
+      return !!this.token.trim()
+    },
+    setUserProfile(){
+      
     }
   }
 })

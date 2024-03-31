@@ -24,7 +24,7 @@ const announceList = ref([1, 2, 3, 4, 5])
         :key="index"
       >
         <div class="item-symbol">
-          <el-icon><ArrowRight /></el-icon>
+          <!-- <el-icon><ArrowRight /></el-icon> -->
         </div>
         <div class="item-text">测试公告-------{{ el }}</div>
       </li>

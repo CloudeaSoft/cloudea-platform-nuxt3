@@ -7,13 +7,12 @@ enum Api {
 }
 
 export const postInfoPostApi = async (id: string, request: PageRequest) => {
-  const response: Result<GetPostInfoResponse> = await http.post(
-    Api.POST_INFO + id,
-    {
-      params: {
-        request: request
-      }
+  const response: Result<GetPostInfoResponse> = await useFetch<
+    Result<GetPostInfoResponse>
+  >(Api.POST_INFO + id, {
+    params: {
+      request: request
     }
-  )
+  })
   return response
 }

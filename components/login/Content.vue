@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const isLoginPanel = ref<boolean>(true)
+const handleRegisterSuccess = () => {
+  isLoginPanel.value = true
+}
 </script>
 
 <template>
@@ -13,7 +16,7 @@ const isLoginPanel = ref<boolean>(true)
         <LoginArea></LoginArea>
       </div>
       <div class="register-area">
-        <LoginRegisterArea></LoginRegisterArea>
+        <LoginRegisterArea @success="handleRegisterSuccess"></LoginRegisterArea>
       </div>
       <div class="cover-area">
         <div class="cover-content">

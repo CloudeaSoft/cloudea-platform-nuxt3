@@ -15,7 +15,7 @@ const testList = ref([
     <div class="hot-list-item">
       <div class="hot-item-header">
         <div class="hot-title">
-          <el-icon class="hot-icon"><Tickets /></el-icon>
+          <!-- <el-icon class="hot-icon"><Tickets /></el-icon> -->
           <span class="title-text"><slot name="title"></slot></span>
         </div>
         <div class="item-header-button">
