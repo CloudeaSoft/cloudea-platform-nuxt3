@@ -13,12 +13,12 @@ const resetForm = () => {
 }
 
 const handleLogin = async () => {
-  const token = await sessionPostApi(account.value, password.value, 0)
-  if (token == undefined) {
+  const tokenRes = await sessionPostApi(account.value, password.value, 0)
+  if (tokenRes.value?.Status === false || tokenRes.value?.Data == undefined) {
     // 登录失败
     return
   }
-  useUserStore().setToken(token.value?.Data!)
+  useUserStore().setToken(tokenRes.value?.Data!)
   resetForm()
   useMessage(i18n.t('login.loginForm.messages.loginSuccess'), 'success')
   handleLoginSuccess()

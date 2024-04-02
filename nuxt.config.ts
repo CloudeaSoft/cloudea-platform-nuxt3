@@ -14,8 +14,8 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      CLOUDEA_URL: process.env.CLOUDEA_URL_DEV,
-      CLOUDEA_API: process.env.CLOUDEA_API_DEV
+      CLOUDEA_URL: process.env.CLOUDEA_URL,
+      CLOUDEA_API: process.env.CLOUDEA_API
     }
   },
   imports: {
