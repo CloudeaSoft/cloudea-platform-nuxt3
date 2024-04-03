@@ -9,7 +9,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
   const nuxt = useNuxtApp()
 
-  if (!token || token == '') {
+  if (!token || !!token.trim()) {
     useMessage(message, 'warn', 5000)
     return navigateTo(nuxt.$localePath('/login'))
   }

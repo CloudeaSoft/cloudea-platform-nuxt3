@@ -18,7 +18,7 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
       />
     </span>
     <span class="user">
-      <Icon name="lucide:baby" />
+      <NuxtLinkLocale to="/account/home"><Icon name="lucide:baby" /></NuxtLinkLocale>
     </span>
     <div class="login" v-if="!isAuthorized()">
       <NuxtLinkLocale to="/login">
@@ -46,6 +46,10 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
     font-size: 25px;
     cursor: pointer;
     margin-right: 20px;
+  }
+
+  .user *{
+    color: var(--cloudea-font-color-2) !important;
   }
 
   .login {

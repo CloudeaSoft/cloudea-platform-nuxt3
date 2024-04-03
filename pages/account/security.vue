@@ -1,0 +1,1 @@
+<template><AccountCard>notice</AccountCard></template>
