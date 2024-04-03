@@ -1,35 +1,45 @@
 <script setup lang="ts">
 import { postInfoPostApi } from '@/api'
-import type { GetPostInfoResponse } from '~/types/api/forum-model'
 
-const response = ref<GetPostInfoResponse>()
-
-const initializePost = async (
-  id: string = 'd05e3718-873b-4ff0-8f13-8fa01042714b'
-) => {
-  const res = await postInfoPostApi(id, {
-    PageIndex: 1,
+const getPost = async () => {
+  return await postInfoPostApi('d05e3718-873b-4ff0-8f13-8fa01042714b', {
+    PageIndex: PageIndex.value,
     PageSize: 15
   })
-  if (res == null) {
-    console.log('xxx')
-  }
-  response.value = res.Data
 }
+
+const PageIndex = ref(1)
+
+// const data = await fetch(
+//   'api/Forum/PostInfo' + '/d05e3718-873b-4ff0-8f13-8fa01042714b',
+//   {
+//     baseURL: useRuntimeConfig().public.CLOUDEA_API,
+//     body: {
+//       PageIndex: PageIndex.value,
+//       PageSize: 15
+//     }
+//   }
+// )
+
+const data = await getPost()
+
+const kkk = () => {
+  PageIndex.value++
+  console.log(data.value)
+}
+
+console.log(data.value)
 
 const getLocaleTime = (dateTimeOffsetString: string): string => {
   return new Date(dateTimeOffsetString).toLocaleString()
 }
-
-onMounted(async () => {
-  initializePost()
-})
 </script>
 
 <template>
   <div class="post-main">
     <div class="post-title">
       <h2>Post Title</h2>
+      <button @click="kkk">123</button>
       <div class="post-info">
         <div class="click-count info">点击数: 111</div>
         <div class="reply-count info">回复数: 111</div>
@@ -46,7 +56,6 @@ onMounted(async () => {
         <div class="right-area">
           <div class="time-area">time</div>
           <div class="content-area">content</div>
-          <div class="comment-area cloudea-area">comment</div>
         </div>
       </div>
       <div class="reply-container" v-for="i in 10">

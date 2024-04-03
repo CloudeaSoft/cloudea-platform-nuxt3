@@ -1,1 +1,1 @@
-<template><AccountCard>notice</AccountCard></template>
+<template><AccountCard :title="$t('account.nav.security')">notice</AccountCard></template>

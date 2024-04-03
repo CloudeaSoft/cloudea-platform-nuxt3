@@ -22,25 +22,25 @@ const handleRegisterSuccess = () => {
         <div class="cover-content">
           <div class="cover left">
             <h2>{{ $t('login.registerWords') }}</h2>
-            <LoginForumButton
+            <CloudeaForumButton
               class="button"
               type="danger"
               @click="isLoginPanel = true"
             >
               {{ $t('login.login') }}
-            </LoginForumButton>
+            </CloudeaForumButton>
           </div>
           <div class="cover right">
             <h2 style="top: 10px">
               {{ $t('login.loginWords') }}
             </h2>
-            <LoginForumButton
+            <CloudeaForumButton
               class="button"
               type="danger"
               @click="isLoginPanel = false"
             >
               {{ $t('login.register') }}
-            </LoginForumButton>
+            </CloudeaForumButton>
           </div>
         </div>
       </div>

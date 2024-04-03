@@ -7,12 +7,14 @@ enum Api {
   SESSION = '/identity/session'
 }
 
+const baseAPI = useRuntimeConfig().public.CLOUDEA_API
+
 export const vercodePostApi = async (
   email: string,
   codeType: 1 | 2 | 3 | 4
 ) => {
   const { data } = await useFetch<string>(Api.VERCODE, {
-    baseURL: useRuntimeConfig().public.CLOUDEA_API,
+    baseURL: baseAPI,
     method: 'POST',
     query: {
       email,
@@ -24,7 +26,7 @@ export const vercodePostApi = async (
 
 export const registerTokenPostApi = async (email: string, verCode: string) => {
   const { data } = await useFetch<Result<string>>(Api.REGISTER_TOKEN, {
-    baseURL: useRuntimeConfig().public.CLOUDEA_API,
+    baseURL: baseAPI,
     method: 'POST',
     query: {
       email,
@@ -41,7 +43,7 @@ export const userPostApi = async (
   password: string
 ) => {
   const { data } = await useFetch<Result<string>>(Api.USER, {
-    baseURL: useRuntimeConfig().public.CLOUDEA_API,
+    baseURL: baseAPI,
     method: 'POST',
     body: {
       RegisterToken: token,
@@ -59,7 +61,7 @@ export const sessionPostApi = async (
   loginType: 0 | 1 | 2 | 3 | 4
 ) => {
   const { data } = await useFetch<Result<string>>(Api.SESSION, {
-    baseURL: useRuntimeConfig().public.CLOUDEA_API,
+    baseURL: baseAPI,
     method: 'POST',
     body: {
       UserName: usernameOrEmail,

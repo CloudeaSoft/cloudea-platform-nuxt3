@@ -32,12 +32,12 @@ const handleLoginSuccess = () => {
 <template>
   <form class="content">
     <h1>{{ $t('login.login') }}</h1>
-    <LoginFormInput
+    <CloudeaFormInput
       type="text"
       v-model="account"
       :placeholder="$t('login.loginForm.accountPlaceholder')"
     />
-    <LoginFormInput
+    <CloudeaFormInput
       type="text"
       v-model="password"
       :placeholder="$t('login.loginForm.passwordPlaceholder')"
@@ -47,9 +47,9 @@ const handleLoginSuccess = () => {
         {{ $t('login.loginForm.forgotPassword') }}
       </NuxtLinkLocale>
     </span>
-    <LoginForumButton class="button" type="success" @click="handleLogin">
+    <CloudeaForumButton class="button" type="success" @click="handleLogin">
       {{ $t('login.login') }}
-    </LoginForumButton>
+    </CloudeaForumButton>
   </form>
 </template>
 <style lang="scss" scoped>

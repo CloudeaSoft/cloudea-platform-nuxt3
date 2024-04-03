@@ -67,5 +67,6 @@ watch(
 .container {
   display: flex;
   justify-content: space-between;
+  position: static;
 }
 </style>

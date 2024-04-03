@@ -1,61 +1,36 @@
 <script setup lang="ts">
 const navItemList = ref([
   {
-    name: '首页',
+    name: 'home',
     route: '/account/home',
-    icon: 'House'
+    icon: 'home'
   },
   {
-    name: '我的信息',
+    name: 'setting',
     route: '/account/setting',
-    icon: 'account'
+    icon: 'user'
   },
   {
-    name: '我的头像',
+    name: 'avatar',
     route: '/account/avatar',
-    icon: 'Avatar'
+    icon: 'circle-user'
   },
   {
-    name: '账号安全',
+    name: 'security',
     route: '/account/security',
-    icon: 'Key'
+    icon: 'brick-wall'
   },
   {
-    name: '消息通知',
+    name: 'notice',
     route: '/account/notice',
-    icon: 'Key'
-  },
-  {
-    name: '消息通知',
-    route: '/account/notice',
-    icon: 'Key'
-  },
-  {
-    name: '消息通知',
-    route: '/account/notice',
-    icon: 'Key'
-  },
-  {
-    name: '消息通知',
-    route: '/account/notice',
-    icon: 'Key'
-  },
-  {
-    name: '消息通知',
-    route: '/account/notice',
-    icon: 'Key'
-  },
-  {
-    name: '消息通知',
-    route: '/account/notice',
-    icon: 'Key'
+    icon: 'mail'
   }
 ])
 </script>
 
 <template>
   <div class="account-nav">
-    <span class="nav-title">个人中心</span>
+    <span class="nav-title">{{ $t('account.title') }}</span>
     <ul class="nav-ul">
       <NuxtLinkLocale
         v-for="(item, index) in navItemList"
@@ -63,8 +38,12 @@ const navItemList = ref([
         :to="item.route"
       >
         <li class="nav-item">
-          <i class="nav-item-icon"><Icon name="lucide:baby"> </Icon></i>
-          <span class="nav-item-name">{{ item.name }}</span>
+          <i class="nav-item-icon">
+            <Icon :name="'lucide:' + item.icon" />
+          </i>
+          <span class="nav-item-name">
+            {{ $t(`account.nav.${item.name}`) }}
+          </span>
         </li>
       </NuxtLinkLocale>
     </ul>
@@ -102,17 +81,31 @@ const navItemList = ref([
       height: 48px;
       line-height: 48px;
 
-      &:hover {
-        background-color: #fff;
-      }
-
       .nav-item-icon {
         margin-left: 16px;
+        font-size: 1.2rem;
+        color: var(--cloudea-font-color-0);
       }
 
       .nav-item-name {
         margin-left: 12px;
         font-size: 1.2rem;
+      }
+
+      &:hover {
+        background-color: var(--cloudea-white);
+        * {
+          color: var(--cloudea-blue-5);
+        }
+      }
+    }
+
+    .router-link-active {
+      .nav-item {
+        background-color: var(--cloudea-blue-5);
+        * {
+          color: var(--cloudea-white);
+        }
       }
     }
   }

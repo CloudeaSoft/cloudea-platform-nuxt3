@@ -8,8 +8,8 @@
         "name": "界面设置",
         "language": "语言",
         "languageOptions": {
-            "zh-cn": "中文 (简体)",
-            "en-us": "English (United States)"
+            "zh-cn": "简体中文",
+            "en-us": "English"
         },
         "trans": "透明度",
         "font": "字体",
@@ -29,15 +29,6 @@
         "about": "关于",
         "login": "登录/注册"
     },
-    "warning": {
-        "test": "Test Warning"
-    },
-    "meta": {
-        "forum": {
-            "title": "论坛",
-            "description": "论坛"
-        }
-    },
     "login": {
         "login": "登录",
         "loginWords": "在这里写一些登录描述文字",
@@ -56,10 +47,29 @@
             "emailPlaceholder": "邮箱",
             "passwordPlaceholder": "密码",
             "vercodePlaceholder": "验证码",
-            "vercodeGetter":"获取验证码",
+            "vercodeGetter": "获取验证码",
             "messages": {
                 "registerSuccess": "注册成功"
             }
+        }
+    },
+    "account": {
+        "title": "个人中心",
+        "nav": {
+            "home": "首页",
+            "setting": "我的信息",
+            "avatar": "我的头像",
+            "security": "账号安全",
+            "notice": "消息通知"
+        }
+    },
+    "warning": {
+        "test": "Test Warning"
+    },
+    "meta": {
+        "forum": {
+            "title": "论坛",
+            "description": "论坛"
         }
     }
 }

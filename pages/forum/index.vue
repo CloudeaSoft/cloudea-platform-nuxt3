@@ -20,6 +20,7 @@ useHead({
   <div class="view forum-index-view">
     <ForumContent></ForumContent>
   </div>
+  <ForumEditLink />
 </template>
 
 <style lang="scss" scoped>

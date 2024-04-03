@@ -2,7 +2,7 @@
 
 <style lang="scss" scoped>
 .user-content {
-  background-color: grey;
   width: 100%;
+  border-left: 1px solid var(--cloudea-gray-4);
 }
 </style>

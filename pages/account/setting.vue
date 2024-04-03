@@ -1,1 +1,3 @@
-<template><AccountCard>setting</AccountCard></template>
+<template>
+  <AccountCard :title="$t('account.nav.setting')">setting</AccountCard>
+</template>

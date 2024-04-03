@@ -1,1 +1,3 @@
-<template><AccountCard>avatar</AccountCard></template>
+<template>
+  <AccountCard :title="$t('account.nav.avatar')">avatar</AccountCard>
+</template>

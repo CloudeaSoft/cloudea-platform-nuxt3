@@ -51,24 +51,24 @@ const emits = defineEmits<{
 <template>
   <form class="content">
     <h1>{{ $t('login.register') }}</h1>
-    <LoginFormInput
+    <CloudeaFormInput
       type="text"
       v-model="username"
       :placeholder="$t('login.registerForm.usernamePlaceholder')"
       :show-password="false"
     />
-    <LoginFormInput
+    <CloudeaFormInput
       type="text"
       v-model="email"
       :placeholder="$t('login.registerForm.emailPlaceholder')"
     />
-    <LoginFormInput
+    <CloudeaFormInput
       type="text"
       v-model="password"
       :placeholder="$t('login.registerForm.passwordPlaceholder')"
     />
     <div class="vercode">
-      <LoginFormInput
+      <CloudeaFormInput
         type="text"
         v-model="vercode"
         :placeholder="$t('login.registerForm.vercodePlaceholder')"
@@ -77,9 +77,9 @@ const emits = defineEmits<{
         {{ $t('login.registerForm.vercodeGetter') }}
       </button>
     </div>
-    <LoginForumButton class="button" @click="handleRegister">
+    <CloudeaForumButton class="button" @click="handleRegister">
       {{ $t('login.register') }}
-    </LoginForumButton>
+    </CloudeaForumButton>
   </form>
 </template>
 <style lang="scss" scoped>

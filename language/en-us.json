@@ -5,15 +5,19 @@
         "keywords": ""
     },
     "settings": {
-        "name": "Setting Panel",
+        "name": "Site Settings",
         "language": "Language",
         "languageOptions": {
-            "zh-cn": "中文 (简体)",
-            "en-us": "English (United States)"
+            "zh-cn": "简体中文",
+            "en-us": "English"
         },
         "trans": "Transparency",
         "font": "Font Style",
-        "confirm": "Confirm"
+        "background": "Background Image",
+        "backgroundSystem": "System Background",
+        "confirm": "Confirm",
+        "default": "Default",
+        "reset": "Set Default"
     },
     "header": {
         "name": "Cloudea Platform",
@@ -21,9 +25,20 @@
         "forum": "Forum",
         "tool": "Toolbox",
         "book": "Bookshelf",
-        "about": "About us"
+        "about": "About us",
+        "login": "Login/Register"
     },
     "warning": {
         "test": "Test Warning"
+    },
+    "account": {
+        "title": "Account Center",
+        "nav": {
+            "home": "Home",
+            "setting": "Profile",
+            "avatar": "Avatar",
+            "security": "Security",
+            "notice": "Message"
+        }
     }
 }
