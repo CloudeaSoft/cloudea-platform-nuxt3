@@ -1,7 +1,3 @@
-/**
- * Get the number of hours that have passed based on a timestamp.
- */
-
 import dayjs from 'dayjs'
 
 export const hourDiff = (upvoteTime: number, hours: number) => {
