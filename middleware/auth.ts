@@ -13,5 +13,4 @@ export default defineNuxtRouteMiddleware((to, from) => {
     useMessage(message, 'warn', 5000)
     return navigateTo(nuxt.$localePath('/login'))
   }
-  console.log('123')
 })

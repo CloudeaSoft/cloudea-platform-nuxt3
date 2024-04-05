@@ -10,23 +10,7 @@ const getPost = async () => {
 
 const PageIndex = ref(1)
 
-// const data = await fetch(
-//   'api/Forum/PostInfo' + '/d05e3718-873b-4ff0-8f13-8fa01042714b',
-//   {
-//     baseURL: useRuntimeConfig().public.CLOUDEA_API,
-//     body: {
-//       PageIndex: PageIndex.value,
-//       PageSize: 15
-//     }
-//   }
-// )
-
 const data = await getPost()
-
-const kkk = () => {
-  PageIndex.value++
-  console.log(data.value)
-}
 
 console.log(data.value)
 
@@ -39,7 +23,7 @@ const getLocaleTime = (dateTimeOffsetString: string): string => {
   <div class="post-main">
     <div class="post-title">
       <h2>Post Title</h2>
-      <button @click="kkk">123</button>
+      <button>123</button>
       <div class="post-info">
         <div class="click-count info">点击数: 111</div>
         <div class="reply-count info">回复数: 111</div>

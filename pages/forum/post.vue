@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <div class="post-view view"><ForumPostContent></ForumPostContent></div>
 </template>
