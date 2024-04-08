@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     'nuxt-typed-router',
     '@vite-pwa/nuxt',
     '@nuxtjs/color-mode',
-    'nuxt-icon'
+    'nuxt-icon',
+    '@nuxtjs/tailwindcss'
   ],
   runtimeConfig: {
     public: {

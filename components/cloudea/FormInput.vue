@@ -25,7 +25,10 @@ const clear = () => {
 
 const showClear = () => {
   return (
-    props.clearable && !props.disabled && !props.readonly && !!model.value?.trim()
+    props.clearable &&
+    !props.disabled &&
+    !props.readonly &&
+    !!model.value?.trim()
   )
 }
 
@@ -100,16 +103,23 @@ interface Props {
    * @default false
    */
   autofocus?: boolean
+
+  labelPlaceholder?: boolean
+
+  fullBorder: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  clearable: true
+  clearable: true,
+  labelPlaceholder: true,
+  fullBorder: false
 })
 </script>
 
 <template>
   <div class="cloudea-input">
     <input
+      :class="[fullBorder ? 'full-border' : '']"
       :id="props.id"
       v-model="model"
       :maxlength="props.maxlength"
@@ -122,10 +132,14 @@ const props = withDefaults(defineProps<Props>(), {
       :readonly="props.readonly"
       :tabindex="props.tabindex"
       :autofocus="props.autofocus"
+      :placeholder="labelPlaceholder ? undefined : props.placeholder"
       @focus="handleInputFocus"
       @blur="handleInputBlur"
     />
-    <label :class="['input-placeholder', isFocused ? 'active' : null]">
+    <label
+      :class="['input-placeholder', isFocused ? 'active' : null]"
+      v-if="labelPlaceholder"
+    >
       {{ props.placeholder }}
     </label>
     <span
@@ -176,6 +190,15 @@ const props = withDefaults(defineProps<Props>(), {
 
     &:focus ~ .input-clear {
       display: block;
+    }
+
+    &.full-border {
+      transition: border 0.6s;
+      border: 2px solid var(--cloudea-trans-blue-2);
+    }
+
+    &:focus.full-border {
+      border: 2px solid var(--cloudea-blue-5);
     }
   }
 
