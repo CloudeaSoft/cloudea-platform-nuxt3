@@ -1,5 +1,5 @@
 <template>
-  <NuxtLinkLocale to="/forum/edit/topic">
+  <NuxtLinkLocale to="/forum/edit/post">
     <div class="edit-link">
       <div class="link-content">
         <Icon class="link-icon" name="lucide:text" />

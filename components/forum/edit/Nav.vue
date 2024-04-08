@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const list = ref([
-  { title: 'edit.topic.title', route: '/forum/edit/topic', icon: 'scroll-text' }
+  { title: 'edit.post.title', route: '/forum/edit/post', icon: 'scroll-text' }
 ])
 </script>
 
