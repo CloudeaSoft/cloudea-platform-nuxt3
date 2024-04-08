@@ -1,29 +1,9 @@
-<template>
-  <button
-    type="button"
-    class="btn-next"
-    :disabled="internalDisabled"
-    :aria-label="nextText || t('el.pagination.next')"
-    :aria-disabled="internalDisabled"
-    @click="$emit('click', $event)"
-  >
-    <span v-if="nextText">{{ nextText }}</span>
-    <Icon v-else :name="`lucide:${nextIcon}`" />
-  </button>
-</template>
-
 <script lang="ts" setup>
 import { computed } from 'vue'
-
-defineOptions({
-  name: 'ElPaginationNext'
-})
 
 const props = defineProps(paginationNextProps)
 
 defineEmits(['click'])
-
-const { t } = useI18n()
 
 const internalDisabled = computed(
   () =>
@@ -52,3 +32,17 @@ export const paginationNextProps = {
   }
 }
 </script>
+
+<template>
+  <button
+    type="button"
+    class="btn-next"
+    :disabled="internalDisabled"
+    :aria-label="nextText || $t('cloudea.pagination.next')"
+    :aria-disabled="internalDisabled"
+    @click="$emit('click', $event)"
+  >
+    <span v-if="nextText">{{ nextText }}</span>
+    <Icon v-else :name="`lucide:${nextIcon}`" />
+  </button>
+</template>

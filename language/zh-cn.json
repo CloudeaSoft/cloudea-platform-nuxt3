@@ -71,5 +71,14 @@
             "title": "论坛",
             "description": "论坛"
         }
+    },
+    "cloudea": {
+        "pagination": {
+            "currentPage": "当前页面",
+            "prev": "上一页",
+            "next": "下一页",
+            "nextPages": "查看后一组",
+            "prevPages": "查看前一组"
+        }
     }
 }

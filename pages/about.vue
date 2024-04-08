@@ -1,9 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const currentPage = ref(1)
+</script>
 
 <template>
   <div class="view about-view">
-    about us
-    <CloudeaPagination></CloudeaPagination>
+
   </div>
 </template>
 

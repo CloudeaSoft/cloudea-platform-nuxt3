@@ -1,14 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-defineOptions({
-  name: 'ElPaginationPrev'
-})
-
 const props = defineProps(paginationPrevProps)
 defineEmits(paginationPrevEmits)
-
-const { t } = useI18n()
 
 const internalDisabled = computed(
   () => props.disabled || props.currentPage <= 1
@@ -40,7 +34,7 @@ const paginationPrevEmits = {
     type="button"
     class="btn-prev"
     :disabled="internalDisabled"
-    :aria-label="prevText || t('el.pagination.prev')"
+    :aria-label="prevText || $t('cloudea.pagination.prev')"
     :aria-disabled="internalDisabled"
     @click="$emit('click', $event)"
   >

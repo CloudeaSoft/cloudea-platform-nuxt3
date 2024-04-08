@@ -24,7 +24,9 @@ const clear = () => {
 }
 
 const showClear = () => {
-  return props.clearable && !props.disabled && !props.readonly && !model.value
+  return (
+    props.clearable && !props.disabled && !props.readonly && !!model.value?.trim()
+  )
 }
 
 interface Props {
@@ -100,7 +102,9 @@ interface Props {
   autofocus?: boolean
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  clearable: true
+})
 </script>
 
 <template>
@@ -126,7 +130,7 @@ const props = defineProps<Props>()
     </label>
     <span
       class="input-clear"
-      v-if="showClear"
+      v-show="showClear()"
       @mousedown.prevent=""
       @click="clear"
     >
@@ -142,6 +146,14 @@ const props = defineProps<Props>()
   display: flex;
   align-items: center;
   padding-top: 5px;
+
+  .input-clear {
+    position: absolute;
+    right: 10px;
+    color: var(--cloudea-font-color-0);
+    cursor: pointer;
+    display: none;
+  }
 
   input {
     border: none;
@@ -178,14 +190,6 @@ const props = defineProps<Props>()
       font-size: 10px;
       transform: translate(-10px, -25px);
     }
-  }
-
-  .input-clear {
-    position: absolute;
-    right: 10px;
-    color: var(--cloudea-font-color-0);
-    cursor: pointer;
-    display: none;
   }
 }
 </style>

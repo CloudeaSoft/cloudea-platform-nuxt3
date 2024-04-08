@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Check if param is undefined.
 const isAbsent = (v: unknown): v is undefined => typeof v !== 'number'
 
 type LayoutKey =
@@ -32,7 +33,6 @@ interface PaginationProps {
 const props = withDefaults(defineProps<PaginationProps>(), {
   pageSize: 10,
   defaultPageSize: 10,
-  currentPage: 1,
   defaultCurrentPage: 1,
   layout: (
     ['prev', 'pager', 'next', 'jumper', '->', 'total'] as LayoutKey[]
@@ -58,6 +58,7 @@ const hasPageSizeListener =
   'onUpdate:pageSize' in vnodeProps ||
   'onUpdate:page-size' in vnodeProps ||
   'onSizeChange' in vnodeProps
+
 const innerPageSize = ref(
   isAbsent(props.defaultPageSize) ? 10 : props.defaultPageSize
 )
@@ -97,14 +98,21 @@ const currentPageBridge = computed<number>({
   },
   set(v) {
     let newCurrentPage = v
+    console.log('New:', newCurrentPage)
     if (v < 1) {
       newCurrentPage = 1
     } else if (v > pageCountBridge.value) {
       newCurrentPage = pageCountBridge.value
     }
+    console.log('New:', newCurrentPage)
+    console.log(isAbsent(props.currentPage))
+
     if (isAbsent(props.currentPage)) {
+      console.log(1)
+
       innerCurrentPage.value = newCurrentPage
     }
+    console.log('Inner:', innerCurrentPage.value)
     if (hasCurrentPageListener) {
       emit('update:current-page', newCurrentPage)
       emit('current-change', newCurrentPage)
@@ -173,13 +181,60 @@ const paginationEmits = {
 </script>
 
 <template>
-  xxx
-  <CloudeaPaginationComponentsPrev
-    @click="prev"
-    :prev-icon="props.prevIcon"
-  ></CloudeaPaginationComponentsPrev>
-  <CloudeaPaginationComponentsNext
-    @click="next"
-    :next-icon="props.nextIcon"
-  ></CloudeaPaginationComponentsNext>
+  <div class="cloudea-pagination">
+    <CloudeaPaginationComponentsPrev
+      @click="prev"
+      :current-page="currentPageBridge"
+      :page-count="pageCountBridge"
+      :prev-text="props.prevText"
+      :prev-icon="props.prevIcon"
+      :disabled="props.disabled"
+    ></CloudeaPaginationComponentsPrev>
+    <CloudeaPaginationComponentsPager
+      @change="handleCurrentChange"
+      :current-page="currentPageBridge"
+      :page-count="pageCountBridge"
+      :pager-count="props.pagerCount"
+      :disabled="props.disabled"
+    >
+    </CloudeaPaginationComponentsPager>
+    <CloudeaPaginationComponentsNext
+      @click="next"
+      :current-page="currentPageBridge"
+      :page-count="pageCountBridge"
+      :next-text="props.nextText"
+      :next-icon="props.nextIcon"
+      :disabled="props.disabled"
+    ></CloudeaPaginationComponentsNext>
+  </div>
 </template>
+
+<style lang="scss" scoped>
+.cloudea-pagination {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  white-space: nowrap;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    background: var(--cloudea-trans-white-5);
+    padding: 0 4px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}
+</style>
