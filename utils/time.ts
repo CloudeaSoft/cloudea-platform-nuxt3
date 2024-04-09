@@ -16,9 +16,7 @@ export const getLocaleTime = (dateTimeOffsetString: string): string => {
   const locale = useCookie('cloudea-language').value
   switch (locale) {
     case 'zh-cn':
-      return new Date(dateTimeOffsetString).toLocaleString(
-        // 'YYYY-MM-DDTHH:mm:ss.sssZ'
-      )
+      return new Date(dateTimeOffsetString).toLocaleString()
     case 'en-us':
       return new Date(dateTimeOffsetString).toLocaleString()
     default:

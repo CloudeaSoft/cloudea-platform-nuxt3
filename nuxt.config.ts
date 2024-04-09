@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
+  build: {
+    transpile: ['pinia-plugin-persistedstate']
+  },
   devtools: { enabled: true },
   modules: [
     '@pinia/nuxt',

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import type { ForumPost } from '~/types/api/forum-model'
+import type { ForumPost } from '~/types/api/forum-model.d'
+
+const link = () => `/forum/posts/${Id}`
 
 const props = defineProps<{
   post: ForumPost
@@ -23,12 +25,12 @@ const {
   <div class="content-wrap">
     <div class="content-main">
       <div class="title-row">
-        <NuxtLinkLocale class="title" to="/forum/post">{{
+        <NuxtLinkLocale class="title" :to="link()">{{
           Title
         }}</NuxtLinkLocale>
       </div>
       <div class="abstract">
-        <NuxtLinkLocale to="/forum/post">
+        <NuxtLinkLocale :to="link()">
           <div>
             {{ Content }}
           </div>

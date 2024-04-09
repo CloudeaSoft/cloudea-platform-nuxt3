@@ -1,22 +1,18 @@
 <script setup lang="ts">
 import { postInfoPostApi } from '@/api'
 
-const getPost = async () => {
-  return await postInfoPostApi('d05e3718-873b-4ff0-8f13-8fa01042714b', {
-    PageIndex: PageIndex.value,
-    PageSize: 15
-  })
+interface postProps {
+  postId: string
 }
+
+const props = defineProps<postProps>()
 
 const PageIndex = ref(1)
 
-const data = await getPost()
-
-console.log(data.value)
-
-const getLocaleTime = (dateTimeOffsetString: string): string => {
-  return new Date(dateTimeOffsetString).toLocaleString()
-}
+const data = await postInfoPostApi(props.postId, {
+  PageIndex: PageIndex.value,
+  PageSize: 15
+})
 </script>
 
 <template>

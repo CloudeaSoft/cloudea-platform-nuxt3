@@ -9,7 +9,7 @@ import type {
 enum Api {
   SECTION = '/forum/section',
   POST = '/forum/post',
-  POST_INFO = '/post/:id/info'
+  POST_INFO = '/forum/post/:id/info'
 }
 
 const baseAPI = useRuntimeConfig().public.CLOUDEA_API
