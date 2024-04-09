@@ -13,5 +13,15 @@ export const hourDiff = (upvoteTime: number, hours: number) => {
 }
 
 export const getLocaleTime = (dateTimeOffsetString: string): string => {
-  return new Date(dateTimeOffsetString).toLocaleString()
+  const locale = useCookie('cloudea-language').value
+  switch (locale) {
+    case 'zh-cn':
+      return new Date(dateTimeOffsetString).toLocaleString(
+        // 'YYYY-MM-DDTHH:mm:ss.sssZ'
+      )
+    case 'en-us':
+      return new Date(dateTimeOffsetString).toLocaleString()
+    default:
+      return new Date(dateTimeOffsetString).toLocaleString()
+  }
 }

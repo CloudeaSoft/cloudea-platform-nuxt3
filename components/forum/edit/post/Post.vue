@@ -4,25 +4,62 @@ import { postPostApi } from '~/api'
 import { MilkdownProvider } from '@milkdown/vue'
 import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
 
+const postSection = ref('')
+
 const postTitle = ref('')
 
 const postContent = ref(`\`\`\`javascript
 console.log(\'Hello World!\')
 \`\`\``)
 
+const milkdownFocused = ref<boolean>(false)
+
 const handlePost = async () => {
-  await postPostApi({})
+  console.log('主题: ', postSection.value)
+  console.log('标题: ', postTitle.value)
+  console.log('内容: ', postContent.value)
+  var createRes = await postPostApi({
+    SectionId: postSection.value,
+    Title: postTitle.value,
+    Content: postContent.value
+  })
+  if (!createRes.value?.Status) {
+    console.log(1)
+    useMessage('', 'error')
+    return
+  }
+  if (!createRes.value.Data.trim()) {
+    console.log(2)
+    useMessage('', 'error')
+    return
+  }
+  resetEditorContent()
+  useMessage('', 'success')
 }
 
 const handleSave = (editorValue: string) => {
-  console.log(editorValue)
+  postContent.value = editorValue
+}
+
+const handleFocus = () => {
+  milkdownFocused.value = true
+}
+
+const handleBlur = () => {
+  milkdownFocused.value = false
+}
+
+const resetEditorContent = () => {
+  postTitle.value = ''
 }
 </script>
 
 <template>
   <form class="topic-editor">
     <div class="editor-main">
-      <div class="section-area">主题区域</div>
+      <div class="section-area">
+        <ForumEditPostSectionSelector v-model="postSection" />
+      </div>
       <div class="title-area">
         <CloudeaFormInput
           v-model="postTitle"
@@ -31,11 +68,13 @@ const handleSave = (editorValue: string) => {
           full-border
         />
       </div>
-      <div class="text-area">
+      <div :class="['text-area', milkdownFocused ? 'active' : '']">
         <MilkdownProvider>
           <ProsemirrorAdapterProvider>
             <CloudeaMilkdownEditor
               @save="handleSave"
+              @focus="handleFocus"
+              @blur="handleBlur"
               v-model:editor-value="postContent"
             />
           </ProsemirrorAdapterProvider>
@@ -57,16 +96,13 @@ const handleSave = (editorValue: string) => {
 
   .editor-main {
     flex: 1;
-    background-color: #fff;
+    overflow: hidden;
 
     .section-area {
       height: 50px;
-      background-color: black;
-      color: #fff;
+      background-color: var(--cloudea-trans-blue-1);
       text-align: center;
-      line-height: 50px;
-      font-size: 2rem;
-      font-weight: 700;
+      box-shadow: 0px 2px 3px 1px;
     }
 
     .title-area {
@@ -88,10 +124,15 @@ const handleSave = (editorValue: string) => {
     .text-area {
       min-height: 400px;
       width: calc(100% - 40px);
-      background-color: #fff;
+      background-color: var(--cloudea-white);
       margin: 20px 20px 0;
       border: 2px solid var(--cloudea-trans-blue-1);
       padding: 10px;
+      transition: border 0.6s;
+
+      &.active {
+        border: 2px solid var(--cloudea-blue-5);
+      }
     }
     .label-area {
       margin-top: 20px;

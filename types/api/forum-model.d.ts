@@ -40,3 +40,35 @@ export interface CommentInfo {
 }
 
 declare type ForumRecommendPostList = List<PostInfo>
+
+export interface ForumSection {
+  Id: string
+  MasterUserId: string
+  Name: string
+  Statement: string
+  ClickCount: number
+  TopicCount: number
+  CreatedOnUtc: string
+  ModifiedOnUtc?: string
+}
+
+export interface CreatePostRequest {
+  SectionId: string
+  Title: string
+  Content: string
+}
+
+export interface ForumPost {
+  Id: string
+  ParentSectionId: string
+  OwnerUserId: string
+  Title: string
+  Content: string
+  ClickCount: number
+  LikeCount: number
+  DislikeCount: number
+  LastClickTime: string
+  LastEditTime: string | null
+  CreatedOnUtc: string
+  ModifiedOnUtc: string | null
+}

@@ -1,24 +1,18 @@
 <script setup lang="ts">
-import type { PostInfo } from '~/types/api/forum-model'
+import { getPostApi } from '~/api'
+import { GUID_EMPTY } from '~/types/api/base-model.d'
 
 const showRecommend = ref(true)
 
-const list = ref<PostInfo[]>([])
-for (var i = 0; i < 20; i++) {
-  list.value.push({
-    PostId: 'string',
-    Creator: '用户名',
-    CreatorId: 'string',
-    Title: '帖子标题',
-    Content: 'string',
-    ReplyCount: 5,
-    ClickCount: 15,
-    LikeCount: 3,
-    DislikeCount: 0,
-    CreateTime: new Date('2024.03.22'),
-    LastUpdatedTime: null
-  })
+const postListRes = await getPostApi()
+
+interface PostListProps {
+  sectionId: string
 }
+
+const props = withDefaults(defineProps<PostListProps>(), {
+  sectionId: GUID_EMPTY
+})
 </script>
 
 <template>
@@ -37,8 +31,8 @@ for (var i = 0; i < 20; i++) {
       </div>
     </div>
     <div class="post-list-wrap">
-      <div class="entry" v-for="post in list">
-        <ForumContentPostListItem :key="post.PostId" :post="post" />
+      <div class="entry" v-for="post in postListRes?.Data.Rows" :key="post.Id">
+        <ForumContentPostListItem :post="post" />
       </div>
     </div>
   </div>

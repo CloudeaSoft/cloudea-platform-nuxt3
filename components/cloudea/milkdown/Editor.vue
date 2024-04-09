@@ -23,7 +23,6 @@ import { tooltipFactory } from '@milkdown/plugin-tooltip'
 import { upload, uploadConfig } from '@milkdown/plugin-upload'
 import { clipboard } from '@milkdown/plugin-clipboard'
 
-
 // refractor language support for plugin-prism
 import c from 'refractor/lang/c'
 import cpp from 'refractor/lang/cpp'
@@ -55,6 +54,8 @@ const props = withDefaults(defineProps<MilkdownEditorProps>(), {
 
 const emits = defineEmits<{
   save: [editorValue: string]
+  focus: any
+  blur: any
 }>()
 
 const valueMarkdown = computed(() => props.editorValue)
@@ -75,6 +76,14 @@ useEditor((root) =>
           editorContent.value = markdown
           emits('save', markdown)
         }
+      })
+
+      ctx.get(listenerCtx).focus((ctx) => {
+        emits('focus')
+      })
+
+      ctx.get(listenerCtx).blur((ctx) => {
+        emits('blur')
       })
 
       // upload images

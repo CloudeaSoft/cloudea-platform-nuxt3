@@ -1,26 +1,15 @@
 <script setup lang="ts">
-const i18n = useI18n()
-
-const testMessage = () => {
-  const text = i18n.t('warning.test')
-  useMessage(text, `warn`, 2000)
-}
+const sectionId = ref<string>()
 </script>
 
 <template>
   <div class="forum-index-nav cloudea-area">
-    <div class="side-navigator-wrap">
-      <div class="nav-item-wrap" v-for="i in 5">
-        <div class="nav-item-content">
-          <NuxtLinkLocale to="/forum" class="nav-item">xxx</NuxtLinkLocale>
-        </div>
-      </div>
-    </div>
+    <ForumContentNav v-model="sectionId" />
   </div>
   <div class="forum-index-container">
     <div class="forum-index-content">
       <div class="post-list">
-        <ForumContentPostList></ForumContentPostList>
+        <ForumContentPostList :section-id="sectionId"></ForumContentPostList>
       </div>
       <div class="forum-index-aside">
         <ForumContentAside></ForumContentAside>
@@ -41,35 +30,6 @@ const testMessage = () => {
   height: fit-content;
   max-height: calc(100dvh - 101px);
   overflow-x: hidden;
-
-  .side-navigator-wrap {
-    min-width: 180px;
-    padding: 8px;
-  }
-
-  .nav-item-wrap {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .nav-item-content {
-    line-height: 24px;
-    border-right: 4px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .nav-item-content .nav-item {
-    display: inline-block;
-    width: 100%;
-    box-sizing: border-box;
-    position: relative;
-    padding: 10px 17px;
-    cursor: pointer;
-  }
 }
 
 .forum-index-container {

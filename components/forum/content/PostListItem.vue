@@ -1,22 +1,21 @@
 <script setup lang="ts">
-import type { PostInfo } from '~/types/api/forum-model'
+import type { ForumPost } from '~/types/api/forum-model'
 
 const props = defineProps<{
-  post: PostInfo
+  post: ForumPost
 }>()
 
 const {
-  PostId,
-  Creator,
-  CreatorId,
+  Id,
+  OwnerUserId,
   Title,
   Content,
-  ReplyCount,
   ClickCount,
   LikeCount,
   DislikeCount,
-  CreateTime,
-  LastUpdatedTime
+  LastClickTime,
+  LastEditTime,
+  CreatedOnUtc
 } = props.post
 </script>
 
@@ -39,12 +38,12 @@ const {
         <ul class="action-list">
           <li class="item meta-container">
             <a class="user-info" href="">
-              <div class="user-popover">{{ Creator }}</div>
+              <div class="user-popover">{{ OwnerUserId }}</div>
             </a>
             <div class="footer-divider"></div>
           </li>
           <li class="item date">
-            {{ getLocaleTime(CreateTime.toString()) }}
+            {{ getLocaleTime(CreatedOnUtc) }}
             <div class="footer-divider"></div>
           </li>
           <li class="item view">

@@ -5,6 +5,7 @@
   --cloudea-font-color-3: #e0e0e0;
 
   --cloudea-white: #0f1720;
+  --cloudea-black: #ffffff;
 
   --cloudea-blue-0: #00479e;
   --cloudea-blue-5: var(--cloudea-blue-2);
@@ -24,4 +25,23 @@
 
   --cloudea-trans-pink-0: #21131a77;
   --cloudea-trans-pink-1: #aa608477;
+
+  // milkdown
+  --crepe-color-background: #1f1b16;
+  --crepe-color-on-background: #eae1d9;
+  --crepe-color-surface: #18120b;
+  --crepe-color-surface-low: #201b13;
+  --crepe-color-on-surface: #ede0d4;
+  --crepe-color-on-surface-variant: #d3c4b4;
+  --crepe-color-outline: #9c8f80;
+  --crepe-color-primary: #f4bd6f;
+  --crepe-color-secondary: #56442a;
+  --crepe-color-on-secondary: #fbdebc;
+  --crepe-color-inverse: #ede0d4;
+  --crepe-color-on-inverse: #362f27;
+  --crepe-color-inline-code: #ffb4ab;
+  --crepe-color-error: #ffb4ab;
+  --crepe-color-hover: #251f17;
+  --crepe-color-selected: #3b342b;
+  --crepe-color-inline-area: #3f3830;
 }
