@@ -31,7 +31,7 @@ interface PaginationProps {
 }
 
 const props = withDefaults(defineProps<PaginationProps>(), {
-  pageSize: 10,
+  pageSize: 15,
   defaultPageSize: 10,
   defaultCurrentPage: 1,
   layout: (

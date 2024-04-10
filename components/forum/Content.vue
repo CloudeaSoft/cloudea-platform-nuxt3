@@ -1,15 +1,28 @@
 <script setup lang="ts">
-const sectionId = ref<string>()
+import { getPostApi } from '~/api'
+import { GUID_EMPTY, type PageResponse } from '~/types/api/base-model.d'
+import type { ForumPost } from '~/types/api/forum-model.d'
+
+const sectionId = ref(GUID_EMPTY)
+
+const postList = ref((await getPostApi(undefined)).value?.Data.Rows)
+
+const handleSectionChange = async () => {
+  var res = await getPostApi(
+    sectionId.value !== GUID_EMPTY ? sectionId.value : undefined
+  )
+  postList.value = res.value?.Data.Rows!
+}
 </script>
 
 <template>
   <div class="forum-index-nav cloudea-area">
-    <ForumContentNav v-model="sectionId" />
+    <ForumContentNav v-model="sectionId" @change="handleSectionChange" />
   </div>
   <div class="forum-index-container">
     <div class="forum-index-content">
       <div class="post-list">
-        <ForumContentPostList :section-id="sectionId"></ForumContentPostList>
+        <ForumContentPostList :data="postList!"></ForumContentPostList>
       </div>
       <div class="forum-index-aside">
         <ForumContentAside></ForumContentAside>

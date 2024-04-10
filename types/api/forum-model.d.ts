@@ -62,6 +62,7 @@ export interface ForumPost {
   Id: string
   ParentSectionId: string
   OwnerUserId: string
+  OwnerUser: object
   Title: string
   Content: string
   ClickCount: number

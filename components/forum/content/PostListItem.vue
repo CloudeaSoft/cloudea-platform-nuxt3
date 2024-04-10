@@ -10,6 +10,7 @@ const props = defineProps<{
 const {
   Id,
   OwnerUserId,
+  OwnerUser,
   Title,
   Content,
   ClickCount,
@@ -25,9 +26,7 @@ const {
   <div class="content-wrap">
     <div class="content-main">
       <div class="title-row">
-        <NuxtLinkLocale class="title" :to="link()">{{
-          Title
-        }}</NuxtLinkLocale>
+        <NuxtLinkLocale class="title" :to="link()">{{ Title }}</NuxtLinkLocale>
       </div>
       <div class="abstract">
         <NuxtLinkLocale :to="link()">

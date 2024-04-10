@@ -2,14 +2,17 @@
 import { getSectionApi } from '~/api'
 import { GUID_EMPTY } from '~/types/api/base-model.d'
 
+const emits = defineEmits<{
+  change: []
+}>()
+
 const sectionList = await getSectionApi()
 
 const sectionIdModel = defineModel<string>()
 
-sectionIdModel.value = GUID_EMPTY
-
 const handleSelect = (sectionId: string) => {
   sectionIdModel.value = sectionId
+  emits('change')
 }
 </script>
 

@@ -42,7 +42,7 @@ export const postPostApi = async (request: CreatePostRequest) => {
   return data
 }
 
-export const getPostApi = async () => {
+export const getPostApi = async (sectionId: string | undefined) => {
   const { data } = await useFetch<Result<PageResponse<ForumPost>>>(Api.POST, {
     baseURL: baseAPI,
     headers: {
@@ -50,7 +50,8 @@ export const getPostApi = async () => {
     },
     params: {
       page: 1,
-      limit: 15
+      limit: 15,
+      sectionId
     },
     method: 'GET',
     ...responseHandler

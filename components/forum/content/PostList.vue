@@ -1,18 +1,15 @@
 <script setup lang="ts">
 import { getPostApi } from '~/api'
 import { GUID_EMPTY } from '~/types/api/base-model.d'
+import type { ForumPost } from '~/types/api/forum-model'
 
 const showRecommend = ref(true)
 
-const postListRes = await getPostApi()
-
 interface PostListProps {
-  sectionId: string
+  data: ForumPost[]
 }
 
-const props = withDefaults(defineProps<PostListProps>(), {
-  sectionId: GUID_EMPTY
-})
+const props = defineProps<PostListProps>()
 </script>
 
 <template>
@@ -31,7 +28,7 @@ const props = withDefaults(defineProps<PostListProps>(), {
       </div>
     </div>
     <div class="post-list-wrap">
-      <div class="entry" v-for="post in postListRes?.Data.Rows" :key="post.Id">
+      <div class="entry" v-for="post in data" :key="post.Id">
         <ForumContentPostListItem :post="post" />
       </div>
     </div>
