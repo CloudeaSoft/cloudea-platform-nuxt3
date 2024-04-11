@@ -8,11 +8,6 @@ export interface PageRequest {
   PageSize: number
 }
 
-export interface PageResponse<T = any> {
-  Total: number
-  reply: T[]
-}
-
 export interface Error {
   Code: string
   Message: string

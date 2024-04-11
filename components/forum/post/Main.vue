@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { postInfoPostApi } from '@/api'
+import { postPostInfoApi } from '@/api'
+import type { GetPostInfoResponse } from '~/types/api/forum-model'
 
 interface postProps {
   postId: string
@@ -9,48 +10,76 @@ const props = defineProps<postProps>()
 
 const pageIndex = ref(1)
 
-const data = await postInfoPostApi(props.postId, {
-  PageIndex: pageIndex.value,
-  PageSize: 15
-})
+const pageSize = ref(3)
 
-console.log(data.value?.Data.ReplyInfos?.total)
+const data = ref<GetPostInfoResponse>()
+
+const getPost = async () => {
+  var response = await postPostInfoApi(props.postId, {
+    PageIndex: pageIndex.value,
+    PageSize: pageSize.value
+  })
+  data.value = response.value?.Data
+}
+
+await getPost()
 </script>
 
 <template>
   <div class="post-main">
     <div class="post-title">
-      <h2>Post Title</h2>
+      <h2>{{ data?.PostInfo.Title }}</h2>
       <div class="post-info">
-        <div class="click-count info">点击数: 111</div>
-        <div class="reply-count info">回复数: 111</div>
+        <div class="click-count info">
+          {{ `点击数: ` + data?.PostInfo.ClickCount }}
+        </div>
+        <div class="reply-count info">
+          {{ `回复数: ` + data?.ReplyInfos.Total }}
+        </div>
       </div>
     </div>
     <div class="post-body">
       <div class="body-content">
         <div class="user-area">
           <ForumPostMainUserArea
-            user-id="1"
-            user-name="2"
+            :user-id="data?.PostInfo.CreatorId!"
+            :user-name="data?.PostInfo.Creator!"
           ></ForumPostMainUserArea>
         </div>
         <div class="right-area">
-          <div class="time-area">time</div>
-          <div class="content-area">content</div>
+          <div class="time-area">
+            {{
+              $t('最后更新于 ') + getLocaleTime(data?.PostInfo.LastUpdatedTime!)
+            }}
+          </div>
+          <div class="content-area">
+            {{ markdownToText(data?.PostInfo.Content!) }}
+          </div>
         </div>
       </div>
-      <div class="reply-container" v-for="i in 10">
-        <ForumPostReply></ForumPostReply>
+      <div class="reply-container" v-for="reply in data?.ReplyInfos.Rows">
+        <ForumPostReply
+          :user-id="reply.CreatorId"
+          :user="reply.Creator"
+          :time="reply.CreateTime!"
+          :content="reply.Content"
+          :comment="reply.CommentInfos"
+        ></ForumPostReply>
       </div>
     </div>
     <div class="post-footer">
-      <CloudeaPagination :total="data?.Data.ReplyInfos?.total ?? 1" v-model:current-page="pageIndex"/>
+      <CloudeaPagination
+        :total="data?.ReplyInfos.Total ?? 1"
+        v-model:current-page="pageIndex"
+        :page-size="pageSize"
+      />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .post-main {
+  position: relative;
   height: 100%;
   padding-bottom: 20px;
 }
@@ -95,6 +124,10 @@ console.log(data.value?.Data.ReplyInfos?.total)
       flex-direction: column;
       padding: 20px 0;
       padding-left: 20px;
+
+      .time-area {
+        text-align: right;
+      }
 
       .content-area {
         flex: 1;

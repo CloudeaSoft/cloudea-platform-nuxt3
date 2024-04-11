@@ -1,6 +1,9 @@
+import type { UserProfile } from './user-model'
+import type { PageResponse } from './base-model'
+
 export interface GetPostInfoResponse {
   PostInfo: PostInfo
-  ReplyInfos?: PageResponse<ReplyInfo> | null
+  ReplyInfos: PageResponse<ReplyInfo>
 }
 
 export interface PostInfo {
@@ -13,8 +16,8 @@ export interface PostInfo {
   ClickCount: number
   LikeCount: number
   DislikeCount: number
-  CreateTime: Date
-  LastUpdatedTime?: Date | null
+  CreateTime: string
+  LastUpdatedTime?: string | null
 }
 
 export interface ReplyInfo {
@@ -25,7 +28,7 @@ export interface ReplyInfo {
   Content: string
   LikeCount: number
   DislikeCount: number
-  CreateTime: Date
+  CreateTime: string
   CommentInfos: CommentInfo[]
 }
 
@@ -36,7 +39,7 @@ export interface CommentInfo {
   Content: string
   LikeCount: number
   DislikeCount: number
-  CreateTime: Date
+  CreateTime: string
 }
 
 declare type ForumRecommendPostList = List<PostInfo>
@@ -62,7 +65,7 @@ export interface ForumPost {
   Id: string
   ParentSectionId: string
   OwnerUserId: string
-  OwnerUser: object
+  OwnerUser: UserProfile
   Title: string
   Content: string
   ClickCount: number

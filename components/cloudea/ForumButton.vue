@@ -58,6 +58,9 @@ const disabledClass = () => {
   text-transform: uppercase;
   transition: all 0.2s !important;
   white-space: nowrap;
+  height: 40px;
+  // line-height: 30px;
+
   width: 150px;
 
   &:active {

@@ -31,7 +31,7 @@ const {
       <div class="abstract">
         <NuxtLinkLocale :to="link()">
           <div>
-            {{ Content }}
+            {{ markdownToText(Content) }}
           </div>
         </NuxtLinkLocale>
       </div>
@@ -39,7 +39,7 @@ const {
         <ul class="action-list">
           <li class="item meta-container">
             <a class="user-info" href="">
-              <div class="user-popover">{{ OwnerUserId }}</div>
+              <div class="user-popover">{{ OwnerUser.UserName }}</div>
             </a>
             <div class="footer-divider"></div>
           </li>

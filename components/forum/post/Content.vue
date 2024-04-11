@@ -4,6 +4,8 @@ interface postProps {
 }
 
 const props = defineProps<postProps>()
+
+const isShowReplyEditor = ref<boolean>(false)
 </script>
 
 <template>
@@ -13,7 +15,15 @@ const props = defineProps<postProps>()
     </div>
     <!-- <div class="post-aside"><ForumPostAside></ForumPostAside></div> -->
     <div class="post-panel cloudea-area">
-      <ForumPostPanel></ForumPostPanel>
+      <ForumPostPanel
+        @reply="isShowReplyEditor = !isShowReplyEditor"
+      ></ForumPostPanel>
+    </div>
+    <div :class="['post-reply', isShowReplyEditor ? 'active' : '']">
+      <ForumPostReplyEditor
+        :post-id="props.postId"
+        @close="isShowReplyEditor = false"
+      />
     </div>
   </div>
 </template>
@@ -21,6 +31,7 @@ const props = defineProps<postProps>()
 <style lang="scss" scoped>
 .forum-post-container {
   height: calc(100% - 20px);
+  position: relative;
 
   .post-content {
     height: 100%;
@@ -39,6 +50,20 @@ const props = defineProps<postProps>()
     margin-left: -7rem;
     top: 140px;
     z-index: 2;
+  }
+
+  .post-reply {
+    position: absolute;
+    bottom: -320px;
+
+    height: 300px;
+    width: 100%;
+
+    transition: all 0.3s;
+
+    &.active {
+      bottom: 0;
+    }
   }
 }
 </style>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { getPostApi } from '~/api'
-import { GUID_EMPTY, type PageResponse } from '~/types/api/base-model.d'
-import type { ForumPost } from '~/types/api/forum-model.d'
+import { GUID_EMPTY } from '~/types/api/base-model.d'
 
 const sectionId = ref(GUID_EMPTY)
 

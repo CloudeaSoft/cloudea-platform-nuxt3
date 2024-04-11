@@ -1,14 +1,27 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+interface ReplyProps {
+  userId: string
+  user: string
+  time: string
+  content: string
+  comment: object[]
+}
+
+const props = defineProps<ReplyProps>()
+</script>
 
 <template>
   <div class="reply-content">
     <div class="user-area">
-      <ForumPostMainUserArea user-id="1" user-name="2"></ForumPostMainUserArea>
+      <ForumPostMainUserArea
+        :user-id="userId"
+        :user-name="user"
+      ></ForumPostMainUserArea>
     </div>
     <div class="right-area">
-      <div class="time-area">time</div>
-      <div class="content-area">content</div>
-      <div class="comment-area">comment</div>
+      <div class="time-area">{{ time }}</div>
+      <div class="content-area">{{ content }}</div>
+      <div class="comment-area">{{ comment }}</div>
     </div>
   </div>
 </template>
