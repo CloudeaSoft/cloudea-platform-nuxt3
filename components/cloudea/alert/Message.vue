@@ -52,6 +52,8 @@ const messageClass = (type: string): string => {
   width: 100%;
   display: flex;
   z-index: 9999;
+  pointer-events: none;
+  user-select: none;
 }
 
 .cloudea-message {

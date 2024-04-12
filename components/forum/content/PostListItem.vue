@@ -20,25 +20,41 @@ const {
   LastEditTime,
   CreatedOnUtc
 } = props.post
+
+const handleClickBody = () => {
+  navigateTo(link())
+}
+
+const handleClickUser = ()=>{
+  console.log('user')
+}
+
+const handleClickLike = () => {
+  console.log('like')
+}
+
+const handleClickTag = (tag: string) => {
+  console.log('tag:', tag)
+}
 </script>
 
 <template>
   <div class="content-wrap">
-    <div class="content-main">
+    <div class="content-main" @click="handleClickBody">
       <div class="title-row">
-        <NuxtLinkLocale class="title" :to="link()">{{ Title }}</NuxtLinkLocale>
+        <div class="title">
+          {{ Title }}
+        </div>
       </div>
       <div class="abstract">
-        <NuxtLinkLocale :to="link()">
-          <div>
-            {{ markdownToText(Content) }}
-          </div>
-        </NuxtLinkLocale>
+        <div>
+          {{ markdownToText(Content) }}
+        </div>
       </div>
       <div class="entry-footer">
         <ul class="action-list">
           <li class="item meta-container">
-            <a class="user-info" href="">
+            <a class="user-info" @click.stop="handleClickUser">
               <div class="user-popover">{{ OwnerUser.UserName }}</div>
             </a>
             <div class="footer-divider"></div>
@@ -69,7 +85,7 @@ const {
             </svg>
             <span>{{ ClickCount }}</span>
           </li>
-          <li class="item like">
+          <li class="item like" @click.stop="handleClickLike">
             <svg
               width="14"
               height="14"
@@ -88,7 +104,7 @@ const {
             <span>{{ LikeCount }}</span>
           </li>
         </ul>
-        <div class="entry-footer-tags">
+        <div class="entry-footer-tags" @click.stop="handleClickTag('test')">
           <NuxtLinkLocale
             class="footer-tag footer-tag-only width-limited"
             to="/forum"
@@ -137,7 +153,7 @@ const {
   font-weight: 400;
 }
 
-.abstract a {
+.abstract div {
   color: var(--cloudea-font-color-1);
   font-size: 13px;
   line-height: 22px;
@@ -169,6 +185,13 @@ const {
   flex-shrink: 0;
 }
 
+.meta-container,
+.meta-container .user-info {
+  display: flex;
+  align-items: center;
+  color: var(--cloudea-font-color-1);
+}
+
 .meta-container .user-info {
   max-width: 132px;
   font-size: 13px;
@@ -177,13 +200,10 @@ const {
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-all;
-}
 
-.meta-container,
-.meta-container .user-info {
-  display: flex;
-  align-items: center;
-  color: var(--cloudea-font-color-1);
+  &:hover {
+    color: var(--cloudea-blue-5);
+  }
 }
 
 .meta-container .user-info .user-popover {
@@ -231,10 +251,10 @@ const {
   white-space: nowrap;
   min-height: 18px;
   line-height: 18px;
-}
 
-.footer-tag:hover {
-  color: var(--cloudea-blue-5);
+  &:hover {
+    color: var(--cloudea-blue-5);
+  }
 }
 
 .footer-tag-only {

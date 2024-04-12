@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { getPostApi } from '~/api'
-import { GUID_EMPTY } from '~/types/api/base-model.d'
 import type { ForumPost } from '~/types/api/forum-model'
 
 const showRecommend = ref(true)

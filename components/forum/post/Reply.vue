@@ -1,7 +1,7 @@
 <script setup lang="ts">
 interface ReplyProps {
   userId: string
-  user: string
+  user?: string
   time: string
   content: string
   comment: object[]

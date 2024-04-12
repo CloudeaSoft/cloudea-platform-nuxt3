@@ -20,41 +20,41 @@ type OnResponseErrorContext<R extends ResponseType = 'json'> = FetchContext & {
 const handleStatus = (status: number) => {
   switch (status) {
     case 200:
-      useMessage('Request successful', 'success', 3000)
+      useMessage('200 Request successful', 'success', 3000)
       break
     case 201:
-      useMessage('Resource created', 'success', 3000)
+      useMessage('201 Resource created', 'success', 3000)
       break
     case 204:
-      useMessage('No content', 'info', 3000)
+      useMessage('204 No content', 'info', 3000)
       break
     case 301:
-      useMessage('Moved Permanently', 'info', 3000)
+      useMessage('301 Moved Permanently', 'info', 3000)
       break
     case 304:
-      useMessage('Not Modified', 'info', 3000)
+      useMessage('304 Not Modified', 'info', 3000)
       break
     case 400:
-      useMessage('Bad Request', 'error', 3000)
+      useMessage('400 Bad Request', 'error', 3000)
       break
     case 401:
-      useMessage('Unauthorized', 'error', 3000)
+      useMessage('401 Unauthorized', 'error', 3000)
       useUserStore().removeToken()
       break
     case 403:
-      useMessage('Forbidden', 'error', 3000)
+      useMessage('403 Forbidden', 'error', 3000)
       break
     case 404:
       useMessage('404 Not Found', 'error', 3000)
       break
     case 409:
-      useMessage('Conflict', 'error', 3000)
+      useMessage('409 Conflict', 'error', 3000)
       break
     case 500:
-      useMessage('Internal Server Error', 'error', 3000)
+      useMessage('500 Internal Server Error', 'error', 3000)
       break
     case 502:
-      useMessage('Bad Gateway', 'error', 3000)
+      useMessage('502 Bad Gateway', 'error', 3000)
       break
     case 503:
       useMessage('Service Unavailable', 'error', 3000)

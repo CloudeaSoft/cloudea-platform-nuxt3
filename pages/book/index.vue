@@ -1,1 +1,8 @@
-<template>With books we are living.</template>
+<template><div class="book-view view">With books we are living.</div></template>
+
+<style lang="scss" scoped>
+.book-view {
+  height: calc(100dvh - 6.66rem);
+  color: var(--cloudea-font-color-3);
+}
+</style>

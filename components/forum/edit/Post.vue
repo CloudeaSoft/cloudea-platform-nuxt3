@@ -8,33 +8,35 @@ const postSection = ref('')
 
 const postTitle = ref('')
 
-const postContent = ref(`\`\`\`javascript
-console.log(\'Hello World!\')
-\`\`\``)
+const postContent = ref('')
 
 const milkdownFocused = ref<boolean>(false)
 
 const handlePost = async () => {
-  console.log('主题: ', postSection.value)
-  console.log('标题: ', postTitle.value)
-  console.log('内容: ', postContent.value)
+  if (!postTitle.value || !postTitle.value.trim()) {
+    useMessage('Empty Title', 'warn')
+    return
+  }
+  if (!postContent.value || !postContent.value.trim()) {
+    useMessage('Empty Content', 'warn')
+    return
+  }
   var createRes = await postPostApi({
     SectionId: postSection.value,
     Title: postTitle.value,
     Content: postContent.value
   })
   if (!createRes.value?.Status) {
-    console.log(1)
-    useMessage('', 'error')
+    // useMessage('', 'error')
     return
   }
   if (!createRes.value.Data.trim()) {
-    console.log(2)
-    useMessage('', 'error')
+    // useMessage('', 'error')
     return
   }
   resetEditorContent()
   useMessage('', 'success')
+  navigateTo(`/forum/posts/${createRes.value.Data}`)
 }
 
 const handleSave = (editorValue: string) => {
@@ -122,7 +124,7 @@ const resetEditorContent = () => {
     }
 
     .text-area {
-      min-height: 400px;
+      height: 500px;
       width: calc(100% - 40px);
       background-color: var(--cloudea-white);
       margin: 20px 20px 0;
