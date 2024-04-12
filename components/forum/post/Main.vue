@@ -23,6 +23,17 @@ const getPost = async () => {
 }
 
 await getPost()
+
+const isShowPost = ref<boolean>(pageIndex.value === 1)
+
+const handlePageChange = async () => {
+  await getPost()
+  if (pageIndex.value === 1) {
+    isShowPost.value = true
+    return
+  }
+  isShowPost.value = false
+}
 </script>
 
 <template>
@@ -39,7 +50,7 @@ await getPost()
       </div>
     </div>
     <div class="post-body">
-      <div class="body-content">
+      <div class="body-content" v-show="isShowPost">
         <div class="user-area">
           <ForumPostMainUserArea
             :user-id="data?.PostInfo.CreatorId!"
@@ -48,22 +59,24 @@ await getPost()
         </div>
         <div class="right-area">
           <div class="time-area">
-            {{
-              $t('最后更新于 ') + getLocaleTime(data?.PostInfo.LastUpdatedTime!)
-            }}
+            {{ getLocaleTime(data?.PostInfo.LastUpdatedTime!) }}
           </div>
           <div class="content-area">
             {{ markdownToText(data?.PostInfo.Content!) }}
           </div>
         </div>
       </div>
-      <div class="reply-container" v-for="reply in data?.ReplyInfos.Rows">
+      <div
+        class="reply-container"
+        v-for="(reply, index) in data?.ReplyInfos.Rows"
+      >
         <ForumPostReply
           :user-id="reply.CreatorId"
           :user="reply.Creator"
           :time="reply.CreateTime!"
           :content="reply.Content"
           :comment="reply.CommentInfos"
+          :floor="index + 2"
         ></ForumPostReply>
       </div>
     </div>
@@ -71,7 +84,8 @@ await getPost()
       <CloudeaPagination
         :total="data?.ReplyInfos.Total ?? 1"
         v-model:current-page="pageIndex"
-        :page-size="pageSize"
+        v-model:page-size="pageSize"
+        @change="handlePageChange"
       />
     </div>
   </div>

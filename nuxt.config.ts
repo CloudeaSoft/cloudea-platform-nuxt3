@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' }
+  },
   ssr: false,
   build: {
     transpile: ['pinia-plugin-persistedstate']
@@ -9,11 +12,11 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/i18n',
-    'dayjs-nuxt',
     'nuxt-typed-router',
     '@vite-pwa/nuxt',
     '@nuxtjs/color-mode',
-    'nuxt-icon'
+    'nuxt-icon',
+    'nuxt-lodash'
   ],
   runtimeConfig: {
     public: {

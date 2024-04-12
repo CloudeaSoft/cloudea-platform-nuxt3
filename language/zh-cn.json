@@ -66,6 +66,22 @@
     "forum": {
         "index": {
             "commonSection": "综合"
+        },
+        "post": {
+            "reply": {
+                "open": "回复",
+                "close": "关闭回复",
+                "report": "举报",
+                "floor": "楼",
+                "comment": {
+                    "open": "我也说一句",
+                    "close": "我也说一句"
+                }
+            },
+            "replyEditor": {
+                "title": "回复",
+                "commit": "提交"
+            }
         }
     },
     "edit": {

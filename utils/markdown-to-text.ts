@@ -1,5 +1,5 @@
 import { Renderer, marked, type MarkedOptions } from 'marked'
-import { escape, unescape } from 'lodash'
+// import { escape, unescape } from 'lodash'
 
 const block = (text: string) => text + '\n\n'
 const escapeBlock = (text: string) => escape(text) + '\n\n'

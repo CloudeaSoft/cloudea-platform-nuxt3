@@ -40,9 +40,9 @@ const handlePublish = async () => {
 <template>
   <div class="post-reply-content">
     <div class="reply-title">
-      <h2 class="title-text">{{ $t('回复') }}</h2>
+      <h2 class="title-text">{{ $t('forum.post.replyEditor.title') }}</h2>
       <CloudeaForumButton class="title-publish" @click="handlePublish">
-        {{ $t('Commit') }}
+        {{ $t('forum.post.replyEditor.commit') }}
       </CloudeaForumButton>
     </div>
     <div class="editor-container">
