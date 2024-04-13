@@ -1,16 +1,21 @@
 <script setup lang="ts">
+import { getCommentApi, postCommentApi } from '~/api'
+
 interface ReplyProps {
+  replyId: string
   userId: string
   user?: string
   time: string
   content: string
-  comment: object[]
+  commentCount: number
   floor: number
 }
 
 const props = defineProps<ReplyProps>()
 
-const showComment = ref<boolean>(false)
+const showComment = ref<boolean>(props.commentCount > 0)
+
+const showCommentEditor = ref<boolean>(props.commentCount <= 0)
 
 const handleCommentOpen = () => {
   showComment.value = true
@@ -18,6 +23,34 @@ const handleCommentOpen = () => {
 
 const handleCommentClose = () => {
   showComment.value = false
+}
+
+const handleCommentEditorOpen = () => {
+  showCommentEditor.value = true
+}
+
+const handleCommentEditorClose = () => {
+  showCommentEditor.value = false
+}
+
+const commentList = ref()
+commentList.value = (await getCommentApi(props.replyId)).value?.Data.Rows
+
+const commentContent = ref<string>('')
+
+const handleReplyCommit = async () => {
+  if (!commentContent.value.trim()) {
+    useMessage('', 'warn')
+    return
+  }
+
+  var response = await postCommentApi(props.replyId, commentContent.value)
+  if (!response.value?.Status) {
+    useMessage(response.value?.Error.Message!, 'error')
+    return
+  }
+
+  commentContent.value = ''
 }
 </script>
 
@@ -59,13 +92,29 @@ const handleCommentClose = () => {
         </div>
         <div class="comment-wrapper" v-show="showComment">
           <ul class="comment-content">
-            <li v-for="comment in 2">xxx: xxxxxxxxxxxxxxxxxxxxxxxxxxx.</li>
+            <li v-for="comment in commentList">
+              {{ `${comment.CreatorId}: ${comment.Content}` }}
+            </li>
             <li>
-              <button>{{ $t('forum.post.reply.comment.open') }}</button>
+              <button
+                v-show="!showCommentEditor"
+                @click="handleCommentEditorOpen"
+              >
+                {{ $t('forum.post.reply.comment.open') }}
+              </button>
+              <button
+                v-show="showCommentEditor"
+                @click="handleCommentEditorClose"
+              >
+                {{ $t('forum.post.reply.comment.close') }}
+              </button>
             </li>
           </ul>
-          <div class="comment-editor">
-            <input type="text" />
+          <div class="comment-editor" v-show="showCommentEditor">
+            <input type="text" v-model="commentContent" />
+            <button @click="handleReplyCommit">
+              {{ $t('forum.post.reply.comment.commit') }}
+            </button>
           </div>
         </div>
       </div>

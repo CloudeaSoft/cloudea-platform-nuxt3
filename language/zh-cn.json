@@ -75,7 +75,8 @@
                 "floor": "楼",
                 "comment": {
                     "open": "我也说一句",
-                    "close": "我也说一句"
+                    "close": "关闭",
+                    "commit": "发表"
                 }
             },
             "replyEditor": {

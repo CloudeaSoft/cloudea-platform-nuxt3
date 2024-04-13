@@ -29,7 +29,7 @@ export interface ReplyInfo {
   LikeCount: number
   DislikeCount: number
   CreateTime: string
-  CommentInfos: CommentInfo[]
+  CommentCount: number
 }
 
 export interface CommentInfo {

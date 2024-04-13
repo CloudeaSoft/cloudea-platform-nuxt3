@@ -71,11 +71,12 @@ const handlePageChange = async () => {
         v-for="(reply, index) in data?.ReplyInfos.Rows"
       >
         <ForumPostReply
+          :reply-id="reply.ReplyId"
           :user-id="reply.CreatorId"
           :user="reply.Creator"
           :time="reply.CreateTime!"
           :content="reply.Content"
-          :comment="reply.CommentInfos"
+          :comment-count="reply.CommentCount"
           :floor="index + 2"
         ></ForumPostReply>
       </div>

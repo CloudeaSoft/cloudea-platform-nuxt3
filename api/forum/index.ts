@@ -1,5 +1,6 @@
 import type { PageRequest, PageResponse, Result } from '~/types/api/base-model'
 import type {
+  CommentInfo,
   CreatePostRequest,
   ForumPost,
   ForumSection,
@@ -10,7 +11,8 @@ enum Api {
   SECTION = '/forum/section',
   POST = '/forum/post',
   POST_INFO = '/forum/post/:id/info',
-  REPLY = '/forum/reply'
+  REPLY = '/forum/reply',
+  COMMENT = '/forum/comment'
 }
 
 const baseAPI = useRuntimeConfig().public.CLOUDEA_API
@@ -90,6 +92,46 @@ export const postReplyApi = async (id: string, content: string) => {
       content
     },
     method: 'POST',
+    ...responseHandler
+  })
+
+  return data
+}
+
+export const postCommentApi = async (
+  replyId: string,
+  content: string,
+  targetUserId: string | undefined = undefined
+) => {
+  const { data } = await useFetch<Result<string>>(Api.COMMENT, {
+    baseURL: baseAPI,
+    headers: {
+      Authorization: `Bearer ${useUserStore().getToken()}`
+    },
+    params: {
+      id: replyId,
+      content,
+      targetUserId
+    },
+    method: 'POST',
+    ...responseHandler
+  })
+
+  return data
+}
+
+export const getCommentApi = async (replyId: string) => {
+  const { data } = await useFetch<Result<PageResponse<CommentInfo>>>(Api.COMMENT, {
+    baseURL: baseAPI,
+    headers: {
+      Authorization: `Bearer ${useUserStore().getToken()}`
+    },
+    params: {
+      id: replyId,
+      page: 1,
+      limit: 15
+    },
+    method: 'GET',
     ...responseHandler
   })
 
