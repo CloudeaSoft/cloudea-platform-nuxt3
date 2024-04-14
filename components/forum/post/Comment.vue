@@ -64,7 +64,11 @@ const handlePageChange = async () => {
   <div class="comment-wrapper">
     <div class="comment-content">
       <ul class="comment-list">
-        <li class="comment-item" v-for="comment in commentList?.Rows">
+        <li
+          class="comment-item"
+          v-for="comment in commentList?.Rows"
+          :key="comment.CommentId"
+        >
           <div class="item-avatar"></div>
           <div class="item-right">
             <div class="item-content">
@@ -97,6 +101,7 @@ const handlePageChange = async () => {
             {{ $t('forum.post.reply.comment.close') }}
           </button>
           <CloudeaPagination
+            v-if="commentList?.Total! > 0"
             v-model:current-page="pageIndex"
             :total="commentList?.Total!"
             :page-size="pageSize"

@@ -11,7 +11,7 @@ const props = defineProps<postProps>()
 
 const pageIndex = ref(1)
 
-const pageSize = ref(3)
+const pageSize = ref(5)
 
 const postData = ref<PostInfo>()
 
@@ -75,7 +75,11 @@ const handlePageChange = async () => {
           </div>
         </div>
       </div>
-      <div class="reply-container" v-for="(reply, index) in replyData?.Rows">
+      <div
+        class="reply-container"
+        v-for="(reply, index) in replyData?.Rows"
+        :key="reply.ReplyId"
+      >
         <ForumPostReply
           :reply-id="reply.ReplyId"
           :user-id="reply.CreatorId"
@@ -91,7 +95,7 @@ const handlePageChange = async () => {
       <CloudeaPagination
         :total="replyData?.Total ?? 1"
         v-model:current-page="pageIndex"
-        v-model:page-size="pageSize"
+        :page-size="pageSize"
         @change="handlePageChange"
       />
     </div>
