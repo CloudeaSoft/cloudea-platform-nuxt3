@@ -17,6 +17,8 @@ watch(
 
 <template>
   <div class="app" :style="{ backgroundImage: `url(${imageURL})` }">
+    <!-- <div id="sakura"></div> -->
+    <div id="perticle_1"></div>
     <div class="view-container container index-container">
       <div class="main-header-box">
         <CloudeaTopBar></CloudeaTopBar>
@@ -29,6 +31,9 @@ watch(
 </template>
 
 <style lang="scss" scoped>
+@import url('@/assets/css/effect/sakura.scss');
+@import url('@/assets/css/effect/perticle.scss');
+
 .app {
   background-repeat: no-repeat;
   background-position: top center;

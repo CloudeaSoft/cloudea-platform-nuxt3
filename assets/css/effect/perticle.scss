@@ -1,0 +1,125 @@
+.mv-anime {
+  -moz-animation: mva 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: mva 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translate3d(0, 0, 0);
+}
+@keyframes mva {
+  0% {
+    clip-path: circle(0 at 50% 50%);
+    -webkit-clip-path: circle(0 at 50% 50%);
+  }
+  100% {
+    clip-path: circle(100% at 50% 50%);
+    -webkit-clip-path: circle(100% at 50% 50%);
+  }
+}
+@-moz-keyframes mva {
+  0% {
+    clip-path: circle(0 at 50% 50%);
+    -webkit-clip-path: circle(0 at 50% 50%);
+  }
+  100% {
+    clip-path: circle(100% at 50% 50%);
+    -webkit-clip-path: circle(100% at 50% 50%);
+  }
+}
+@-webkit-keyframes mva {
+  0% {
+    clip-path: circle(0 at 50% 50%);
+    -webkit-clip-path: circle(0 at 50% 50%);
+  }
+  100% {
+    clip-path: circle(100% at 50% 50%);
+    -webkit-clip-path: circle(100% at 50% 50%);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .mv-anime {
+    -moz-animation: none;
+    animation: none;
+  }
+}
+
+#perticle_1 {
+  background-image: url('@/public/images/effect/perticle/bg_perticle_01.png'),
+    url('@/public/images/effect/perticle/bg_perticle_02.png'),
+    url('@/public/images/effect/perticle/bg_perticle_03.png');
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-blend-mode: screen;
+  -webkit-animation: snow 10s linear infinite;
+  -moz-animation: snow 10s linear infinite;
+  animation: snow 10s linear infinite;
+  background-repeat: repeat;
+}
+
+@keyframes snow {
+  0% {
+    opacity: 0.25;
+    transform: scale(1);
+    background-position:
+      500px 1000px,
+      -400px 800px,
+      0 600px;
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+    background-position:
+      0 0,
+      0 0,
+      0 0;
+  }
+}
+@-moz-keyframes snow {
+  0% {
+    opacity: 0.25;
+    transform: scale(1);
+    background-position:
+      500px 1000px,
+      -400px 800px,
+      0 600px;
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+    background-position:
+      0 0,
+      0 0,
+      0 0;
+  }
+}
+@-webkit-keyframes snow {
+  0% {
+    opacity: 0.25;
+    transform: scale(1);
+    background-position:
+      500px 1000px,
+      -400px 800px,
+      0 600px;
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+    background-position:
+      0 0,
+      0 0,
+      0 0;
+  }
+}

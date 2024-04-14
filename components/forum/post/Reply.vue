@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { getCommentApi, postCommentApi } from '~/api'
+import type { UserProfile } from '~/types/api/user-model'
 
 interface ReplyProps {
   replyId: string
   userId: string
-  user?: string
+  user?: UserProfile
   time: string
   content: string
   commentCount: number
@@ -15,42 +15,12 @@ const props = defineProps<ReplyProps>()
 
 const showComment = ref<boolean>(props.commentCount > 0)
 
-const showCommentEditor = ref<boolean>(props.commentCount <= 0)
-
 const handleCommentOpen = () => {
   showComment.value = true
 }
 
 const handleCommentClose = () => {
   showComment.value = false
-}
-
-const handleCommentEditorOpen = () => {
-  showCommentEditor.value = true
-}
-
-const handleCommentEditorClose = () => {
-  showCommentEditor.value = false
-}
-
-const commentList = ref()
-commentList.value = (await getCommentApi(props.replyId)).value?.Data.Rows
-
-const commentContent = ref<string>('')
-
-const handleReplyCommit = async () => {
-  if (!commentContent.value.trim()) {
-    useMessage('', 'warn')
-    return
-  }
-
-  var response = await postCommentApi(props.replyId, commentContent.value)
-  if (!response.value?.Status) {
-    useMessage(response.value?.Error.Message!, 'error')
-    return
-  }
-
-  commentContent.value = ''
 }
 </script>
 
@@ -59,7 +29,7 @@ const handleReplyCommit = async () => {
     <div class="user-area">
       <ForumPostMainUserArea
         :user-id="userId"
-        :user-name="user"
+        :user-name="user?.DisplayName"
       ></ForumPostMainUserArea>
     </div>
     <div class="right-area">
@@ -79,7 +49,7 @@ const handleReplyCommit = async () => {
               v-show="!showComment"
               @click="handleCommentOpen"
             >
-              {{ $t('forum.post.reply.open') }}
+              {{ `${$t('forum.post.reply.open')}(${props.commentCount})` }}
             </span>
             <span
               class="comment-close"
@@ -90,37 +60,17 @@ const handleReplyCommit = async () => {
             </span>
           </div>
         </div>
-        <div class="comment-wrapper" v-show="showComment">
-          <ul class="comment-content">
-            <li v-for="comment in commentList">
-              {{ `${comment.CreatorId}: ${comment.Content}` }}
-            </li>
-            <li>
-              <button
-                v-show="!showCommentEditor"
-                @click="handleCommentEditorOpen"
-              >
-                {{ $t('forum.post.reply.comment.open') }}
-              </button>
-              <button
-                v-show="showCommentEditor"
-                @click="handleCommentEditorClose"
-              >
-                {{ $t('forum.post.reply.comment.close') }}
-              </button>
-            </li>
-          </ul>
-          <div class="comment-editor" v-show="showCommentEditor">
-            <input type="text" v-model="commentContent" />
-            <button @click="handleReplyCommit">
-              {{ $t('forum.post.reply.comment.commit') }}
-            </button>
-          </div>
-        </div>
+        <KeepAlive
+          ><ForumPostComment
+            v-if="showComment"
+            :reply-id="props.replyId"
+            :comment-count="props.commentCount"
+        /></KeepAlive>
       </div>
     </div>
   </div>
 </template>
+
 <style lang="scss" scoped>
 .reply-content {
   min-height: 200px;
@@ -174,18 +124,6 @@ const handleReplyCommit = async () => {
               color: var(--cloudea-blue-5);
             }
           }
-        }
-      }
-
-      .comment-wrapper {
-        border: 1px solid var(--cloudea-font-color-0);
-
-        .comment-content {
-          padding: 4px 15px 14px;
-        }
-
-        .comment-editor {
-          padding-top: 13px;
         }
       }
     }

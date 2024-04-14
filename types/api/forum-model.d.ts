@@ -8,7 +8,7 @@ export interface GetPostInfoResponse {
 
 export interface PostInfo {
   PostId: string
-  Creator: string
+  Creator: UserProfile
   CreatorId: string
   Title: string
   Content: string
@@ -22,7 +22,7 @@ export interface PostInfo {
 
 export interface ReplyInfo {
   ReplyId: string
-  Creator: string
+  Creator: UserProfile
   CreatorId: string
   Title?: string | null
   Content: string
@@ -34,7 +34,7 @@ export interface ReplyInfo {
 
 export interface CommentInfo {
   CommentId: string
-  Creator: string
+  Creator: UserProfile
   CreatorId: string
   Content: string
   LikeCount: number

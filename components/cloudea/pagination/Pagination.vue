@@ -98,21 +98,16 @@ const currentPageBridge = computed<number>({
   },
   set(v) {
     let newCurrentPage = v
-    console.log('New:', newCurrentPage)
     if (v < 1) {
       newCurrentPage = 1
     } else if (v > pageCountBridge.value) {
       newCurrentPage = pageCountBridge.value
     }
-    console.log('New:', newCurrentPage)
-    console.log(isAbsent(props.currentPage))
 
     if (isAbsent(props.currentPage)) {
-      console.log(1)
-
       innerCurrentPage.value = newCurrentPage
     }
-    console.log('Inner:', innerCurrentPage.value)
+
     if (hasCurrentPageListener) {
       emit('update:current-page', newCurrentPage)
       emit('current-change', newCurrentPage)

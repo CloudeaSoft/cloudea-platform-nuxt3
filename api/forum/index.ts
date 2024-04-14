@@ -4,13 +4,15 @@ import type {
   CreatePostRequest,
   ForumPost,
   ForumSection,
-  GetPostInfoResponse
+  GetPostInfoResponse,
+  PostInfo,
+  ReplyInfo
 } from '~/types/api/forum-model'
 
 enum Api {
   SECTION = '/forum/section',
   POST = '/forum/post',
-  POST_INFO = '/forum/post/:id/info',
+  POST_INFO = '/forum/post/:id',
   REPLY = '/forum/reply',
   COMMENT = '/forum/comment'
 }
@@ -67,14 +69,13 @@ export const postPostApi = async (request: CreatePostRequest) => {
   return data
 }
 
-export const postPostInfoApi = async (id: string, request: PageRequest) => {
+export const postPostInfoApi = async (id: string) => {
   const fullUrl = `${baseAPI}${Api.POST_INFO.replace(':id', id)}`
-  const { data } = await useFetch<Result<GetPostInfoResponse>>(fullUrl, {
+  const { data } = await useFetch<Result<PostInfo>>(fullUrl, {
     baseURL: baseAPI,
     headers: {
       Authorization: `Bearer ${useUserStore().getToken()}`
     },
-    body: request,
     method: 'POST',
     ...responseHandler
   })
@@ -92,6 +93,24 @@ export const postReplyApi = async (id: string, content: string) => {
       content
     },
     method: 'POST',
+    ...responseHandler
+  })
+
+  return data
+}
+
+export const getReplyApi = async (postId: string, request: PageRequest) => {
+  const { data } = await useFetch<Result<PageResponse<ReplyInfo>>>(Api.REPLY, {
+    baseURL: baseAPI,
+    headers: {
+      Authorization: `Bearer ${useUserStore().getToken()}`
+    },
+    params: {
+      postId,
+      page: request.PageIndex,
+      limit: request.PageSize
+    },
+    method: 'GET',
     ...responseHandler
   })
 
@@ -120,20 +139,23 @@ export const postCommentApi = async (
   return data
 }
 
-export const getCommentApi = async (replyId: string) => {
-  const { data } = await useFetch<Result<PageResponse<CommentInfo>>>(Api.COMMENT, {
-    baseURL: baseAPI,
-    headers: {
-      Authorization: `Bearer ${useUserStore().getToken()}`
-    },
-    params: {
-      id: replyId,
-      page: 1,
-      limit: 15
-    },
-    method: 'GET',
-    ...responseHandler
-  })
+export const getCommentApi = async (replyId: string, request: PageRequest) => {
+  const { data } = await useFetch<Result<PageResponse<CommentInfo>>>(
+    Api.COMMENT,
+    {
+      baseURL: baseAPI,
+      headers: {
+        Authorization: `Bearer ${useUserStore().getToken()}`
+      },
+      params: {
+        id: replyId,
+        page: request.PageIndex,
+        limit: request.PageSize
+      },
+      method: 'GET',
+      ...responseHandler
+    }
+  )
 
   return data
 }

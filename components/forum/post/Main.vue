@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { postPostInfoApi } from '@/api'
-import type { GetPostInfoResponse } from '~/types/api/forum-model'
+import { getReplyApi, postPostInfoApi } from '@/api'
+import type { PageResponse } from '~/types/api/base-model'
+import type { ReplyInfo, PostInfo } from '~/types/api/forum-model'
 
 interface postProps {
   postId: string
@@ -12,22 +13,30 @@ const pageIndex = ref(1)
 
 const pageSize = ref(3)
 
-const data = ref<GetPostInfoResponse>()
+const postData = ref<PostInfo>()
+
+const replyData = ref<PageResponse<ReplyInfo>>()
 
 const getPost = async () => {
-  var response = await postPostInfoApi(props.postId, {
+  var response = await postPostInfoApi(props.postId)
+  postData.value = response.value?.Data
+}
+
+const getReply = async () => {
+  var response = await getReplyApi(props.postId, {
     PageIndex: pageIndex.value,
     PageSize: pageSize.value
   })
-  data.value = response.value?.Data
+  replyData.value = response.value?.Data
 }
 
 await getPost()
+await getReply()
 
 const isShowPost = ref<boolean>(pageIndex.value === 1)
 
 const handlePageChange = async () => {
-  await getPost()
+  await getReply()
   if (pageIndex.value === 1) {
     isShowPost.value = true
     return
@@ -39,13 +48,13 @@ const handlePageChange = async () => {
 <template>
   <div class="post-main">
     <div class="post-title">
-      <h2>{{ data?.PostInfo.Title }}</h2>
+      <h2>{{ postData?.Title }}</h2>
       <div class="post-info">
         <div class="click-count info">
-          {{ `点击数: ` + data?.PostInfo.ClickCount }}
+          {{ `点击数: ` + postData?.ClickCount }}
         </div>
         <div class="reply-count info">
-          {{ `回复数: ` + data?.ReplyInfos.Total }}
+          {{ `回复数: ` + replyData?.Total }}
         </div>
       </div>
     </div>
@@ -53,23 +62,20 @@ const handlePageChange = async () => {
       <div class="body-content" v-show="isShowPost">
         <div class="user-area">
           <ForumPostMainUserArea
-            :user-id="data?.PostInfo.CreatorId!"
-            :user-name="data?.PostInfo.Creator!"
+            :user-id="postData?.CreatorId!"
+            :user-name="postData?.Creator.DisplayName!"
           ></ForumPostMainUserArea>
         </div>
         <div class="right-area">
           <div class="time-area">
-            {{ getLocaleTime(data?.PostInfo.LastUpdatedTime!) }}
+            {{ getLocaleTime(postData?.LastUpdatedTime!) }}
           </div>
           <div class="content-area">
-            {{ markdownToText(data?.PostInfo.Content!) }}
+            {{ markdownToText(postData?.Content!) }}
           </div>
         </div>
       </div>
-      <div
-        class="reply-container"
-        v-for="(reply, index) in data?.ReplyInfos.Rows"
-      >
+      <div class="reply-container" v-for="(reply, index) in replyData?.Rows">
         <ForumPostReply
           :reply-id="reply.ReplyId"
           :user-id="reply.CreatorId"
@@ -83,7 +89,7 @@ const handlePageChange = async () => {
     </div>
     <div class="post-footer">
       <CloudeaPagination
-        :total="data?.ReplyInfos.Total ?? 1"
+        :total="replyData?.Total ?? 1"
         v-model:current-page="pageIndex"
         v-model:page-size="pageSize"
         @change="handlePageChange"

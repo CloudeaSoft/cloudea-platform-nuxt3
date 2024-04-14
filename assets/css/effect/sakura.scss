@@ -1,0 +1,61 @@
+@charset "UTF-8";
+@keyframes drop {
+  0% {
+    background-position:
+      0 0,
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      500px 1000px,
+      -400px 800px,
+      0 600px;
+  }
+}
+
+@-moz-keyframes drop {
+  0% {
+    background-position:
+      0 0,
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      500px 1000px,
+      -400px 800px,
+      0 600px;
+  }
+}
+
+@-webkit-keyframes drop {
+  0% {
+    background-position:
+      0 0,
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      500px 1000px,
+      -400px 800px,
+      0 600px;
+  }
+}
+
+#sakura {
+  background-image: url('@/public/images/effect/sakura/mv-bg-sakura01.png'),
+    url('@/public/images/effect/sakura/mv-bg-sakura02.png'),
+    url('@/public/images/effect/sakura/mv-bg-sakura03.png');
+  background-repeat: repeat;
+  -webkit-animation: drop 15s linear infinite;
+  -moz-animation: drop 15s linear infinite;
+  animation: drop 15s linear infinite;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+
+  top: 0;
+  z-index: 0;
+}
