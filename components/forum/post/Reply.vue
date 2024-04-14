@@ -37,27 +37,30 @@ const handleCommentClose = () => {
       <div class="content-area">{{ content }}</div>
       <div class="comment-area">
         <div class="detail">
-          <div class="detail-wrap">
-            <span class="comment-report">{{
-              $t('forum.post.reply.report')
-            }}</span>
+          <div class="detail-wrap clearfix">
+            <span class="comment-report">
+              <Icon name="lucide:triangle-alert" />
+              <span>{{ $t('forum.post.reply.report') }}</span>
+            </span>
             <span class="comment-floor">{{
               floor + $t('forum.post.reply.floor')
             }}</span>
-            <span
-              class="comment-open"
-              v-show="!showComment"
-              @click="handleCommentOpen"
-            >
-              {{ `${$t('forum.post.reply.open')}(${props.commentCount})` }}
-            </span>
-            <span
-              class="comment-close"
-              v-show="showComment"
-              @click="handleCommentClose"
-            >
-              {{ $t('forum.post.reply.close') }}
-            </span>
+            <div class="comment-button">
+              <span
+                class="comment-open"
+                v-show="!showComment"
+                @click="handleCommentOpen"
+              >
+                {{ `${$t('forum.post.reply.open')}(${props.commentCount})` }}
+              </span>
+              <span
+                class="comment-close"
+                v-show="showComment"
+                @click="handleCommentClose"
+              >
+                {{ $t('forum.post.reply.close') }}
+              </span>
+            </div>
           </div>
         </div>
         <KeepAlive
@@ -111,8 +114,14 @@ const handleCommentClose = () => {
           float: right;
           position: relative;
 
-          & > span {
+          & > * {
             margin: 0 4px;
+            line-height: 2rem;
+          }
+
+          .comment-button {
+            float: right;
+            margin-right: 0;
           }
 
           .comment-open,
@@ -122,6 +131,41 @@ const handleCommentClose = () => {
 
             &:hover {
               color: var(--cloudea-blue-5);
+            }
+          }
+
+          .comment-report {
+            display: inline-block;
+
+            svg {
+              height: 1.2rem;
+              width: 1.2rem;
+              margin-right: 2px;
+            }
+          }
+
+          .comment-close {
+            position: relative;
+            display: inline-block;
+            border: 1px solid var(--cloudea-grey-0);
+            border-bottom: 0;
+            height: 2rem;
+            width: 80px;
+            text-align: center;
+            line-height: 2rem;
+            background: var(--cloudea-white);
+            box-sizing: content-box;
+            user-select: none;
+
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: -1px;
+              right: 0;
+              width: calc(100%);
+              height: calc(1px);
+              background-color: var(--cloudea-white);
+              z-index: 1;
             }
           }
         }

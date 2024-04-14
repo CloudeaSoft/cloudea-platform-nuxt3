@@ -64,8 +64,22 @@ const handlePageChange = async () => {
   <div class="comment-wrapper">
     <div class="comment-content">
       <ul class="comment-list">
-        <li v-for="comment in commentList?.Rows">
-          {{ `${comment.Creator.DisplayName}: ${comment.Content}` }}
+        <li class="comment-item" v-for="comment in commentList?.Rows">
+          <div class="item-avatar"></div>
+          <div class="item-right">
+            <div class="item-content">
+              <div class="item-creator">
+                {{ comment.Creator.DisplayName }}
+              </div>
+              :&nbsp;
+              <div class="item-text">
+                {{ comment.Content }}
+              </div>
+            </div>
+            <div class="item-footer">
+              {{ getLocaleTime(comment.CreateTime) }}
+            </div>
+          </div>
         </li>
         <li class="comment-list-footer">
           <button
@@ -103,29 +117,67 @@ const handlePageChange = async () => {
 
 <style lang="scss" scoped>
 .comment-wrapper {
-  border: 1px solid var(--cloudea-font-color-0);
+  border: 1px solid var(--cloudea-grey-0);
+  background: var(--cloudea-white);
 
   .comment-content {
     padding: 4px 15px 14px;
     display: flex;
     flex-direction: column;
 
-    .comment-list-footer {
-      display: flex;
-      flex-direction: row-reverse;
+    .comment-list {
+      .comment-item {
+        padding-top: 15px;
+        display: flex;
+        align-items: center;
 
-      .editor-open,
-      .editor-close {
-        padding: 4px 8px;
-        cursor: pointer;
+        .item-avatar {
+          width: 40px;
+          height: 40px;
+          background-color: var(--cloudea-black);
+        }
 
-        border-radius: 5px;
-        border: 1px solid var(--cloudea-font-color-0);
-        color: var(--cloudea-font-color-3);
+        .item-right {
+          display: flex;
+          flex-direction: column;
+          margin-left: 15px;
+          line-height: 24px;
+          flex: 1;
 
-        &:hover {
-          border-color: var(--cloudea-blue-5);
-          color: var(--cloudea-blue-5);
+          .item-content {
+            display: flex;
+
+            .item-creator {
+              color: var(--cloudea-blue-5);
+            }
+          }
+
+          .item-footer {
+            width: 100%;
+            text-align: right;
+          }
+        }
+      }
+
+      .comment-list-footer {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        padding-top: 15px;
+
+        .editor-open,
+        .editor-close {
+          padding: 4px 8px;
+          cursor: pointer;
+
+          border-radius: 5px;
+          border: 1px solid var(--cloudea-font-color-0);
+          color: var(--cloudea-font-color-3);
+          background: var(--cloudea-white);
+          &:hover {
+            border-color: var(--cloudea-blue-5);
+            color: var(--cloudea-blue-5);
+          }
         }
       }
     }
@@ -144,10 +196,15 @@ const handlePageChange = async () => {
     button {
       height: 38px;
       width: 100px;
-      border: 2px solid var(--cloudea-blue-5);
-      background: var(--cloudea-blue-0);
+      border: 2px solid var(--cloudea-trans-blue-2);
+      background: var(--cloudea-white);
       color: var(--cloudea-font-color-3);
       cursor: pointer;
+      transition: border 0.6s;
+
+      &:hover {
+        border-color: var(--cloudea-blue-5);
+      }
     }
   }
 }
