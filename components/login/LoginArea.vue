@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { sessionPostApi } from '~/api'
+import { getMyProfileApi } from '~/api/user'
 
 const i18n = useI18n()
 
@@ -21,10 +22,16 @@ const handleLogin = async () => {
   useUserStore().setToken(tokenRes.value?.Data!)
   resetForm()
   useMessage(i18n.t('login.loginForm.messages.loginSuccess'), 'success')
-  handleLoginSuccess()
+  await handleLoginSuccess()
 }
 
-const handleLoginSuccess = () => {
+const handleLoginSuccess = async () => {
+  var profile = await getMyProfileApi()
+  if (profile.value == null) {
+    useMessage('Unknown Error', 'error')
+    return
+  }
+  useUserStore().setUserProfile(profile.value.Data)
   navigateTo('/')
 }
 </script>

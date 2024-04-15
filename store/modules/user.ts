@@ -1,3 +1,4 @@
+import type { UserProfile } from '~/types/api/user-model'
 import type { UserStore } from '../types/user'
 
 export const useUserStore = defineStore({
@@ -5,13 +6,15 @@ export const useUserStore = defineStore({
   persist: true,
   state: (): UserStore => ({
     id: '00000000-0000-0000-0000-000000000000',
-    name: '',
-    displayName: '',
-    signature: '',
-    avatarUrl: '',
-    coverImageUrl: '',
-    leaves: 0,
-    createdOnUtc: '',
+    profile: {
+      Id: '00000000-0000-0000-0000-000000000000',
+      UserName: '',
+      DisplayName: '',
+      Signature: '',
+      AvatarUrl: '',
+      CoverImageUrl: '',
+      Leaves: 0
+    },
     token: '',
     role: 0
   }),
@@ -28,8 +31,8 @@ export const useUserStore = defineStore({
     isAuthorized() {
       return !!this.token.trim()
     },
-    setUserProfile(){
-      
+    setUserProfile(profile: UserProfile) {
+      this.profile = profile
     }
   }
 })

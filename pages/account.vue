@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const a = ref()
+definePageMeta({
+  middleware: 'auth'
+})
 </script>
 
 <template>

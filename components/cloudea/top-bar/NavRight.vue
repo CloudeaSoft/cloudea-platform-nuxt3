@@ -17,10 +17,12 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
         @click="showSettingPanel = !showSettingPanel"
       />
     </span>
-    <span class="user">
-      <NuxtLinkLocale to="/account/home"><Icon name="lucide:baby" /></NuxtLinkLocale>
+    <span class="user" v-if="isAuthorized()">
+      <NuxtLinkLocale to="/account/home">
+        <CloudeaTopBarAvatar />
+      </NuxtLinkLocale>
     </span>
-    <div class="login" v-if="!isAuthorized()">
+    <div class="login" v-else>
       <NuxtLinkLocale to="/login">
         {{ $t('header.login') }}
       </NuxtLinkLocale>
@@ -48,7 +50,7 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
     margin-right: 20px;
   }
 
-  .user *{
+  .user {
     color: var(--cloudea-font-color-2) !important;
   }
 

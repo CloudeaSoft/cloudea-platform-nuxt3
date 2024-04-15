@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
+definePageMeta({
+  middleware: 'auth'
+})
+
 useHead({
   title: t('meta.forum.title'),
   meta: [

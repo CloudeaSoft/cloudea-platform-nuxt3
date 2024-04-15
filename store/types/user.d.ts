@@ -1,12 +1,8 @@
+import type { UserProfile } from '~/types/api/user-model'
+
 export interface UserStore {
   id: string
-  name: string
-  displayName: string
-  signature: string
-  avatarUrl: string
-  coverImageUrl: string
-  leaves: number
-  createdOnUtc: string
+  profile?: UserProfile
   token: string
   role: number
 }

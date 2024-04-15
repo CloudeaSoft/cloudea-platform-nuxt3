@@ -54,6 +54,7 @@ const navItemList = ref([
 .account-nav {
   display: flex;
   flex-direction: column;
+  border-right: 1px solid var(--cloudea-gray-4);
 
   .nav-title,
   .nav-ul {

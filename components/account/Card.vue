@@ -18,9 +18,7 @@ const props = defineProps<{
 
 <style lang="scss" scoped>
 .user-content {
-  // background-color: white;
   width: 100%;
-  border-left: 1px solid var(--cloudea-gray-4);
 
   .content-title {
     height: 50px;
