@@ -66,6 +66,13 @@
             "security": "账号安全",
             "notice": "消息通知"
         },
+        "setting": {
+            "displayName": "昵称",
+            "userName": "用户名",
+            "signature": "签名",
+            "leaves": "叶子",
+            "commit": "保存"
+        },
         "avatar": {
             "upload": "上传头像",
             "clean": "清除图片",
