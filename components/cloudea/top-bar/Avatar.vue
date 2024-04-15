@@ -1,6 +1,11 @@
 <script setup lang="ts">
 const showUserPanel = ref<boolean>(false)
 
+const avatarStyle = () =>
+  useUserStore().profile?.AvatarUrl
+    ? `background-image: url(${useUserStore().profile?.AvatarUrl})`
+    : 'background: var(--cloudea-black)'
+
 const handleEnter = () => {
   showUserPanel.value = true
 }
@@ -19,7 +24,7 @@ const handleLogout = () => {
 <template>
   <div
     class="avatar"
-    :style="`background-image: url(${useUserStore().profile?.AvatarUrl})`"
+    :style="avatarStyle()"
     @mouseenter="handleEnter"
     @mouseleave="handleBlur"
   >
@@ -29,13 +34,13 @@ const handleLogout = () => {
           <div class="user-panel-list">
             <div class="list-item">
               <NuxtLinkLocale to="/account/home">
-                {{ $t('个人中心') }}
+                {{ $t('header.avatar.center') }}
               </NuxtLinkLocale>
             </div>
-            <div class="list-item">xxx</div>
-            <div class="list-item">xxx</div>
+            <div class="list-item">---</div>
+            <div class="list-item">---</div>
             <div class="list-item" @click="handleLogout">
-              {{ $t('退出登录') }}
+              {{ $t('header.avatar.logout') }}
             </div>
           </div>
         </div>

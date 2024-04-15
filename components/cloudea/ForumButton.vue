@@ -105,10 +105,13 @@ const disabledClass = () => {
   background-color: var(--cloudea-font-color-0);
   border: 1px solid var(--cloudea-font-color-2);
   color: var(--cloudea-font-color-2);
+  cursor: initial;
+  transition: none !important;
+  transform: none !important;
 
   &:hover {
-    background-color: var(--cloudea-font-color-2);
-    color: var(--cloudea-font-color-0);
+    background-color: var(--cloudea-font-color-0);
+    color: var(--cloudea-font-color-2);
   }
 }
 </style>

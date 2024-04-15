@@ -16,7 +16,8 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxtjs/color-mode',
     'nuxt-icon',
-    'nuxt-lodash'
+    'nuxt-lodash',
+    "@nuxt/image"
   ],
   runtimeConfig: {
     public: {

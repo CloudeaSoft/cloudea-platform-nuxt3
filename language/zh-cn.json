@@ -27,7 +27,11 @@
         "tool": "工具箱",
         "book": "书架",
         "about": "关于",
-        "login": "登录/注册"
+        "login": "登录/注册",
+        "avatar": {
+            "center": "个人中心",
+            "logout": "退出登录"
+        }
     },
     "login": {
         "login": "登录",
@@ -61,6 +65,14 @@
             "avatar": "我的头像",
             "security": "账号安全",
             "notice": "消息通知"
+        },
+        "avatar": {
+            "upload": "上传头像",
+            "clean": "清除图片",
+            "message": {
+                "nullAvatar": "头像为空",
+                "uploadFailed": "上传失败"
+            }
         }
     },
     "forum": {

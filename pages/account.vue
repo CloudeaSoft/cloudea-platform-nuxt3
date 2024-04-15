@@ -16,6 +16,7 @@ definePageMeta({
 <style lang="scss" scoped>
 .user-view {
   height: calc(100dvh - 8rem);
+  min-height: 720px;
   margin-top: 3rem;
   display: flex;
 
