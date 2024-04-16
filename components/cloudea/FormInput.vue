@@ -106,7 +106,7 @@ interface Props {
 
   labelPlaceholder?: boolean
 
-  fullBorder: boolean
+  fullBorder?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

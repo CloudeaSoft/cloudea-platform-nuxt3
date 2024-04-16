@@ -4,6 +4,11 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' }
   },
   ssr: false,
+  router: {
+    options: {
+      hashMode: true
+    }
+  },
   build: {
     transpile: ['pinia-plugin-persistedstate']
   },
@@ -17,7 +22,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-icon',
     'nuxt-lodash',
-    "@nuxt/image"
+    '@nuxt/image'
   ],
   runtimeConfig: {
     public: {

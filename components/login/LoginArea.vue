@@ -17,6 +17,7 @@ const handleLogin = async () => {
   const tokenRes = await sessionPostApi(account.value, password.value, 0)
   if (tokenRes.value?.Status === false || tokenRes.value?.Data == undefined) {
     // 登录失败
+    useMessage('', 'error')
     return
   }
   useUserStore().setToken(tokenRes.value?.Data!)

@@ -27,11 +27,11 @@ const handlePost = async () => {
     Content: postContent.value
   })
   if (!createRes.value?.Status) {
-    // useMessage('', 'error')
+    useMessage('', 'error')
     return
   }
   if (!createRes.value.Data.trim()) {
-    // useMessage('', 'error')
+    useMessage('', 'error')
     return
   }
   resetEditorContent()

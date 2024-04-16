@@ -46,7 +46,7 @@ export const getPostApi = async (sectionId: string | undefined) => {
     },
     params: {
       page: 1,
-      limit: 50,
+      limit: 15,
       sectionId
     },
     method: 'GET',

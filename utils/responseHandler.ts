@@ -49,6 +49,7 @@ const handleStatus = (status: number) => {
       break
     case 409:
       useMessage('409 Conflict', 'error', 3000)
+      useUserStore().removeToken()
       break
     case 500:
       useMessage('500 Internal Server Error', 'error', 3000)
