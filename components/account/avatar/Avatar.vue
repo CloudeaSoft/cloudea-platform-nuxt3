@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { postProfileAvatarApi } from '~/api/user'
+import { postMyProfileAvatarApi } from '~/api/user'
 
 const { t } = useI18n()
 const inputRef = ref<HTMLInputElement>()
@@ -56,7 +56,7 @@ const handlePublishAvatar = async () => {
     useMessage(t('account.avatar.message.nullAvatar'), 'warn')
     return
   }
-  var response = await postProfileAvatarApi(avatar.value)
+  var response = await postMyProfileAvatarApi(avatar.value)
   if (!response.value?.Status) {
     useMessage(t('account.avatar.message.uploadFailed'), 'warn')
     return

@@ -13,6 +13,7 @@
         },
         "trans": "Transparency",
         "font": "Font Style",
+        "fontInput": "Input Font Name",
         "background": "Background Image",
         "backgroundSystem": "System Background",
         "confirm": "Confirm",
@@ -26,10 +27,35 @@
         "tool": "Toolbox",
         "book": "Bookshelf",
         "about": "About us",
-        "login": "Login/Register"
+        "login": "Login/Register",
+        "avatar": {
+            "center": "User Center",
+            "logout": "Logout"
+        }
     },
-    "warning": {
-        "test": "Test Warning"
+    "login": {
+        "login": "Login",
+        "loginWords": "None Now.",
+        "register": "Register",
+        "registerWords": "None Now.",
+        "loginForm": {
+            "accountPlaceholder": "Username/Email",
+            "passwordPlaceholder": "Password",
+            "forgotPassword": "Forgot Password?",
+            "messages": {
+                "loginSuccess": "Login Successfully."
+            }
+        },
+        "registerForm": {
+            "usernamePlaceholder": "Username",
+            "emailPlaceholder": "Email",
+            "passwordPlaceholder": "Password",
+            "vercodePlaceholder": "Verification Code",
+            "vercodeGetter": "Get Vercode",
+            "messages": {
+                "registerSuccess": "Register Successfully"
+            }
+        }
     },
     "account": {
         "title": "Account Center",
@@ -39,6 +65,91 @@
             "avatar": "Avatar",
             "security": "Security",
             "notice": "Message"
+        },
+        "setting": {
+            "displayName": "DisplayName",
+            "userName": "Username",
+            "signature": "Signature",
+            "leaves": "Leaves",
+            "commit": "Save"
+        },
+        "avatar": {
+            "upload": "Upload",
+            "clean": "Clear",
+            "message": {
+                "nullAvatar": "Empty Image",
+                "uploadFailed": "Upload Failed"
+            }
+        }
+    },
+    "forum": {
+        "index": {
+            "commonSection": "General",
+            "userArea": {
+                "following": "Following",
+                "fans": "Followers",
+                "follow": "Follow",
+                "message": "Message"
+            }
+        },
+        "post": {
+            "reply": {
+                "open": "Reply",
+                "close": "Close Reply",
+                "report": "Report",
+                "floor": "Floor",
+                "comment": {
+                    "open": "Add My Comment",
+                    "close": "Close",
+                    "commit": "Commit"
+                }
+            },
+            "replyEditor": {
+                "title": "Reply",
+                "commit": "Commit"
+            }
+        }
+    },
+    "warn": {
+        "middleware": {
+            "auth": {
+                "loginRequirement": "You need to login to continue your operation"
+            }
+        }
+    },
+    "meta": {
+        "home": {
+            "title": "Home",
+            "description": "Home"
+        },
+        "forum": {
+            "title": "Forum",
+            "description": "Forum"
+        },
+        "account": {
+            "title": "User Center",
+            "description": "User Center"
+        },
+        "tool": {
+            "title": "ToolBox",
+            "description": "ToolBox"
+        },
+        "book": {
+            "title": "Bookshelf",
+            "description": "Bookshelf"
+        },
+        "about": {
+            "title": "About us",
+            "description": "About us"
+        }
+    },
+    "cloudea": {
+        "pagination": {
+            "currentPage": "Current Page",
+            "prev": "Prev",
+            "next": "Next",
+            "nextPages": "Next Pages",
+            "prevPages": "Prev Pages"
         }
     }
 }

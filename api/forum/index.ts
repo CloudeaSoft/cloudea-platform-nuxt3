@@ -3,6 +3,7 @@ import type {
   CommentInfo,
   CreatePostRequest,
   ForumPost,
+  ForumPostLike,
   ForumSection,
   GetPostInfoResponse,
   PostInfo,
@@ -14,7 +15,10 @@ enum Api {
   POST = '/forum/post',
   POST_INFO = '/forum/post/:id',
   REPLY = '/forum/reply',
-  COMMENT = '/forum/comment'
+  COMMENT = '/forum/comment',
+  POST_LIKE = '/forum/post/:id/like',
+  POST_DISLIKE = '/forum/post/:id/dislike',
+  POST_FAVORITE = '/forum/post/:id/favorite'
 }
 
 const baseAPI = useRuntimeConfig().public.CLOUDEA_API
@@ -38,15 +42,18 @@ export const getSectionApi = async () => {
   return data
 }
 
-export const getPostApi = async (sectionId: string | undefined) => {
-  const { data } = await useFetch<Result<PageResponse<ForumPost>>>(Api.POST, {
+export const getPostApi = async (
+  sectionId: string | undefined,
+  request: PageRequest
+) => {
+  const { data } = await useFetch<Result<PageResponse<PostInfo>>>(Api.POST, {
     baseURL: baseAPI,
     headers: {
       Authorization: `Bearer ${useUserStore().getToken()}`
     },
     params: {
-      page: 1,
-      limit: 15,
+      page: request.PageIndex,
+      limit: request.PageSize,
       sectionId
     },
     method: 'GET',
@@ -153,6 +160,102 @@ export const getCommentApi = async (replyId: string, request: PageRequest) => {
         limit: request.PageSize
       },
       method: 'GET',
+      ...responseHandler
+    }
+  )
+
+  return data
+}
+
+export const postPostLikeApi = async (id: string) => {
+  const { data } = await useFetch<Result<string>>(
+    Api.POST_LIKE.replace(':id', id),
+    {
+      baseURL: baseAPI,
+      headers: {
+        Authorization: `Bearer ${useUserStore().getToken()}`
+      },
+      method: 'POST',
+      ...responseHandler
+    }
+  )
+
+  return data
+}
+
+export const getPostLikeApi = async (id: string) => {
+  const { data } = await useFetch<Result<ForumPostLike>>(
+    Api.POST_LIKE.replace(':id', id),
+    {
+      baseURL: baseAPI,
+      headers: {
+        Authorization: `Bearer ${useUserStore().getToken()}`
+      },
+      method: 'GET',
+      ...responseHandler
+    }
+  )
+
+  return data
+}
+
+export const deletePostLikeApi = async (id: string) => {
+  const { data } = await useFetch<Result<ForumPostLike>>(
+    Api.POST_LIKE.replace(':id', id),
+    {
+      baseURL: baseAPI,
+      headers: {
+        Authorization: `Bearer ${useUserStore().getToken()}`
+      },
+      method: 'DELETE',
+      ...responseHandler
+    }
+  )
+
+  return data
+}
+
+export const postPostFavoriteApi = async (id: string) => {
+  const { data } = await useFetch<Result<string>>(
+    Api.POST_FAVORITE.replace(':id', id),
+    {
+      baseURL: baseAPI,
+      headers: {
+        Authorization: `Bearer ${useUserStore().getToken()}`
+      },
+      method: 'POST',
+      ...responseHandler
+    }
+  )
+
+  return data
+}
+
+export const getPostFavoriteApi = async (id: string) => {
+  const { data } = await useFetch<Result<ForumPostLike>>(
+    Api.POST_FAVORITE.replace(':id', id),
+    {
+      baseURL: baseAPI,
+      headers: {
+        Authorization: `Bearer ${useUserStore().getToken()}`
+      },
+      method: 'GET',
+      ...responseHandler
+    }
+  )
+
+  return data
+}
+
+export const deletePostFavoriteApi = async (id: string) => {
+  const { data } = await useFetch<Result<ForumPostLike>>(
+    Api.POST_FAVORITE.replace(':id', id),
+    {
+      baseURL: baseAPI,
+      headers: {
+        Authorization: `Bearer ${useUserStore().getToken()}`
+      },
+      method: 'DELETE',
       ...responseHandler
     }
   )

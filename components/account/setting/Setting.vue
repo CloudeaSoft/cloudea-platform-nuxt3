@@ -1,12 +1,35 @@
 <script setup lang="ts">
+import { putMyProfileApi } from '~/api/user'
+
 const user = useUserStore().profile
+let oldDisplayName = user?.DisplayName
+let oldSignature = user?.Signature
 const displayName = ref(user?.DisplayName)
 const userName = ref(user?.UserName)
 const signature = ref(user?.Signature)
 const leaves = ref(user?.Leaves)
 
 const handleCommitSetting = async () => {
-  console.log('xxxx')
+  if (displayName.value == oldDisplayName && signature.value == oldSignature) {
+    useMessage('', 'warn')
+    return
+  }
+  if (displayName.value == undefined) {
+    useMessage('', 'warn')
+    return
+  }
+
+  var response = await putMyProfileApi({
+    DisplayName: displayName.value,
+    Signature: signature.value
+  })
+  if (!response.value?.Status) {
+    useMessage('', 'error')
+    return
+  }
+  useUserStore().setUserProfile(response.value.Data)
+  oldDisplayName = displayName.value
+  oldSignature = signature.value
 }
 </script>
 
@@ -73,6 +96,8 @@ const handleCommitSetting = async () => {
 
       display: flex;
       font-size: 1.125rem;
+
+      padding-right: 50px;
 
       .item-label {
         width: 95px;

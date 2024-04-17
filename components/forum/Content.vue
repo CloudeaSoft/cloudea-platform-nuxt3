@@ -3,14 +3,48 @@ import { getPostApi } from '~/api'
 import { GUID_EMPTY } from '~/types/api/base-model.d'
 
 const sectionId = ref(GUID_EMPTY)
+const isRecommend = ref(true)
 
-const postList = ref((await getPostApi(undefined)).value?.Data.Rows)
+const pageIndex = ref(1)
+const pageSize = ref(15)
+
+const postList = ref(
+  (
+    await getPostApi(undefined, {
+      PageIndex: pageIndex.value,
+      PageSize: pageSize.value
+    })
+  ).value?.Data.Rows
+)
+
+const handleGetPostList = async () => {
+  if (!isRecommend.value) {
+    var res = await getPostApi(
+      sectionId.value !== GUID_EMPTY ? sectionId.value : undefined,
+      { PageIndex: pageIndex.value, PageSize: pageSize.value }
+    )
+    postList.value = res.value?.Data.Rows!
+  } else {
+    var res = await getPostApi(
+      sectionId.value !== GUID_EMPTY ? sectionId.value : undefined,
+      { PageIndex: pageIndex.value, PageSize: pageSize.value }
+    )
+    postList.value = res.value?.Data.Rows!
+  }
+}
 
 const handleSectionChange = async () => {
-  var res = await getPostApi(
-    sectionId.value !== GUID_EMPTY ? sectionId.value : undefined
-  )
-  postList.value = res.value?.Data.Rows!
+  if (sectionId.value !== GUID_EMPTY) {
+    isRecommend.value = false
+  } else {
+    isRecommend.value = true
+  }
+  await handleGetPostList()
+}
+
+const handleIsRecommendChange = async (status: boolean) => {
+  isRecommend.value = status
+  await handleGetPostList()
 }
 </script>
 
@@ -21,7 +55,25 @@ const handleSectionChange = async () => {
   <div class="forum-index-container">
     <div class="forum-index-content">
       <div class="post-list">
-        <ForumContentPostList :data="postList!"></ForumContentPostList>
+        <div class="post-list-container cloudea-area">
+          <div class="post-list-header">
+            <div class="list-nav">
+              <ul class="nav-list">
+                <li
+                  :class="isRecommend ? 'nav-item active' : 'nav-item'"
+                  v-if="sectionId == GUID_EMPTY"
+                >
+                  <div @click="handleIsRecommendChange(true)">推荐</div>
+                </li>
+                <li :class="isRecommend ? 'nav-item' : 'nav-item active'">
+                  <div @click="handleIsRecommendChange(false)">最新</div>
+                </li>
+              </ul>
+              <div class="drop-down-area"></div>
+            </div>
+          </div>
+          <ForumContentPostList :data="postList!"></ForumContentPostList>
+        </div>
       </div>
       <div class="forum-index-aside">
         <ForumContentAside></ForumContentAside>
@@ -57,6 +109,43 @@ const handleSectionChange = async () => {
     position: relative;
     margin-bottom: 20px;
     transition: margin 0.6s ease-in-out;
+
+    .post-list-container {
+      backdrop-filter: initial;
+
+      .post-list-header {
+        padding: 1rem 1.66rem;
+        border-bottom: 1px solid var(--cloudea-gray-4);
+      }
+
+      .post-list-header .list-nav,
+      .post-list-header .list-nav .nav-list {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .post-list-header .list-nav .nav-list .nav-item {
+        padding: 0 1.66rem;
+        line-height: 2rem;
+        font-size: 1.33em;
+        border: none;
+        position: relative;
+        cursor: pointer;
+      }
+      .post-list-header .list-nav .nav-list .nav-item:first-child {
+        margin-left: -1.66rem;
+      }
+
+      .nav-list .nav-item.active {
+        color: var(--cloudea-blue-5);
+        font-weight: 500;
+      }
+
+      .post-list-header .nav-list {
+        align-items: center;
+        line-height: 1;
+      }
+    }
   }
 }
 

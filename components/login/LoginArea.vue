@@ -2,11 +2,11 @@
 import { sessionPostApi } from '~/api'
 import { getMyProfileApi } from '~/api/user'
 
-const i18n = useI18n()
+const { t } = useI18n()
 
-const account = ref()
+const account = ref<string>()
 
-const password = ref()
+const password = ref<string>()
 
 const resetForm = () => {
   account.value = undefined
@@ -14,15 +14,22 @@ const resetForm = () => {
 }
 
 const handleLogin = async () => {
+  if (!account.value || !account.value?.trim()) {
+    useMessage(t('login.loginForm.messages.noAccount'), 'warn')
+    return
+  }
+  if (!password.value || !password.value?.trim()) {
+    useMessage(t('login.loginForm.messages.noPassword'), 'warn')
+    return
+  }
   const tokenRes = await sessionPostApi(account.value, password.value, 0)
   if (tokenRes.value?.Status === false || tokenRes.value?.Data == undefined) {
-    // 登录失败
-    useMessage('', 'error')
+    useMessage(t('login.loginForm.messages.loginFailed'), 'error')
     return
   }
   useUserStore().setToken(tokenRes.value?.Data!)
   resetForm()
-  useMessage(i18n.t('login.loginForm.messages.loginSuccess'), 'success')
+  useMessage(t('login.loginForm.messages.loginSuccess'), 'success')
   await handleLoginSuccess()
 }
 
@@ -43,12 +50,14 @@ const handleLoginSuccess = async () => {
     <CloudeaFormInput
       type="text"
       v-model="account"
+      autocomplete="username"
       :placeholder="$t('login.loginForm.accountPlaceholder')"
     />
     <CloudeaFormInput
       type="text"
       v-model="password"
       :placeholder="$t('login.loginForm.passwordPlaceholder')"
+      autocomplete="current-password"
     />
     <span>
       <NuxtLinkLocale to="/forgot">

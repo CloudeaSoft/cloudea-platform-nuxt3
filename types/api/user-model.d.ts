@@ -7,3 +7,8 @@ export interface UserProfile {
   CoverImageUrl?: string
   Leaves: number
 }
+
+export interface UpdateUserProfileRequest {
+  DisplayName: string
+  Signature: string | undefined
+}

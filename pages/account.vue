@@ -1,12 +1,24 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 definePageMeta({
   middleware: 'auth'
+})
+
+useHead({
+  title: t('meta.account.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('meta.account.description')
+    }
+  ]
 })
 </script>
 
 <template>
-  <div class="view user-view">
-    <div class="user-container cloudea-area">
+  <div class="view account-view">
+    <div class="account-container cloudea-area">
       <AccountNav></AccountNav>
       <NuxtPage />
     </div>
@@ -14,13 +26,13 @@ definePageMeta({
 </template>
 
 <style lang="scss" scoped>
-.user-view {
+.account-view {
   height: calc(100dvh - 8rem);
   min-height: 720px;
   margin-top: 3rem;
   display: flex;
 
-  .user-container {
+  .account-container {
     margin: auto;
     display: flex;
     width: 980px;

@@ -55,6 +55,7 @@ const navItemList = ref([
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--cloudea-gray-4);
+  user-select: none;
 
   .nav-title,
   .nav-ul {

@@ -43,7 +43,10 @@
             "passwordPlaceholder": "密码",
             "forgotPassword": "忘记密码?",
             "messages": {
-                "loginSuccess": "登陆成功"
+                "loginSuccess": "登陆成功",
+                "loginFailed": "登录失败",
+                "noAccount": "请输入用户名或邮箱",
+                "noPassword": "请输入密码"
             }
         },
         "registerForm": {
@@ -53,7 +56,11 @@
             "vercodePlaceholder": "验证码",
             "vercodeGetter": "获取验证码",
             "messages": {
-                "registerSuccess": "注册成功"
+                "registerSuccess": "注册成功",
+                "noUsername": "请输入用户名",
+                "noEmail": "请输入邮箱",
+                "noPassword": "请输入密码",
+                "noVercode": "请输入验证码"
             }
         }
     },
@@ -84,7 +91,13 @@
     },
     "forum": {
         "index": {
-            "commonSection": "综合"
+            "commonSection": "综合",
+            "userArea": {
+                "following": "关注",
+                "fans": "粉丝",
+                "follow": "关注",
+                "message": "私信"
+            }
         },
         "post": {
             "reply": {
@@ -109,13 +122,37 @@
             "title": "帖子编辑器"
         }
     },
-    "warning": {
-        "test": "Test Warning"
+    "warn": {
+        "middleware": {
+            "auth": {
+                "loginRequirement": "您需要登录以继续操作"
+            }
+        }
     },
     "meta": {
+        "home": {
+            "title": "主页",
+            "description": "主页"
+        },
         "forum": {
             "title": "论坛",
             "description": "论坛"
+        },
+        "account": {
+            "title": "个人中心",
+            "description": "用户中心"
+        },
+        "tool": {
+            "title": "工具箱",
+            "description": "工具箱"
+        },
+        "book": {
+            "title": "书架",
+            "description": "书架"
+        },
+        "about": {
+            "title": "关于",
+            "description": "关于"
         }
     },
     "cloudea": {

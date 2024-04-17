@@ -1,11 +1,18 @@
 <script setup lang="ts">
-const currentPage = ref(1)
+const { t } = useI18n()
+useHead({
+  title: t('meta.about.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('meta.about.description')
+    }
+  ]
+})
 </script>
 
 <template>
-  <div class="view about-view">
-
-  </div>
+  <div class="view about-view"></div>
 </template>
 
 <style lang="scss" scoped>

@@ -69,7 +69,10 @@ const handlePageChange = async () => {
           v-for="comment in commentList?.Rows"
           :key="comment.CommentId"
         >
-          <div class="item-avatar"></div>
+          <NuxtImg
+            class="item-avatar"
+            :src="comment.Creator.AvatarUrl"
+          ></NuxtImg>
           <div class="item-right">
             <div class="item-content">
               <div class="item-creator">
@@ -139,7 +142,7 @@ const handlePageChange = async () => {
         .item-avatar {
           width: 40px;
           height: 40px;
-          background-color: var(--cloudea-black);
+          border-radius: 20px;
         }
 
         .item-right {

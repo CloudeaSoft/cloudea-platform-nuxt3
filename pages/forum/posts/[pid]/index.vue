@@ -14,6 +14,5 @@ const pid = computed(() => {
 <style lang="scss" scoped>
 .post-view {
   height: calc(100dvh - 6.66rem);
-  overflow: hidden;
 }
 </style>

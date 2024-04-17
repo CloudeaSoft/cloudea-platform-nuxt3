@@ -68,6 +68,7 @@ export interface ForumPost {
   OwnerUser: UserProfile
   Title: string
   Content: string
+  ReplyCount: number
   ClickCount: number
   LikeCount: number
   DislikeCount: number
@@ -75,4 +76,11 @@ export interface ForumPost {
   LastEditTime: string | null
   CreatedOnUtc: string
   ModifiedOnUtc: string | null
+}
+
+export interface ForumPostLike {
+  Id: string
+  ParentPostId: string
+  OwnerUserId: string
+  IsLike: boolean
 }

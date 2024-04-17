@@ -61,10 +61,7 @@ const handlePageChange = async () => {
     <div class="post-body">
       <div class="body-content" v-show="isShowPost">
         <div class="user-area">
-          <ForumPostMainUserArea
-            :user-id="postData?.CreatorId!"
-            :user-name="postData?.Creator.DisplayName!"
-          ></ForumPostMainUserArea>
+          <ForumPostUserArea :profile="postData?.Creator!"></ForumPostUserArea>
         </div>
         <div class="right-area">
           <div class="time-area">
@@ -82,8 +79,8 @@ const handlePageChange = async () => {
       >
         <ForumPostReply
           :reply-id="reply.ReplyId"
-          :user-id="reply.CreatorId"
-          :user="reply.Creator"
+          :creator-id="reply.CreatorId"
+          :creator="reply.Creator"
           :time="reply.CreateTime!"
           :content="reply.Content"
           :comment-count="reply.CommentCount"

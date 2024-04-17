@@ -2,7 +2,7 @@
 import { vercodePostApi } from '@/api'
 import { registerTokenPostApi, userPostApi } from '~/api/identity'
 
-const i18n = useI18n()
+const { t } = useI18n()
 
 const username = ref()
 const email = ref()
@@ -17,10 +17,30 @@ const resetForm = () => {
 }
 
 const handleGetVercode = async () => {
+  if (!email.value || !email.value?.trim()) {
+    useMessage(t('login.registerForm.messages.noEmail'), 'warn')
+    return
+  }
   await vercodePostApi(email.value, 1)
 }
 
 const handleRegister = async () => {
+  if (!username.value || !username.value?.trim()) {
+    useMessage(t('login.registerForm.messages.noUsername'), 'warn')
+    return
+  }
+  if (!email.value || !email.value?.trim()) {
+    useMessage(t('login.registerForm.messages.noEmail'), 'warn')
+    return
+  }
+  if (!password.value || !password.value?.trim()) {
+    useMessage(t('login.registerForm.messages.noPassword'), 'warn')
+    return
+  }
+  if (!vercode.value || !vercode.value?.trim()) {
+    useMessage(t('login.registerForm.messages.noVercode'), 'warn')
+    return
+  }
   var token = await registerTokenPostApi(email.value, vercode.value)
   if (token == null) {
     return
@@ -36,7 +56,7 @@ const handleRegister = async () => {
   }
   resetForm()
   handleRegisterSuccess()
-  useMessage(i18n.t('login.registerForm.messages.registerSuccess'), 'success')
+  useMessage(t('login.registerForm.messages.registerSuccess'), 'success')
 }
 
 const handleRegisterSuccess = () => {

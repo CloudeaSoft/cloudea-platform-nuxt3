@@ -50,6 +50,7 @@ const handleStatus = (status: number) => {
     case 409:
       useMessage('409 Conflict', 'error', 3000)
       useUserStore().removeToken()
+      navigateTo('/login')
       break
     case 500:
       useMessage('500 Internal Server Error', 'error', 3000)

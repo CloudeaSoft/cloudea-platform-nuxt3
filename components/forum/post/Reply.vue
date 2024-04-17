@@ -3,8 +3,8 @@ import type { UserProfile } from '~/types/api/user-model'
 
 interface ReplyProps {
   replyId: string
-  userId: string
-  user?: UserProfile
+  creatorId: string
+  creator: UserProfile
   time: string
   content: string
   commentCount: number
@@ -27,10 +27,7 @@ const handleCommentClose = () => {
 <template>
   <div class="reply-content">
     <div class="user-area">
-      <ForumPostMainUserArea
-        :user-id="userId"
-        :user-name="user?.DisplayName"
-      ></ForumPostMainUserArea>
+      <ForumPostUserArea :profile="creator"></ForumPostUserArea>
     </div>
     <div class="right-area">
       <div class="time-area">{{ getLocaleTime(time) }}</div>

@@ -16,6 +16,7 @@ const isShowReplyEditor = ref<boolean>(false)
     <!-- <div class="post-aside"><ForumPostAside></ForumPostAside></div> -->
     <div class="post-panel cloudea-area">
       <ForumPostPanel
+        :post-id="postId"
         @reply="isShowReplyEditor = !isShowReplyEditor"
       ></ForumPostPanel>
     </div>
@@ -35,6 +36,7 @@ const isShowReplyEditor = ref<boolean>(false)
 
   .post-content {
     height: 100%;
+    backdrop-filter: initial;
   }
 
   .post-aside {
