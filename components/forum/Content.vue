@@ -111,7 +111,7 @@ const handleIsRecommendChange = async (status: boolean) => {
     transition: margin 0.6s ease-in-out;
 
     .post-list-container {
-      backdrop-filter: initial;
+      // backdrop-filter: initial;
 
       .post-list-header {
         padding: 1rem 1.66rem;

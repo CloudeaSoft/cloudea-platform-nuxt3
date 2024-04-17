@@ -52,6 +52,7 @@ const { userId, profile, top, left } = withDefaults(
 
 <style lang="scss" scoped>
 .user-area {
+  display: none;
   position: fixed;
   padding-top: 12px;
   z-index: 5;

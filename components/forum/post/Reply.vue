@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { UserProfile } from '~/types/api/user-model'
+import { MilkdownProvider } from '@milkdown/vue'
+import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
 
 interface ReplyProps {
   replyId: string
@@ -31,7 +33,13 @@ const handleCommentClose = () => {
     </div>
     <div class="right-area">
       <div class="time-area">{{ getLocaleTime(time) }}</div>
-      <div class="content-area">{{ content }}</div>
+      <div class="content-area">
+        <MilkdownProvider>
+          <ProsemirrorAdapterProvider>
+            <CloudeaMilkdownReader :data="content" />
+          </ProsemirrorAdapterProvider>
+        </MilkdownProvider>
+      </div>
       <div class="comment-area">
         <div class="detail">
           <div class="detail-wrap clearfix">

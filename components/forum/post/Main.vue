@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { getReplyApi, postPostInfoApi } from '@/api'
+import { MilkdownProvider } from '@milkdown/vue'
+import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
 import type { PageResponse } from '~/types/api/base-model'
 import type { ReplyInfo, PostInfo } from '~/types/api/forum-model'
 
@@ -42,6 +44,7 @@ const handlePageChange = async () => {
     return
   }
   isShowPost.value = false
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 </script>
 
@@ -68,7 +71,11 @@ const handlePageChange = async () => {
             {{ getLocaleTime(postData?.LastUpdatedTime!) }}
           </div>
           <div class="content-area">
-            {{ markdownToText(postData?.Content!) }}
+            <MilkdownProvider>
+              <ProsemirrorAdapterProvider>
+                <CloudeaMilkdownReader :data="postData?.Content" />
+              </ProsemirrorAdapterProvider>
+            </MilkdownProvider>
           </div>
         </div>
       </div>
@@ -84,7 +91,7 @@ const handlePageChange = async () => {
           :time="reply.CreateTime!"
           :content="reply.Content"
           :comment-count="reply.CommentCount"
-          :floor="index + 2"
+          :floor="index + 2 + pageSize * (pageIndex - 1)"
         ></ForumPostReply>
       </div>
     </div>
@@ -102,7 +109,7 @@ const handlePageChange = async () => {
 <style lang="scss" scoped>
 .post-main {
   position: relative;
-  height: 100%;
+  // height: 100%;
   padding-bottom: 20px;
 }
 

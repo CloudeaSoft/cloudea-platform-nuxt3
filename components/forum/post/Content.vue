@@ -5,7 +5,15 @@ interface postProps {
 
 const props = defineProps<postProps>()
 
-const isShowReplyEditor = ref<boolean>(false)
+const replyEditorRef = ref<HTMLElement>()
+
+const handleScrollToReply = () => {
+  const target = replyEditorRef.value
+  window.scrollTo({
+    top: target?.offsetTop,
+    behavior: 'smooth'
+  })
+}
 </script>
 
 <template>
@@ -13,18 +21,17 @@ const isShowReplyEditor = ref<boolean>(false)
     <div class="post-content cloudea-area">
       <ForumPostMain :post-id="postId"></ForumPostMain>
     </div>
-    <!-- <div class="post-aside"><ForumPostAside></ForumPostAside></div> -->
+    <div class="post-aside" v-show="false">
+      <ForumPostAside></ForumPostAside>
+    </div>
     <div class="post-panel cloudea-area">
       <ForumPostPanel
         :post-id="postId"
-        @reply="isShowReplyEditor = !isShowReplyEditor"
+        @reply="handleScrollToReply"
       ></ForumPostPanel>
     </div>
-    <div :class="['post-reply', isShowReplyEditor ? 'active' : '']">
-      <ForumPostReplyEditor
-        :post-id="props.postId"
-        @close="isShowReplyEditor = false"
-      />
+    <div ref="replyEditorRef" class="post-reply">
+      <ForumPostReplyEditor :post-id="props.postId" />
     </div>
   </div>
 </template>
@@ -36,7 +43,7 @@ const isShowReplyEditor = ref<boolean>(false)
 
   .post-content {
     height: 100%;
-    backdrop-filter: initial;
+    // backdrop-filter: initial;
   }
 
   .post-aside {
@@ -55,11 +62,10 @@ const isShowReplyEditor = ref<boolean>(false)
   }
 
   .post-reply {
-    position: absolute;
-    bottom: -320px;
-
-    height: 300px;
+    margin-top: 20px;
+    height: 320px;
     width: 100%;
+    padding-bottom: 20px;
 
     transition: all 0.3s;
 

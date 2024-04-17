@@ -13,6 +13,6 @@ const pid = computed(() => {
 
 <style lang="scss" scoped>
 .post-view {
-  height: calc(100dvh - 6.66rem);
+  min-height: calc(100dvh - 6.66rem);
 }
 </style>
