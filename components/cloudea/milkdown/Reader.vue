@@ -143,7 +143,7 @@ const { get, loading } = useEditor((root) =>
 
 <style lang="scss" scoped>
 .milkdown-editor {
-  :v-deep(.milkdown) {
+  :deep(.milkdown) {
     height: 100%;
     position: relative;
     --crepe-color-background:  !important;

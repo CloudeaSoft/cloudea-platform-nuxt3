@@ -27,7 +27,7 @@ const handleCommitSetting = async () => {
     useMessage('', 'error')
     return
   }
-  useUserStore().setUserProfile(response.value.Data)
+  useUserStore().updateUserProfile(response.value.Data)
   oldDisplayName = displayName.value
   oldSignature = signature.value
 }

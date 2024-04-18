@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { vercodePostApi } from '@/api'
 import { registerTokenPostApi, userPostApi } from '~/api/identity'
+import { VerificationCodeType } from '~/types/api/user-model.d'
 
 const { t } = useI18n()
 
@@ -21,7 +22,7 @@ const handleGetVercode = async () => {
     useMessage(t('login.registerForm.messages.noEmail'), 'warn')
     return
   }
-  await vercodePostApi(email.value, 1)
+  await vercodePostApi(email.value, VerificationCodeType.RegisterByEmail)
 }
 
 const handleRegister = async () => {
@@ -57,6 +58,7 @@ const handleRegister = async () => {
   resetForm()
   handleRegisterSuccess()
   useMessage(t('login.registerForm.messages.registerSuccess'), 'success')
+  navigateTo('/login')
 }
 
 const handleRegisterSuccess = () => {

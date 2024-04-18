@@ -62,7 +62,7 @@ const handlePublishAvatar = async () => {
     return
   }
   var userProfile = response.value?.Data
-  useUserStore().setUserProfile(userProfile)
+  useUserStore().updateUserProfile(userProfile)
   handleCleanAvatar()
 }
 

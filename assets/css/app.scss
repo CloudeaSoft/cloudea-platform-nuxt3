@@ -19,6 +19,7 @@
 
 .main-container > .view {
   margin-top: 1.66rem;
+  min-height:calc(100dvh - 6.66rem)
 }
 
 .cloudea-area {
@@ -37,5 +38,6 @@
 
   .main-container > .view {
     margin-top: 0;
+    min-height:calc(100dvh - 5rem)
   }
 }

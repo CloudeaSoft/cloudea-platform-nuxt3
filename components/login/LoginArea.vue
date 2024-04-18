@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { sessionPostApi } from '~/api'
 import { getMyProfileApi } from '~/api/user'
+import { LoginType } from '~/types/api/user-model.d'
 
 const { t } = useI18n()
 
@@ -22,24 +23,28 @@ const handleLogin = async () => {
     useMessage(t('login.loginForm.messages.noPassword'), 'warn')
     return
   }
-  const tokenRes = await sessionPostApi(account.value, password.value, 0)
+  const tokenRes = await sessionPostApi(
+    account.value,
+    password.value,
+    LoginType.UserNamePassword
+  )
   if (tokenRes.value?.Status === false || tokenRes.value?.Data == undefined) {
     useMessage(t('login.loginForm.messages.loginFailed'), 'error')
     return
   }
-  useUserStore().setToken(tokenRes.value?.Data!)
   resetForm()
   useMessage(t('login.loginForm.messages.loginSuccess'), 'success')
-  await handleLoginSuccess()
+  await handleLoginSuccess(tokenRes.value?.Data)
 }
 
-const handleLoginSuccess = async () => {
+const handleLoginSuccess = async (token: string) => {
+  useUserStore().setToken(token)
   var profile = await getMyProfileApi()
   if (profile.value == null) {
     useMessage('Unknown Error', 'error')
     return
   }
-  useUserStore().setUserProfile(profile.value.Data)
+  useUserStore().updateUserProfile(profile.value.Data)
   navigateTo('/')
 }
 </script>

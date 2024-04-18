@@ -12,3 +12,21 @@ export interface UpdateUserProfileRequest {
   DisplayName: string
   Signature: string | undefined
 }
+
+export interface ResetPasswordRequest {
+  Email: string
+  NewPassword: string
+  VerCode: string
+}
+
+export enum VerificationCodeType {
+  LoginByEmail = 0,
+  RegisterByEmail = 1,
+  ResetPasswordByEmail = 2
+}
+
+export enum LoginType {
+  UserNamePassword = 0,
+  EmailPassword = 1,
+  EmailVercode = 2
+}

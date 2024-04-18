@@ -24,6 +24,7 @@ export const useUserStore = defineStore({
     },
     setToken(token: string) {
       this.token = token
+      return this
     },
     removeToken() {
       this.token = ''
@@ -31,8 +32,9 @@ export const useUserStore = defineStore({
     isAuthorized() {
       return !!this.token.trim()
     },
-    setUserProfile(profile: UserProfile) {
+    updateUserProfile(profile: UserProfile) {
       this.profile = profile
+      return this
     }
   }
 })
