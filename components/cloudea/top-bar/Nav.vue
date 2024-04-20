@@ -2,7 +2,7 @@
 import { topBarItemList } from './topBarItem'
 
 const navItemNum = topBarItemList.length
-const navItemLength = `${navItemNum * 100}px`
+const navItemLength = navItemNum * 100 + 'px'
 
 const showPhoneHide = ref(false)
 </script>
@@ -15,7 +15,7 @@ const showPhoneHide = ref(false)
         /></span>
       </li>
       <li class="main-nav-list">
-        <ul :class="showPhoneHide ? 'phone-hide active' : 'phone-hide'">
+        <ul :class="[showPhoneHide ? 'phone-hide active' : 'phone-hide']">
           <li v-for="linkItem in topBarItemList" :key="linkItem.index">
             <NuxtLinkLocale :to="{ path: linkItem.router }">
               <span class="item-wrap">{{ $t(`header.${linkItem.name}`) }}</span>
@@ -153,20 +153,20 @@ $navNumber: v-bind(navItemNum);
   .main-nav-list {
     position: fixed;
     top: 5rem;
-    left: 0;
+    left: -100px;
     width: 100px;
 
     z-index: 999;
 
     .phone-hide {
-      transform: translateX(-100px);
+      transform: translateX(0);
       transition: all 0.6s ease-in-out;
       flex-direction: column;
       height: calc(100dvh - 5rem);
       background-color: var(--cloudea-trans-white-2);
 
       &.active {
-        transform: translateX(0);
+        transform: translateX(100px);
       }
     }
   }
