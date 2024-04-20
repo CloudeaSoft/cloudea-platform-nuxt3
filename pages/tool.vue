@@ -12,11 +12,9 @@ useHead({
 </script>
 
 <template>
-  <div class="view"><ToolContent></ToolContent></div>
+  <div class="view tool-view">
+    <ToolContent><NuxtPage /></ToolContent>
+  </div>
 </template>
 
-<style lang="scss" scoped>
-.view {
-  height: calc(100dvh - 6.66rem);
-}
-</style>
+<style lang="scss" scoped></style>

@@ -1,1 +1,1 @@
-<template>arknights</template>
+<template><ToolArknightsGacha /></template>

@@ -36,4 +36,18 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
 .fade-leave-to {
   opacity: 0;
 }
+
+.fold-enter-active,
+.fold-leave-active {
+  transition: height 0.5s ease; /* 设置过渡效果 */
+}
+
+.fold-enter,
+.fold-leave-to {
+  height: 100%; /* 初始和结束状态，元素位于正常位置 */
+}
+
+.fold-leave-active {
+  height: 0;
+}
 </style>

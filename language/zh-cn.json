@@ -134,6 +134,25 @@
             }
         }
     },
+    "tool": {
+        "arknights": {
+            "gachaHistory": {
+                "title": "明日方舟寻访记录查询",
+                "tokenPlaceholder": "在此输入token",
+                "generate": "生成",
+                "charts": {
+                    "title": "分析图表"
+                },
+                "history": {
+                    "title": "原始记录"
+                },
+                "messages": {
+                    "emptyToken": "token不可为空",
+                    "invalidToken": "token无效或已过期"
+                }
+            }
+        }
+    },
     "edit": {
         "post": {
             "title": "帖子编辑器"
