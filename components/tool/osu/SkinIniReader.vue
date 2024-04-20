@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ini from '@/utils/osuTool'
+import ini from '~/utils/osu-tool'
 
 // 文件内容
 const skin = ref(JSON.parse(localStorage.getItem('osu-skin')!) || null)

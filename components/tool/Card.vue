@@ -51,9 +51,7 @@ onMounted(() => {
 
 .tool-card-container {
   margin: 10px;
-  border-radius: 20px;
   overflow: hidden;
-  /* background-color: var(--cloudea-white); */
   position: relative;
 }
 
@@ -116,6 +114,6 @@ onMounted(() => {
 }
 
 .tool-card-main {
-  margin: 30px 0;
+  margin: 30px 0 0;
 }
 </style>
