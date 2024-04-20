@@ -11,7 +11,7 @@ const announceList = ref([1, 2, 3, 4, 5])
         <span class="title-text">公告</span>
       </div>
       <div class="btn-more">
-        <span class="text">更多>></span>
+        <NuxtLinkLocale to="/forum/announce"><span class="text">更多>></span></NuxtLinkLocale>
       </div>
     </div>
     <div class="divider" style="margin-top: 4px">

@@ -10,7 +10,7 @@ const postTitle = ref('')
 
 const postContent = ref('')
 
-const milkdownFocused = ref<boolean>(false)
+const milkdownFocused = ref<boolean>()
 
 const handlePost = async () => {
   if (!postTitle.value || !postTitle.value.trim()) {
@@ -78,7 +78,7 @@ const resetEditorContent = () => {
               @focus="handleFocus"
               @blur="handleBlur"
               v-model:editor-value="postContent"
-            />
+            ></CloudeaMilkdownEditor>
           </ProsemirrorAdapterProvider>
         </MilkdownProvider>
       </div>
@@ -131,6 +131,7 @@ const resetEditorContent = () => {
       border: 2px solid var(--cloudea-trans-blue-1);
       padding: 10px;
       transition: border 0.6s;
+      overflow: hidden;
 
       &.active {
         border: 2px solid var(--cloudea-blue-5);

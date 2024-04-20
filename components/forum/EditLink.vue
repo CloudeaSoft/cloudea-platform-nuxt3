@@ -1,11 +1,11 @@
 <template>
-  <NuxtLinkLocale to="/forum/edit/post">
-    <div class="edit-link">
+  <div class="edit-link">
+    <NuxtLinkLocale :to="`/forum/edit`">
       <div class="link-content">
         <Icon class="link-icon" name="lucide:text" />
       </div>
-    </div>
-  </NuxtLinkLocale>
+    </NuxtLinkLocale>
+  </div>
 </template>
 
 <style lang="scss" scoped>

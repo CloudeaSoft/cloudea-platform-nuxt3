@@ -2,13 +2,13 @@
 
 <template>
   <div class="index-aside">
-    <ForumContentAsideSigninTip></ForumContentAsideSigninTip>
+    <!-- <ForumContentAsideSigninTip></ForumContentAsideSigninTip> -->
     <ForumContentAsideAnnounce></ForumContentAsideAnnounce>
-    <ForumContentAsideHotList
-      ><template #title>文章榜</template></ForumContentAsideHotList
-    >
+    <!-- <ForumContentAsideHotList>
+      <template #title>文章榜</template>
+    </ForumContentAsideHotList> -->
     <!-- <ForumAsideHotList><template #title>作者榜</template></ForumAsideHotList> -->
-    <ForumContentAsideHotTheme class="hot-theme"></ForumContentAsideHotTheme>
+    <!-- <ForumContentAsideHotTheme class="hot-theme"></ForumContentAsideHotTheme> -->
     <ForumContentAsideFooter></ForumContentAsideFooter>
   </div>
 </template>

@@ -174,7 +174,7 @@
                 "messages": {
                     "emptyToken": "token不可为空",
                     "invalidToken": "token无效或已过期",
-                    "emptyHistory":"记录为空"
+                    "emptyHistory": "记录为空"
                 }
             }
         },
@@ -216,7 +216,13 @@
         },
         "forum": {
             "title": "论坛",
-            "description": "论坛"
+            "description": "论坛",
+            "edit": {
+                "post": {
+                    "title": "发帖",
+                    "description": "发帖"
+                }
+            }
         },
         "account": {
             "title": "个人中心",

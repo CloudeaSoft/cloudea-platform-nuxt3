@@ -10,16 +10,16 @@ const info = ref({
   <div class="index-aside-footer cloudea-area">
     <ul class="more-list">
       <li class="item">
-        <a href="" target="_blank" rel="nofollow">使用指南</a>
+        <NuxtLinkLocale to="/" rel="nofollow">使用指南</NuxtLinkLocale>
       </li>
       <li class="item">
-        <a href="" target="_blank" rel="nofollow">用户协议</a>
+        <NuxtLinkLocale to="/" rel="nofollow">用户协议</NuxtLinkLocale>
       </li>
       <li class="item">
-        <a href="" target="_blank" rel="nofollow">隐私政策</a>
+        <NuxtLinkLocale to="/privacy" rel="nofollow">隐私政策</NuxtLinkLocale>
       </li>
       <li class="item">
-        <a href="" target="_blank" rel="nofollow">关于我们</a>
+        <NuxtLinkLocale to="/about" rel="nofollow">关于我们</NuxtLinkLocale>
       </li>
     </ul>
     <ul class="more-list">
@@ -45,7 +45,7 @@ const info = ref({
         >
       </li>
       <li class="item">
-        <span>©2023 Cloudea</span>
+        <span>©{{ new Date().getFullYear() }} Cloudea</span>
       </li>
     </ul>
   </div>

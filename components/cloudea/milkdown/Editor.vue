@@ -45,12 +45,9 @@ import markdown from 'refractor/lang/markdown'
 
 interface MilkdownEditorProps {
   editorValue: string
-  height?: string
 }
 
-const props = withDefaults(defineProps<MilkdownEditorProps>(), {
-  height: '300'
-})
+const props = withDefaults(defineProps<MilkdownEditorProps>(), {})
 
 const emits = defineEmits<{
   save: [editorValue: string]
@@ -128,11 +125,17 @@ useEditor((root) =>
 )
 </script>
 
-<template><Milkdown class="milkdown-editor" /></template>
+<template>
+  <Milkdown class="milkdown-editor" />
+</template>
 
 <style lang="scss" scoped>
 .milkdown-editor {
   height: 100%;
-  position: relative;
+
+  :deep(.milkdown) {
+    height: 100%;
+    position: relative;
+  }
 }
 </style>

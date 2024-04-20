@@ -226,6 +226,7 @@ watch(
         border-radius: 5px;
         border: 1px solid var(--cloudea-blue-5);
         background-color: var(--cloudea-white);
+        color: var(--cloudea-black);
 
         &:hover {
           background-color: var(--cloudea-blue-5);
@@ -245,6 +246,7 @@ watch(
         border-radius: 5px;
         border: 1px solid var(--cloudea-blue-5);
         background-color: var(--cloudea-white);
+        color: var(--cloudea-black);
       }
 
       input {
