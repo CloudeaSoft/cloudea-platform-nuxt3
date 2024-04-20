@@ -10,7 +10,9 @@ const showDragger = () => {
 }
 
 const setFile = async (file: File) => {
-  validateAvatarFile(file)
+  if (!validateAvatarFile(file)) {
+    return
+  }
   const resizedFile = await resizeImage(file)
   const reader = new FileReader()
   reader.onload = (e) => {

@@ -1,1 +1,1 @@
-<template>osu!</template>
+<template><ToolOsuSkinIniReader /></template>
