@@ -58,7 +58,8 @@ const onInputChange = (event: Event) => {
     >
       <Icon class="icon-upload" name="uiw:cloud-upload" />
       <div class="skin-upload__text">
-        把 Skin.ini 拖到这里 或者 <em>点击此处上传</em>
+        {{ $t('tool.osu.skin.upload.drag') }}
+        <em>{{ $t('tool.osu.skin.upload.click') }} </em>
       </div>
     </div>
     <input
@@ -67,7 +68,7 @@ const onInputChange = (event: Event) => {
       class="skin-upload-input"
       @change="onInputChange"
     />
-    <div class="skin-upload__tip">注：本工具会清除文件内的注释</div>
+    <div class="skin-upload__tip">{{ $t('tool.osu.skin.upload.tips') }}</div>
     <div class="skin-upload__item" v-if="model">
       <div class="skin-upload__item-info">
         <a class="skin-upload__item-name">

@@ -9,14 +9,11 @@ const elementX = ref(0)
 const elementY = ref(0)
 
 onMounted(() => {
-  cardRef.value!.addEventListener(
-    'mousemove',
-    (event) => {
-      const rect = cardHeaderRef.value!.getBoundingClientRect()
-      elementX.value = event.clientX - rect.left
-      elementY.value = event.clientY - rect.top
-    }
-  )
+  cardRef.value!.addEventListener('mousemove', (event) => {
+    const rect = cardHeaderRef.value!.getBoundingClientRect()
+    elementX.value = event.clientX - rect.left
+    elementY.value = event.clientY - rect.top
+  })
 })
 </script>
 
@@ -32,7 +29,9 @@ onMounted(() => {
           <div class="header-body"><slot name="header"></slot></div>
         </div>
       </div>
-      <div class="tool-card-main"><slot></slot></div>
+      <div class="tool-card-main">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>

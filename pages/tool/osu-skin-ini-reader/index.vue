@@ -1,1 +1,1 @@
-<template><ToolOsuSkinIniReader /></template>
+<template><ToolOsuSkinIniEditor /></template>

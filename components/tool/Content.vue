@@ -1,7 +1,9 @@
 <template>
   <div class="tool-container">
     <div class="tool-menu cloudea-area"><ToolMenu /></div>
-    <div class="tool-content cloudea-area"><slot /></div>
+    <div class="tool-content cloudea-area">
+      <slot><ToolDefaultCard /></slot>
+    </div>
   </div>
 </template>
 

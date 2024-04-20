@@ -81,16 +81,22 @@ watch(
 <template>
   <ToolCard>
     <template #header>
-      <div>Osu皮肤设置</div>
+      <div>{{ $t('tool.osu.skin.title') }}</div>
     </template>
     <div class="skin-container">
       <ToolOsuUpload v-show="!skinFileExist" @change="getSkin" />
       <div class="skin-editor" v-show="skinFileExist">
         <div class="skin-editor__bar">
           <div class="skin-editor__bar-row">
-            <button @click="dialogVisible = true">预览</button>
-            <button @click="buildSkin">下载</button>
-            <button @click="clearSkin">返回</button>
+            <button @click="dialogVisible = true" disabled>
+              {{ $t('tool.osu.skin.editor.preview') }}
+            </button>
+            <button @click="buildSkin">
+              {{ $t('tool.osu.skin.editor.download') }}
+            </button>
+            <button @click="clearSkin">
+              {{ $t('tool.osu.skin.editor.clear') }}
+            </button>
             <select v-model="sectionOption">
               <option
                 v-for="(sectionV, section, index) in skin"
@@ -128,22 +134,22 @@ watch(
                   <div class="skin-editor__item-comment">
                     <span class="skin-editor__item-comment-block" />
                     <span class="skin-editor__item-comment-default">
-                      默认值:&nbsp;
+                      {{ $t('tool.osu.skin.editor.defaultValue') }}:&nbsp;
                       {{
                         ini.getTrans(sectionOption, item.toString()).defaultVal
                       }}
                     </span>
                     <span class="skin-editor__item-comment-desc">
-                      说明:&nbsp;
+                      {{ $t('tool.osu.skin.editor.description') }}:&nbsp;
                       {{ ini.getTrans(sectionOption, item.toString()).profile }}
                     </span>
                   </div>
                 </div>
               </div>
             </li>
-            <span class="skin-editor__tips"
-              >注：图片素材相关条目已被隐藏，如有需要请自行修改文件</span
-            >
+            <span class="skin-editor__tips">
+              {{ $t('tool.osu.skin.editor.tips') }}
+            </span>
           </ul>
         </div>
       </div>
@@ -213,12 +219,32 @@ watch(
       }
 
       button {
+        cursor: pointer;
         width: 50px;
         margin-right: 10px;
+
+        border-radius: 5px;
+        border: 1px solid var(--cloudea-blue-5);
+        background-color: var(--cloudea-white);
+
+        &:hover {
+          background-color: var(--cloudea-blue-5);
+          color: var(--cloudea-white);
+        }
+
+        &:disabled {
+          border: 1px solid var(--cloudea-gray-4);
+          background-color: var(--cloudea-white);
+          color: var(--cloudea-gray-4);
+          cursor: not-allowed;
+        }
       }
 
       select {
         width: 100px;
+        border-radius: 5px;
+        border: 1px solid var(--cloudea-blue-5);
+        background-color: var(--cloudea-white);
       }
 
       input {

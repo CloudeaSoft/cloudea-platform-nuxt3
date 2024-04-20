@@ -135,6 +135,9 @@
         }
     },
     "tool": {
+        "empty": {
+            "description": "请在左侧菜单里选择一个工具"
+        },
         "arknights": {
             "gachaHistory": {
                 "title": "明日方舟寻访记录查询",
@@ -149,6 +152,24 @@
                 "messages": {
                     "emptyToken": "token不可为空",
                     "invalidToken": "token无效或已过期"
+                }
+            }
+        },
+        "osu": {
+            "skin": {
+                "title": "Osu皮肤设置",
+                "upload": {
+                    "drag": "把 Skin.ini 拖到这里 或者",
+                    "click": "点击此处上传",
+                    "tips": "注：本工具会清除文件内的注释"
+                },
+                "editor": {
+                    "preview": "预览",
+                    "download": "下载",
+                    "clear": "返回",
+                    "defaultValue": "默认值",
+                    "description": "说明",
+                    "tips": "注：图片素材相关条目已被隐藏，如有需要请自行修改文件"
                 }
             }
         }

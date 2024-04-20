@@ -1,5 +1,10 @@
 <script setup lang="ts">
 const { t } = useI18n()
+
+definePageMeta({
+  middleware: 'child'
+})
+
 useHead({
   title: t('meta.tool.title'),
   meta: [
@@ -13,7 +18,9 @@ useHead({
 
 <template>
   <div class="view tool-view">
-    <ToolContent><NuxtPage /></ToolContent>
+    <ToolContent>
+      <NuxtPage />
+    </ToolContent>
   </div>
 </template>
 
