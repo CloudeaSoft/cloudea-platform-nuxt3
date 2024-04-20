@@ -10,7 +10,7 @@ const baseAPI = useRuntimeConfig().public.CLOUDEA_API
 export const gachaGetApi = async (token: string, channelId: number) => {
   const { data } = await useFetch<Result<GachaHistory>>(Api.GACHA, {
     baseURL: baseAPI,
-    method: 'POST',
+    method: 'GET',
     params: {
       token,
       channelId

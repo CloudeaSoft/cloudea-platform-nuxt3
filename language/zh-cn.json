@@ -117,6 +117,28 @@
             }
         },
         "post": {
+            "panel": {
+                "like": {
+                    "success": "点赞成功",
+                    "failed": "点赞失败"
+                },
+                "nolike": {
+                    "success": "取消点赞成功",
+                    "failed": "取消点赞失败"
+                },
+                "favorite": {
+                    "success": "收藏成功",
+                    "failed": "收藏失败"
+                },
+                "nofavorite": {
+                    "success": "取消收藏成功",
+                    "failed": "取消收藏失败"
+                },
+                "copy": {
+                    "success": "地址已复制到剪贴板！",
+                    "failed": "无法复制地址到剪贴板，请尝试手动复制。"
+                }
+            },
             "reply": {
                 "open": "回复",
                 "close": "关闭回复",
@@ -151,7 +173,8 @@
                 },
                 "messages": {
                     "emptyToken": "token不可为空",
-                    "invalidToken": "token无效或已过期"
+                    "invalidToken": "token无效或已过期",
+                    "emptyHistory":"记录为空"
                 }
             }
         },

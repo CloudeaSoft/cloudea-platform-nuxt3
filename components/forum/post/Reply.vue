@@ -24,6 +24,10 @@ const handleCommentOpen = () => {
 const handleCommentClose = () => {
   showComment.value = false
 }
+
+const handleReport = ()=>{
+  navigateTo(`/report`)
+}
 </script>
 
 <template>
@@ -43,7 +47,7 @@ const handleCommentClose = () => {
       <div class="comment-area">
         <div class="detail">
           <div class="detail-wrap clearfix">
-            <span class="comment-report">
+            <span class="comment-report" @click="handleReport">
               <Icon name="lucide:triangle-alert" />
               <span>{{ $t('forum.post.reply.report') }}</span>
             </span>

@@ -8,6 +8,8 @@ import {
   postPostLikeApi
 } from '~/api'
 
+const { t } = useI18n()
+
 interface PostPanelProps {
   postId: string
 }
@@ -37,17 +39,19 @@ const handleLike = async () => {
   if (!like.value) {
     const response = await postPostLikeApi(props.postId)
     if (!response.value?.Data || !response.value.Status) {
-      useMessage('', 'error')
+      useMessage(t('forum.post.panel.like.failed'), 'error')
       return
     }
     like.value = true
+    useMessage(t('forum.post.panel.like.success'), 'success')
   } else {
     const response = await deletePostLikeApi(props.postId)
     if (!response.value?.Status) {
-      useMessage('', 'error')
+      useMessage(t('forum.post.panel.nolike.failed'), 'error')
       return
     }
     like.value = false
+    useMessage(t('forum.post.panel.nolike.success'), 'success')
   }
 }
 
@@ -55,23 +59,41 @@ const handleFavorite = async () => {
   if (!favorite.value) {
     const response = await postPostFavoriteApi(props.postId)
     if (!response.value?.Data || !response.value.Status) {
-      useMessage('', 'error')
+      useMessage('forum.post.panel.favorite.failed', 'error')
       return
     }
     favorite.value = true
+    useMessage('forum.post.panel.favorite.success', 'success')
   } else {
     const response = await deletePostFavoriteApi(props.postId)
     if (!response.value?.Status) {
-      useMessage('', 'error')
+      useMessage('forum.post.panel.nofavorite.failed', 'error')
       return
     }
     favorite.value = false
+    useMessage('forum.post.panel.nofavorite.success', 'success')
   }
 }
 
-const handleShare = () => {}
+const handleShare = () => {
+  try {
+    // 获取当前地址
+    const currentUrl = window.location.href
 
-const handleReport = () => {}
+    // 复制到剪贴板
+    navigator.clipboard.writeText(currentUrl)
+
+    // 提示用户复制成功
+    useMessage(t('forum.post.panel.copy.success'), 'success')
+  } catch (err) {
+    // 处理错误，比如浏览器不支持或用户拒绝权限
+    useMessage(t('forum.post.panel.copy.failed'), 'error')
+  }
+}
+
+const handleReport = () => {
+  navigateTo('/report')
+}
 </script>
 
 <template>

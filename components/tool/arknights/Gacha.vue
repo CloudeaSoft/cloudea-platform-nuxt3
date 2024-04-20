@@ -39,7 +39,11 @@ const showGacha = async () => {
   // 初始化，获取并分析数据
   tableData.value = []
   try {
-    await getGacha()
+    var res = await getGacha()
+    if (!res) {
+      loadingCheck.value = false
+      return
+    }
     analyzeGacha()
     if (!showChart.value && !showTable.value) {
       showChart.value = true
@@ -56,14 +60,20 @@ const showGacha = async () => {
 // 请求数据 - 获取寻访记录
 const getGacha = async () => {
   //获取记录
-  // var res = await gachaGetApi(gachaToken, gachaChannelId)
+  var res = await gachaGetApi(gachaToken.value, gachaChannelId.value)
+  if (!res.value || !res.value.Status) {
+    useMessage(t('tool.arknights.gachaHistory.messages.invalidToken'), 'warn')
+    return false
+  }
   try {
     // 加入记录列表
-    // tableData.value = res.Data.list
-    tableData.value = tableData.value.concat(gachaHistoryTestData.Data.list)
+    tableData.value = res.value?.Data.list!
+    // tableData.value = tableData.value.concat(gachaHistoryTestData.Data.list)
+    return true
   } catch (e) {
     // 提示
-    useMessage(t('tool.arknights.gachaHistory.messages.invalidToken'), 'warn')
+    useMessage(t('tool.arknights.gachaHistory.messages.emptyHistory'), 'warn')
+    return false
   }
 }
 // 卡池分析 - 分析寻访记录
@@ -249,6 +259,7 @@ const onChartBoardEnter = () => {
           {{ $t('tool.arknights.gachaHistory.generate') }}
         </CloudeaForumButton>
       </div>
+      <CloudeaLoadingMask :loading="loadingCheck" />
     </form>
     <div class="gacha-body">
       <div class="gacha-chart gacha-area">
@@ -295,6 +306,8 @@ const onChartBoardEnter = () => {
 .gacha-header {
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 
   .token {
     width: 100%;
