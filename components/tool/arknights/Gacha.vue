@@ -315,8 +315,11 @@ const onChartBoardEnter = () => {
     font-size: 1.25rem;
     resize: none;
     padding: 10px;
+    background: var(--cloudea-white);
+    color: var(--cloudea-font-color-3);
 
     border: 2px solid var(--cloudea-trans-blue-0);
+    transition: border 0.6s;
 
     &:focus {
       border-color: var(--cloudea-blue-5);
@@ -367,6 +370,10 @@ const onChartBoardEnter = () => {
         margin: 20px;
         display: flex;
         overflow-x: scroll;
+
+        & > *:last-child {
+          margin-right: 0;
+        }
       }
     }
   }

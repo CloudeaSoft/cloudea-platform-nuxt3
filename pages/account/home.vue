@@ -1,4 +1,6 @@
-<template><div class="user-content">home</div></template>
+<template>
+  <div class="user-content"><AccountHome /></div>
+</template>
 
 <style lang="scss" scoped>
 .user-content {

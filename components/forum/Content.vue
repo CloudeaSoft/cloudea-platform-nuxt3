@@ -55,6 +55,7 @@ const handleIsRecommendChange = async (status: boolean) => {
   <div class="forum-index-container">
     <div class="forum-index-content">
       <div class="post-list">
+        <ForumContentSearchBar />
         <div class="post-list-container cloudea-area">
           <div class="post-list-header">
             <div class="list-nav">

@@ -16,7 +16,7 @@ const { userId, profile, top, left } = withDefaults(
 </script>
 
 <template>
-  <div class="user-area" :style="`left:${left}px;top:${top + 10}px;`">
+  <div class="user-area">
     <div class="user-area-content">
       <div class="info-row">
         <NuxtImg class="avatar" :src="profile.AvatarUrl"></NuxtImg>
@@ -52,10 +52,11 @@ const { userId, profile, top, left } = withDefaults(
 
 <style lang="scss" scoped>
 .user-area {
-  display: none;
-  position: fixed;
+  position: absolute;
   padding-top: 12px;
-  z-index: 5;
+  top: 100%;
+  left: -110px;
+  z-index: 999;
   cursor: initial;
 
   .user-area-content {

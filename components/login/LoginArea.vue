@@ -59,9 +59,10 @@ const handleLoginSuccess = async (token: string) => {
       :placeholder="$t('login.loginForm.accountPlaceholder')"
     />
     <CloudeaFormInput
-      type="text"
+      type="password"
       v-model="password"
       :placeholder="$t('login.loginForm.passwordPlaceholder')"
+      
       autocomplete="current-password"
     />
     <span>

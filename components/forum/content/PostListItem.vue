@@ -195,7 +195,7 @@ const {
       font-size: 13px;
       line-height: 22px;
       white-space: nowrap;
-      overflow: hidden;
+      // overflow: hidden;
       text-overflow: ellipsis;
       word-break: break-all;
 
@@ -205,7 +205,8 @@ const {
 
       & .user-popover {
         display: inline;
-        overflow: hidden;
+        // overflow: hidden;
+        position: relative;
         text-overflow: ellipsis;
       }
     }

@@ -85,7 +85,6 @@ const initPoolOption = (poolData: PoolInfo): EChartsOption => {
     },
     series: [
       {
-        // name: 'Access From',
         type: 'pie',
         radius: '50%',
         center: ['50%', '65%'],
@@ -97,7 +96,9 @@ const initPoolOption = (poolData: PoolInfo): EChartsOption => {
             shadowOffsetX: 0,
             shadowColor: 'rgba(0, 0, 0, 0.5)'
           }
-        }
+        },
+        label: false,
+        labelLine: false
       }
     ]
   }
@@ -193,10 +194,15 @@ const initPoolOption = (poolData: PoolInfo): EChartsOption => {
 <style lang="scss" scoped>
 .card-container {
   width: 300px;
-  height: 500px;
-  background-color: var(--cloudea-white);
+  height: 490px;
+  background-color: #dbe8ff;
   box-shadow: var(--cloudea-shadow-0);
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  margin-right: 20px;
 
   .card-content {
     .echart {
@@ -210,11 +216,12 @@ const initPoolOption = (poolData: PoolInfo): EChartsOption => {
     .echart-text {
       padding-left: 60px;
       padding-top: 20px;
-      padding-bottom: 40px;
-      background-color: #eee;
+      padding-bottom: 20px;
+      background-color: #dbe8ff;
+      color: #000;
     }
 
-    -header h2 {
+    header h2 {
       font-size: 30px;
       background: linear-gradient(to right, pink 15%, blue);
       background-clip: text;

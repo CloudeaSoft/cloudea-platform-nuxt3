@@ -132,19 +132,18 @@ const handlePageChange = async () => {
 .post-body {
   padding: 0 20px;
   height: calc(100% - 6.66rem);
-  overflow-y: scroll;
   scrollbar-width: thin !important;
 
   .body-content {
     min-height: 200px;
     display: flex;
     border-bottom: 1px solid var(--cloudea-gray-4);
-    overflow: hidden;
+    // overflow: hidden;
 
     .user-area {
       width: 150px;
       padding: 20px 0;
-      box-shadow: 1px 0px 3px 0px rgba($color: #000000, $alpha: 0.5);
+      box-shadow: 3px 0px 3px 0px rgba($color: #000000, $alpha: 0.5);
     }
 
     .right-area {

@@ -30,7 +30,7 @@ const info = ref({
         </span>
       </li>
     </ul>
-    <ul class="more-list">
+    <ul class="more-list" hidden>
       <li class="item">
         <span>
           座机电话：

@@ -180,7 +180,7 @@
         },
         "osu": {
             "skin": {
-                "title": "Osu皮肤设置",
+                "title": "Osu Skin.ini 阅读器",
                 "upload": {
                     "drag": "把 Skin.ini 拖到这里 或者",
                     "click": "点击此处上传",

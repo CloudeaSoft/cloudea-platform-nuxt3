@@ -88,12 +88,12 @@ const handleReport = ()=>{
   min-height: 200px;
   display: flex;
   border-bottom: 1px solid var(--cloudea-gray-4);
-  overflow: hidden;
+  // overflow: hidden;
 
   .user-area {
     width: 150px;
     padding: 20px 0;
-    box-shadow: 1px 0px 3px 0px rgba($color: #000000, $alpha: 0.35);
+    box-shadow: 3px 0px 3px 0px rgba($color: #000000, $alpha: 0.35);
   }
 
   .right-area {
