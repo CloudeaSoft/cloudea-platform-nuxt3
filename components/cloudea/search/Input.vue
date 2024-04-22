@@ -1,5 +1,9 @@
 <script setup lang="ts">
-const searchValue = ref<string>()
+const emits = defineEmits<{
+  search: []
+}>()
+
+const searchValue = defineModel<string>()
 
 const inputActive = ref<boolean>()
 
@@ -11,7 +15,7 @@ const onInputBlur = () => {
 }
 
 const handleSearch = () => {
-  useMessage('', 'success')
+  emits('search')
 }
 </script>
 
@@ -28,7 +32,7 @@ const handleSearch = () => {
             v-model="searchValue"
           />
         </div>
-        <div class="search-input-content__btn">
+        <div class="search-input-content__btn" @click="handleSearch">
           <Icon name="lucide:search" />
         </div>
       </form>

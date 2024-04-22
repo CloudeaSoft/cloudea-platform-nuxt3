@@ -2,6 +2,13 @@
 // const { showSearchPanel } = storeToRefs(useTempSettingStore())
 
 const showSearchPanel = ref(true)
+
+const searchValue = ref<string>()
+const searchType = ref<number>()
+
+const onSearch = () => {
+  useMessage(searchValue.value!, 'success')
+}
 </script>
 
 <template>
@@ -9,14 +16,10 @@ const showSearchPanel = ref(true)
     <Transition name="search">
       <div class="mask" v-if="showSearchPanel" @click="showSearchPanel = false">
         <div ref="container" class="container cloudea-area" @click.stop>
-          <CloudeaSearchInput />
-          <!--<KunSearchHistory v-if="!search.keywords" />
-
-          <KunSearchResult :topics="topics" v-if="topics.length" />
-
-          <span class="empty" v-if="!topics.length && search.keywords">
-            {{ $t('home.header.emptyResult') }}
-          </span> -->
+          <CloudeaSearchInput @search="onSearch" v-model="searchValue" />
+          <CloudeaSearchNav v-model="searchType" />
+          <div class="cloudea-search-divider"></div>
+          <CloudeaSearchResult />
         </div>
       </div>
     </Transition>
@@ -56,14 +59,20 @@ const showSearchPanel = ref(true)
   background-color: var(--cloudea-trans-white-5);
   border-radius: 20px;
   overflow-y: scroll;
-}
 
-.empty {
-  display: flex;
-  justify-content: center;
-  color: var(--cloudea-blue-2);
-  font-style: oblique;
-  margin-top: 20px;
+  .cloudea-search-divider {
+    margin-top: 10px;
+    width: 100%;
+    border-bottom: 1px solid var(--cloudea-gray-4);
+  }
+
+  .empty {
+    display: flex;
+    justify-content: center;
+    color: var(--cloudea-blue-2);
+    font-style: oblique;
+    margin-top: 20px;
+  }
 }
 
 .search-enter-from {
