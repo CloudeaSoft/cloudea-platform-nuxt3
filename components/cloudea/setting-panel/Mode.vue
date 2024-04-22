@@ -22,7 +22,6 @@ const modeItem: Mode[] = [
 
 <template>
   <div class="mode">
-    <!-- <span>{{ $t('header.settings.mode') }}</span> -->
     <div class="mode-container">
       <span
         v-for="(mode, index) in modeItem"
@@ -32,12 +31,7 @@ const modeItem: Mode[] = [
         <Icon
           class="sun"
           :name="mode.icon"
-          @click="
-            () => {
-              $colorMode.preference = mode.name
-              console.log(mode.name)
-            }
-          "
+          @click="$colorMode.preference = mode.name"
         />
       </span>
     </div>

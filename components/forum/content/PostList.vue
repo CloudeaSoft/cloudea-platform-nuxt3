@@ -6,10 +6,14 @@ interface PostListProps {
 }
 
 const { data } = defineProps<PostListProps>()
+
+const onScroll = () => {
+  ;() => console.log(1)
+}
 </script>
 
 <template>
-  <div class="post-list-wrap">
+  <div class="post-list-wrap" v-infinite-scroll="onScroll">
     <div class="entry" v-for="post in data" :key="post.PostId">
       <ForumContentPostListItem :post="post" />
     </div>

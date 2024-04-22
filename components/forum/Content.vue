@@ -8,14 +8,16 @@ const isRecommend = ref(true)
 const pageIndex = ref(1)
 const pageSize = ref(15)
 
-const postList = ref(
-  (
-    await getPostApi(undefined, {
-      PageIndex: pageIndex.value,
-      PageSize: pageSize.value
-    })
-  ).value?.Data.Rows
-)
+const resData = await getPostApi(undefined, {
+  PageIndex: pageIndex.value,
+  PageSize: pageSize.value
+})
+
+const postList = ref(resData.value?.Data.Rows)
+const maxPage = ref(1)
+maxPage.value = resData.value?.Data.Total
+  ? resData.value?.Data.Total / pageSize.value + 1
+  : maxPage.value
 
 const handleGetPostList = async () => {
   if (!isRecommend.value) {
@@ -46,6 +48,24 @@ const handleIsRecommendChange = async (status: boolean) => {
   isRecommend.value = status
   await handleGetPostList()
 }
+
+const handleMorePostPage = async () => {
+  pageIndex.value++
+  if (!isRecommend.value) {
+    var res = await getPostApi(
+      sectionId.value !== GUID_EMPTY ? sectionId.value : undefined,
+      { PageIndex: pageIndex.value, PageSize: pageSize.value }
+    )
+    postList.value = postList.value?.concat(res.value?.Data.Rows!)
+  } else {
+    var res = await getPostApi(
+      sectionId.value !== GUID_EMPTY ? sectionId.value : undefined,
+      { PageIndex: pageIndex.value, PageSize: pageSize.value }
+    )
+    postList.value = postList.value?.concat(res.value?.Data.Rows!)
+  }
+  console.log(postList.value)
+}
 </script>
 
 <template>
@@ -75,6 +95,13 @@ const handleIsRecommendChange = async (status: boolean) => {
           </div>
           <ForumContentPostList :data="postList!"></ForumContentPostList>
         </div>
+        <div
+          class="post-list-more cloudea-area"
+          @click="handleMorePostPage"
+          v-show="pageIndex < maxPage"
+        >
+          -- Load More --
+        </div>
       </div>
       <div class="forum-index-aside">
         <ForumContentAside></ForumContentAside>
@@ -98,6 +125,8 @@ const handleIsRecommendChange = async (status: boolean) => {
 }
 
 .forum-index-container {
+  // height: calc(100dvh - 6.66rem);
+  // overflow-y: auto;
   margin: 0 auto;
 }
 
@@ -146,6 +175,18 @@ const handleIsRecommendChange = async (status: boolean) => {
         align-items: center;
         line-height: 1;
       }
+    }
+
+    .post-list-more {
+      cursor: pointer;
+      margin-top: 20px;
+      height: 50px;
+      line-height: 50px;
+      display: flex;
+      // align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      // font-weight: 700;
     }
   }
 }
