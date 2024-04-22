@@ -44,6 +44,7 @@ const handleSearch = () => {
 .search-input-area {
   width: 100%;
   height: 60px;
+  flex-shrink: 0;
 
   .search-input-container {
     position: absolute;

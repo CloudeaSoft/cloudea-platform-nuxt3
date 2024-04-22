@@ -1,10 +1,11 @@
 <script setup lang="ts">
-// const { showSearchPanel } = storeToRefs(useTempSettingStore())
+const { showSearchPanel } = storeToRefs(useTempSettingStore())
 
-const showSearchPanel = ref(true)
+// const showSearchPanel = ref(true)
 
 const searchValue = ref<string>()
 const searchType = ref<number>()
+const searchResult = ref<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
 const onSearch = () => {
   useMessage(searchValue.value!, 'success')
@@ -19,7 +20,7 @@ const onSearch = () => {
           <CloudeaSearchInput @search="onSearch" v-model="searchValue" />
           <CloudeaSearchNav v-model="searchType" />
           <div class="cloudea-search-divider"></div>
-          <CloudeaSearchResult />
+          <CloudeaSearchResult :list="searchResult" />
         </div>
       </div>
     </Transition>
@@ -58,20 +59,12 @@ const onSearch = () => {
 
   background-color: var(--cloudea-trans-white-5);
   border-radius: 20px;
-  overflow-y: scroll;
+  overflow-y: hidden;
 
   .cloudea-search-divider {
     margin-top: 10px;
     width: 100%;
     border-bottom: 1px solid var(--cloudea-gray-4);
-  }
-
-  .empty {
-    display: flex;
-    justify-content: center;
-    color: var(--cloudea-blue-2);
-    font-style: oblique;
-    margin-top: 20px;
   }
 }
 
