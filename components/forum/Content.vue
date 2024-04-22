@@ -75,7 +75,7 @@ const handleMorePostPage = async () => {
   <div class="forum-index-container">
     <div class="forum-index-content">
       <div class="post-list">
-        <ForumContentSearchBar />
+        <!-- <ForumContentSearchBar /> -->
         <div class="post-list-container cloudea-area">
           <div class="post-list-header">
             <div class="list-nav">

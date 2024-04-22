@@ -1,14 +1,12 @@
 <script setup lang="ts">
-const isShowSearch = ref(false)
-
 const { isAuthorized } = useUserStore()
 
-const { showSettingPanel } = storeToRefs(useTempSettingStore())
+const { showSettingPanel, showSearchPanel } = storeToRefs(useTempSettingStore())
 </script>
 
 <template>
   <div class="right-side-nav">
-    <span class="search" @click="isShowSearch = true">
+    <span class="search" @click="showSearchPanel = true">
       <Icon name="lucide:search" />
     </span>
     <span class="settings">

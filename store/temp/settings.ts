@@ -6,7 +6,8 @@ export const useTempSettingStore = defineStore({
   state: (): SettingsStoreTemp => ({
     showCloudeaIcon: false,
     showSettingPanel: false,
-    showUserPanel: false
+    showUserPanel: false,
+    showSearchPanel: false
   }),
 
   actions: {
@@ -14,6 +15,7 @@ export const useTempSettingStore = defineStore({
       this.showCloudeaIcon = false
       this.showSettingPanel = false
       this.showUserPanel = false
+      this.showSearchPanel = false
     }
   }
 })

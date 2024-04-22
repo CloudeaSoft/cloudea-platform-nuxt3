@@ -19,6 +19,7 @@ export interface SettingsStoreTemp {
   showCloudeaIcon: boolean
   showSettingPanel: boolean
   showUserPanel: boolean
+  showSearchPanel: boolean
 }
 
 export const SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME = 'cloudea-custom-bg'
