@@ -24,10 +24,6 @@ const handleCommentOpen = () => {
 const handleCommentClose = () => {
   showComment.value = false
 }
-
-const handleReport = ()=>{
-  navigateTo(`/report`)
-}
 </script>
 
 <template>
@@ -47,9 +43,11 @@ const handleReport = ()=>{
       <div class="comment-area">
         <div class="detail">
           <div class="detail-wrap clearfix">
-            <span class="comment-report" @click="handleReport">
-              <Icon name="lucide:triangle-alert" />
-              <span>{{ $t('forum.post.reply.report') }}</span>
+            <span class="comment-report">
+              <NuxtLinkLocale to="/report">
+                <Icon name="lucide:triangle-alert" />
+                <span>{{ $t('forum.post.reply.report') }}</span>
+              </NuxtLinkLocale>
             </span>
             <span class="comment-floor">{{
               floor + $t('forum.post.reply.floor')

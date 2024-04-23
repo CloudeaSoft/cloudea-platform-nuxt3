@@ -58,7 +58,7 @@ const handleRegister = async () => {
   resetForm()
   handleRegisterSuccess()
   useMessage(t('login.registerForm.messages.registerSuccess'), 'success')
-  navigateTo('/login')
+  navigateTo(useNuxtApp().$localePath('/login'))
 }
 
 const handleRegisterSuccess = () => {

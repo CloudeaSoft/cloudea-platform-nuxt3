@@ -90,10 +90,6 @@ const handleShare = () => {
     useMessage(t('forum.post.panel.copy.failed'), 'error')
   }
 }
-
-const handleReport = () => {
-  navigateTo('/report')
-}
 </script>
 
 <template>
@@ -113,8 +109,10 @@ const handleReport = () => {
       <li class="share" @click="handleShare">
         <Icon name="lucide:square-arrow-out-up-right" />
       </li>
-      <li class="report" @click="handleReport">
-        <Icon name="lucide:triangle-alert" />
+      <li class="report">
+        <NuxtLinkLocale to="/report">
+          <Icon name="lucide:triangle-alert" />
+        </NuxtLinkLocale>
       </li>
     </ul>
   </div>

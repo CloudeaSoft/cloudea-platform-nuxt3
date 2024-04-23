@@ -17,7 +17,7 @@ const handleBlur = () => {
 const handleLogout = () => {
   useUserStore().$reset()
   useUserStore().removeToken()
-  navigateTo('/')
+  navigateTo(useNuxtApp().$localePath('/'))
 }
 </script>
 

@@ -35,8 +35,7 @@ const handlePost = async () => {
     return
   }
   resetEditorContent()
-  useMessage('', 'success')
-  navigateTo(`/forum/posts/${createRes.value.Data}`)
+  navigateTo(useNuxtApp().$localePath(`/forum/posts/${createRes.value.Data}`))
 }
 
 const handleSave = (editorValue: string) => {

@@ -33,7 +33,7 @@ const handlePublish = async () => {
   if (!response.value || !response.value.Status || !response.value.Data) {
     return
   }
-  navigateTo(useRoute().fullPath)
+  navigateTo(useNuxtApp().$localePath(useRoute().fullPath))
 }
 </script>
 

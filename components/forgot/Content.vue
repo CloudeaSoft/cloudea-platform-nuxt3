@@ -32,7 +32,7 @@ const handleReset = async () => {
   }
   useMessage(t('forgot.messages.resetSuccess'), 'success')
   clearForm()
-  navigateTo('/login')
+  navigateTo(useNuxtApp().$localePath('/login'))
 }
 
 const handleGetVercode = async () => {

@@ -45,7 +45,7 @@ const handleLoginSuccess = async (token: string) => {
     return
   }
   useUserStore().updateUserProfile(profile.value.Data)
-  navigateTo('/')
+  navigateTo(useNuxtApp().$localePath('/'))
 }
 </script>
 
@@ -62,7 +62,6 @@ const handleLoginSuccess = async (token: string) => {
       type="password"
       v-model="password"
       :placeholder="$t('login.loginForm.passwordPlaceholder')"
-      
       autocomplete="current-password"
     />
     <span>

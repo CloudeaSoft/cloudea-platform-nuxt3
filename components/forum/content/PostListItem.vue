@@ -1,17 +1,10 @@
 <script setup lang="ts">
 import type { PostInfo } from '~/types/api/forum-model.d'
 
-const link = () => `/forum/posts/${PostId}`
+const postLink = computed(() => `/forum/posts/${PostId}`)
+const userLink = computed(() => `/user/${CreatorId}/home`)
 
 const showUserArea = ref(false)
-
-const handleClickBody = () => {
-  navigateTo(link())
-}
-
-const handleClickUser = () => {
-  navigateTo(`/user/${CreatorId}/home`)
-}
 
 const handleClickLike = () => {
   console.log('like')
@@ -42,7 +35,7 @@ const {
 
 <template>
   <div class="content-wrap">
-    <div class="content-main" @click="handleClickBody">
+    <NuxtLinkLocale class="content-main" :to="postLink">
       <div class="title-row">
         <div class="title">
           {{ Title }}
@@ -56,9 +49,9 @@ const {
       <div class="entry-footer">
         <ul class="action-list">
           <li class="item meta-container">
-            <a
+            <NuxtLinkLocale
               class="user-info"
-              @click.stop="handleClickUser"
+              :to="userLink"
               @mouseenter="showUserArea = true"
               @mouseleave="showUserArea = false"
             >
@@ -72,7 +65,7 @@ const {
                   />
                 </Transition>
               </div>
-            </a>
+            </NuxtLinkLocale>
             <div class="footer-divider"></div>
           </li>
           <li class="item date">
@@ -101,7 +94,7 @@ const {
           </NuxtLinkLocale>
         </div>
       </div>
-    </div>
+    </NuxtLinkLocale>
     <img src="" alt="" class="lazy thumb" v-if="false" />
   </div>
 </template>
