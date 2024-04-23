@@ -12,8 +12,9 @@ const searchResult = ref<PostInfo[]>([])
 const isSearching = ref<boolean>(false)
 
 const getSearchApi = async (query: string, page: number) => {
+  const baseAPI = useRuntimeConfig().public.CLOUDEA_API
   return await $fetch<Result<PageResponse<PostInfo>>>('/forum/search', {
-    baseURL: 'http://localhost:7165/api',
+    baseURL: baseAPI,
     headers: {
       Authorization: `Bearer ${useUserStore().getToken()}`
     },

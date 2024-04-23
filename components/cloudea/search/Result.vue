@@ -114,7 +114,7 @@ const isScrollAtBottom = () => {
   padding: 10px 10px 0;
   flex: 1;
   flex-shrink: 1;
-  overflow: scroll;
+  overflow-y: scroll;
   scrollbar-width: thin;
 
   .search-result-container {
