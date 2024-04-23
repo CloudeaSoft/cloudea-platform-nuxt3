@@ -1,4 +1,7 @@
 <script setup lang="ts">
+const colorMode = useColorMode()
+const { systemPageTransparency } = storeToRefs(useSettingStore())
+
 interface Mode {
   name: string
   icon: string
@@ -18,6 +21,16 @@ const modeItem: Mode[] = [
     icon: 'line-md:light-dark-loop'
   }
 ]
+
+watch(
+  () => colorMode.value,
+  () => {
+    useSettingStore().setPageTransparency(
+      systemPageTransparency.value,
+      colorMode.value as 'dark' | 'light'
+    )
+  }
+)
 </script>
 
 <template>

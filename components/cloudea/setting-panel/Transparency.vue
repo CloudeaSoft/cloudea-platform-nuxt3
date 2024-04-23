@@ -11,16 +11,6 @@ watch(
     )
   }
 )
-
-watch(
-  () => colorMode.value,
-  () => {
-    useSettingStore().setPageTransparency(
-      systemPageTransparency.value,
-      colorMode.value as 'dark' | 'light'
-    )
-  }
-)
 </script>
 
 <template>
