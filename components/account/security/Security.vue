@@ -25,6 +25,22 @@ const checkPasswordRequest = (): boolean => {
   return true
 }
 
+const passwordRequestStatus = computed((): boolean => {
+  if (!oldPwd.value) {
+    return false
+  }
+  if (!newPwd.value) {
+    return false
+  }
+  if (!newPwdRepeat.value) {
+    return false
+  }
+  if (!(newPwd.value === newPwdRepeat.value)) {
+    return false
+  }
+  return true
+})
+
 const clearPasswordRequest = () => {
   oldPwd.value = undefined
   newPwd.value = undefined
@@ -87,7 +103,10 @@ const handleChangePassword = async () => {
       <div class="security-content-item">
         <div class="item-content">
           <div class="button-wrap">
-            <CloudeaForumButton @click="handleChangePassword">
+            <CloudeaForumButton
+              @click="handleChangePassword"
+              :type="passwordRequestStatus ? 'success' : 'danger'"
+            >
               {{ $t('account.setting.commit') }}
             </CloudeaForumButton>
           </div>

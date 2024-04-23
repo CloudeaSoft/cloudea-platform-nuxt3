@@ -4,6 +4,7 @@ import { GUID_EMPTY } from '~/types/api/base-model.d'
 
 const sectionId = ref(GUID_EMPTY)
 const isRecommend = ref(true)
+const forumIndexRef = ref<HTMLElement>()
 
 const pageIndex = ref(1)
 const pageSize = ref(15)
@@ -16,7 +17,7 @@ const resData = await getPostApi(undefined, {
 const postList = ref(resData.value?.Data.Rows)
 const maxPage = ref(1)
 maxPage.value = resData.value?.Data.Total
-  ? resData.value?.Data.Total / pageSize.value + 1
+  ? resData.value?.Data.Total / pageSize.value
   : maxPage.value
 
 const handleGetPostList = async () => {
@@ -33,6 +34,7 @@ const handleGetPostList = async () => {
     )
     postList.value = res.value?.Data.Rows!
   }
+  maxPage.value = res.value?.Data.Total! / pageSize.value
 }
 
 const handleSectionChange = async () => {
@@ -41,7 +43,14 @@ const handleSectionChange = async () => {
   } else {
     isRecommend.value = true
   }
+  pageIndex.value = 1
   await handleGetPostList()
+
+  const target = forumIndexRef.value
+  window.scrollTo({
+    top: target?.offsetTop,
+    behavior: 'smooth'
+  })
 }
 
 const handleIsRecommendChange = async (status: boolean) => {
@@ -72,7 +81,7 @@ const handleMorePostPage = async () => {
   <div class="forum-index-nav cloudea-area">
     <ForumContentNav v-model="sectionId" @change="handleSectionChange" />
   </div>
-  <div class="forum-index-container">
+  <div class="forum-index-container" ref="forumIndexRef">
     <div class="forum-index-content">
       <div class="post-list">
         <!-- <ForumContentSearchBar /> -->
