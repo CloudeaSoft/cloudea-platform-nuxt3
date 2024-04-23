@@ -1,5 +1,9 @@
 import type { Result } from '~/types/api/base-model'
-import type { LoginType, ResetPasswordRequest } from '~/types/api/user-model.d'
+import type {
+  ChangePasswordRequest,
+  LoginType,
+  ResetPasswordRequest
+} from '~/types/api/user-model.d'
 
 enum Api {
   VERCODE = '/identity/verificationcode',
@@ -80,6 +84,19 @@ export const passwordPostApi = async (request: ResetPasswordRequest) => {
   const { data } = await useFetch<Result<string>>(Api.PASSWORD, {
     baseURL: baseAPI,
     method: 'POST',
+    body: request,
+    ...responseHandler
+  })
+  return data
+}
+
+export const passwordPutApi = async (request: ChangePasswordRequest) => {
+  const { data } = await useFetch<Result<string>>(Api.PASSWORD, {
+    baseURL: baseAPI,
+    headers: {
+      Authorization: `Bearer ${useUserStore().getToken()}`
+    },
+    method: 'PUT',
     body: request,
     ...responseHandler
   })

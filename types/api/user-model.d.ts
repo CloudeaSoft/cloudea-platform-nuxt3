@@ -19,6 +19,11 @@ export interface ResetPasswordRequest {
   VerCode: string
 }
 
+export interface ChangePasswordRequest {
+  OldPassword: string
+  NewPassword: string
+}
+
 export enum VerificationCodeType {
   LoginByEmail = 0,
   RegisterByEmail = 1,

@@ -12,7 +12,7 @@ const { list } = defineProps<{
       </ul>
     </div>
     <div class="search-result-empty" v-else>
-      <em>{{ $t('无内容') }}</em>
+      <em>{{ $t('cloudea.search.result.emptyResult') }}</em>
     </div>
   </div>
 </template>

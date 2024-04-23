@@ -104,6 +104,13 @@
                 "nullAvatar": "头像为空",
                 "uploadFailed": "上传失败"
             }
+        },
+        "security": {
+            "password": {
+                "newPassword": "新密码",
+                "oldPassword": "旧密码",
+                "newPasswordRepeat": "确认密码"
+            }
         }
     },
     "forum": {
@@ -252,6 +259,15 @@
             "next": "下一页",
             "nextPages": "查看后一组",
             "prevPages": "查看前一组"
+        },
+        "search": {
+            "nav": {
+                "user": "用户",
+                "post": "帖子"
+            },
+            "result": {
+                "emptyResult": "无内容"
+            }
         }
     }
 }

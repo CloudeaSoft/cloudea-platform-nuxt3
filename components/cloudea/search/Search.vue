@@ -1,11 +1,9 @@
 <script setup lang="ts">
 const { showSearchPanel } = storeToRefs(useTempSettingStore())
 
-// const showSearchPanel = ref(true)
-
 const searchValue = ref<string>()
 const searchType = ref<number>()
-const searchResult = ref<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+const searchResult = ref<number[]>([])
 
 const onSearch = () => {
   useMessage(searchValue.value!, 'success')

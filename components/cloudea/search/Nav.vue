@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const navItemList = [
   {
-    name: '帖子',
+    name: 'cloudea.search.nav.post',
     value: 1
   },
   {
-    name: '用户',
+    name: 'cloudea.search.nav.user',
     value: 2
   }
 ]
@@ -28,7 +28,7 @@ const navItemClass = (type: number) => [
         :key="item.value"
         @click="searchType = item.value"
       >
-        {{ item.name }}
+        {{ $t(item.name) }}
       </li>
     </ul>
   </div>
