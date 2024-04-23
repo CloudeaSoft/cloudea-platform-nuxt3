@@ -1,10 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-definePageMeta({
-  middleware: 'child'
-})
-
 useHead({
   title: t('meta.tool.title'),
   meta: [
