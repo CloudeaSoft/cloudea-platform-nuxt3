@@ -26,6 +26,7 @@ const { availableLocales, locale, setLocale } = useI18n()
 .cloudea-select {
   span {
     padding-right: 10px;
+    width: 100px;
   }
 }
 </style>
