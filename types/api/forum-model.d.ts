@@ -16,6 +16,7 @@ export interface PostInfo {
   ClickCount: number
   LikeCount: number
   DislikeCount: number
+  FavoriteCount: number
   CreateTime: string
   LastUpdatedTime?: string | null
 }

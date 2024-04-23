@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const emits = defineEmits<{
   search: []
+  change: []
 }>()
 
 const searchValue = defineModel<string>()
@@ -12,6 +13,9 @@ const onInputFocus = () => {
 }
 const onInputBlur = () => {
   inputActive.value = false
+}
+const onInputInput = () => {
+  emits('change')
 }
 
 const handleSearch = () => {
@@ -28,6 +32,8 @@ const handleSearch = () => {
             type="text"
             @focus="onInputFocus"
             @blur="onInputBlur"
+            @input="onInputInput"
+            @change="onInputInput"
             @keydown.enter="handleSearch"
             v-model="searchValue"
           />
@@ -68,7 +74,7 @@ const handleSearch = () => {
       border-radius: 20px;
       position: relative;
 
-      border: 2px solid var(--cloudea-blue-2);
+      border: 2px solid var(--cloudea-trans-blue-0);
       transition: border 0.6s;
 
       &.active {
@@ -86,6 +92,7 @@ const handleSearch = () => {
           outline: none;
           -webkit-appearance: none;
           appearance: none;
+          color: var(--cloudea-font-color-0);
         }
       }
 

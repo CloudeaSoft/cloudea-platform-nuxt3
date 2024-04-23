@@ -2,10 +2,8 @@ import type { PageRequest, PageResponse, Result } from '~/types/api/base-model'
 import type {
   CommentInfo,
   CreatePostRequest,
-  ForumPost,
   ForumPostLike,
   ForumSection,
-  GetPostInfoResponse,
   PostInfo,
   ReplyInfo
 } from '~/types/api/forum-model'
@@ -18,7 +16,8 @@ enum Api {
   COMMENT = '/forum/comment',
   POST_LIKE = '/forum/post/:id/like',
   POST_DISLIKE = '/forum/post/:id/dislike',
-  POST_FAVORITE = '/forum/post/:id/favorite'
+  POST_FAVORITE = '/forum/post/:id/favorite',
+  SEARCH = '/forum/search'
 }
 
 const baseAPI = useRuntimeConfig().public.CLOUDEA_API
@@ -260,5 +259,21 @@ export const deletePostFavoriteApi = async (id: string) => {
     }
   )
 
+  return data
+}
+
+export const getSearchApi = async (query: string, page: number) => {
+  const { data } = await useFetch<Result<PageResponse<PostInfo>>>(Api.SEARCH, {
+    baseURL: baseAPI,
+    headers: {
+      Authorization: `Bearer ${useUserStore().getToken()}`
+    },
+    query: {
+      query,
+      page
+    },
+    method: 'GET',
+    ...responseHandler
+  })
   return data
 }

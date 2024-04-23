@@ -1,24 +1,98 @@
 <script setup lang="ts">
+import type { PageResponse, Result } from '~/types/api/base-model'
+import type { PostInfo } from '~/types/api/forum-model'
+
 const { showSearchPanel } = storeToRefs(useTempSettingStore())
 
 const searchValue = ref<string>()
+const searchPage = ref<number>(1)
+const searchTotal = ref<number>(0)
 const searchType = ref<number>()
-const searchResult = ref<number[]>([])
+const searchResult = ref<PostInfo[]>([])
+const isSearching = ref<boolean>(false)
+
+const getSearchApi = async (query: string, page: number) => {
+  return await $fetch<Result<PageResponse<PostInfo>>>('/forum/search', {
+    baseURL: 'http://localhost:7165/api',
+    headers: {
+      Authorization: `Bearer ${useUserStore().getToken()}`
+    },
+    query: {
+      query,
+      page
+    },
+    method: 'GET',
+    ...responseHandler
+  })
+}
+
+const onInput = async () => {
+  if (!searchValue.value || isSearching.value) return
+
+  if (searchType.value === 1) {
+    isSearching.value = true
+    var response = await getSearchApi(searchValue.value, searchPage.value)
+    if (!response.Status) {
+      useMessage('', 'error')
+      return
+    }
+    var data = response.Data
+    searchResult.value = data.Rows
+    searchTotal.value = data.Total
+    isSearching.value = false
+  } else {
+    return
+  }
+}
 
 const onSearch = () => {
   useMessage(searchValue.value!, 'success')
 }
+
+const onBottom = async () => {
+  if (!searchValue.value || isSearching.value) return
+
+  isSearching.value = true
+  searchPage.value++
+  var response = await getSearchApi(searchValue.value, searchPage.value)
+  if (!response.Status) {
+    useMessage('', 'error')
+    return
+  }
+  var data = response.Data
+  searchResult.value = searchResult.value.concat(data.Rows)
+  searchTotal.value = data.Total
+  isSearching.value = false
+}
+
+watch(searchType, async () => {
+  searchResult.value = []
+  searchTotal.value = 0
+  await onInput()
+})
 </script>
 
 <template>
   <Teleport to="body" :disabled="showSearchPanel">
     <Transition name="search">
-      <div class="mask" v-if="showSearchPanel" @click="showSearchPanel = false">
-        <div ref="container" class="container cloudea-area" @click.stop>
-          <CloudeaSearchInput @search="onSearch" v-model="searchValue" />
+      <div
+        class="mask"
+        v-if="showSearchPanel"
+        @mousedown.stop="showSearchPanel = false"
+      >
+        <div class="container cloudea-area" @mousedown.stop>
+          <CloudeaSearchInput
+            @input="onInput"
+            @search="onSearch"
+            v-model="searchValue"
+          />
           <CloudeaSearchNav v-model="searchType" />
           <div class="cloudea-search-divider"></div>
-          <CloudeaSearchResult :list="searchResult" />
+          <CloudeaSearchResult
+            :list="searchResult"
+            :total="searchTotal"
+            @bottom="onBottom"
+          />
         </div>
       </div>
     </Transition>
