@@ -84,7 +84,6 @@ const handleMorePostPage = async () => {
   <div class="forum-index-container" ref="forumIndexRef">
     <div class="forum-index-content">
       <div class="post-list">
-        <!-- <ForumContentSearchBar /> -->
         <div class="post-list-container cloudea-area">
           <div class="post-list-header">
             <div class="list-nav">
@@ -93,10 +92,14 @@ const handleMorePostPage = async () => {
                   :class="isRecommend ? 'nav-item active' : 'nav-item'"
                   v-if="sectionId == GUID_EMPTY"
                 >
-                  <div @click="handleIsRecommendChange(true)">推荐</div>
+                  <div @click="handleIsRecommendChange(true)">
+                    {{ $t('forum.index.recommend') }}
+                  </div>
                 </li>
                 <li :class="isRecommend ? 'nav-item' : 'nav-item active'">
-                  <div @click="handleIsRecommendChange(false)">最新</div>
+                  <div @click="handleIsRecommendChange(false)">
+                    {{ $t('forum.index.latest') }}
+                  </div>
                 </li>
               </ul>
               <div class="drop-down-area"></div>

@@ -8,10 +8,12 @@ const announceList = ref([1, 2, 3, 4, 5])
     <div class="announce-header">
       <div class="title">
         <div></div>
-        <span class="title-text">公告</span>
+        <span class="title-text">{{ $t('forum.announce.title') }}</span>
       </div>
       <div class="btn-more">
-        <NuxtLinkLocale to="/forum/announce"><span class="text">更多>></span></NuxtLinkLocale>
+        <NuxtLinkLocale to="/forum/announce">
+          <span class="text"> {{ $t('forum.announce.more') }}>> </span>
+        </NuxtLinkLocale>
       </div>
     </div>
     <div class="divider" style="margin-top: 4px">

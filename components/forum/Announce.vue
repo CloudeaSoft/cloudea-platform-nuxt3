@@ -2,12 +2,12 @@
   <div class="announce-container">
     <div class="announce-content cloudea-area">
       <div class="announce-header">
-        <h1 class="header-text">{{ $t('公告') }}</h1>
+        <h1 class="header-text">{{ $t('forum.announce.title') }}</h1>
       </div>
       <div class="announce-body">
         <ul class="announce-list">
           <li class="announce-list__item" v-for="announce in 16">
-            <span class="item-type">公告</span>
+            <span class="item-type">{{ $t('forum.announce.title') }}</span>
             <NuxtLinkLocale class="item-href">
               2024年4月19日 不停机更新公告
             </NuxtLinkLocale>
@@ -51,7 +51,8 @@
           .item-type {
             display: inline-block;
             vertical-align: middle;
-            width: 36px;
+            min-width: 36px;
+            padding: 0 5px;
             height: 20px;
             box-sizing: border-box;
             font-size: 12px;

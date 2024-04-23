@@ -121,7 +121,9 @@
                 "fans": "粉丝",
                 "follow": "关注",
                 "message": "私信"
-            }
+            },
+            "recommend": "推荐",
+            "latest": "最新"
         },
         "post": {
             "panel": {
@@ -143,7 +145,7 @@
                 },
                 "copy": {
                     "success": "地址已复制到剪贴板！",
-                    "failed": "无法复制地址到剪贴板，请尝试手动复制。"
+                    "failed": "无法复制到剪贴板，请尝试手动复制。"
                 }
             },
             "reply": {
@@ -161,6 +163,10 @@
                 "title": "回复",
                 "commit": "提交"
             }
+        },
+        "announce": {
+            "title": "公告",
+            "more": "更多"
         }
     },
     "tool": {
@@ -205,8 +211,11 @@
         }
     },
     "edit": {
+        "title": "编辑器",
         "post": {
-            "title": "帖子编辑器"
+            "title": "帖子编辑器",
+            "commit": "发布帖子",
+            "titlePlaceholder": "在此输入标题"
         }
     },
     "warn": {

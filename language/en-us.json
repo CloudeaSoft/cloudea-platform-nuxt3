@@ -35,15 +35,18 @@
     },
     "login": {
         "login": "Login",
-        "loginWords": "None Now.",
+        "loginWords": "Write some login description here",
         "register": "Register",
-        "registerWords": "None Now.",
+        "registerWords": "Write some registration description here",
         "loginForm": {
             "accountPlaceholder": "Username/Email",
             "passwordPlaceholder": "Password",
             "forgotPassword": "Forgot Password?",
             "messages": {
-                "loginSuccess": "Login Successfully."
+                "loginSuccess": "Login Successful",
+                "loginFailed": "Login Failed",
+                "noAccount": "Please enter a username or email",
+                "noPassword": "Please enter a password"
             }
         },
         "registerForm": {
@@ -53,8 +56,29 @@
             "vercodePlaceholder": "Verification Code",
             "vercodeGetter": "Get Vercode",
             "messages": {
-                "registerSuccess": "Register Successfully"
+                "registerSuccess": "Registration Successful",
+                "noUsername": "Please enter a username",
+                "noEmail": "Please enter an email",
+                "noPassword": "Please enter a password",
+                "noVercode": "Please enter a verification code"
             }
+        }
+    },
+    "forgot": {
+        "title": "Reset Password",
+        "reset": "Reset",
+        "form": {
+            "emailPlaceholder": "Email",
+            "passwordPlaceholder": "New Password",
+            "vercodePlaceholder": "Verification Code",
+            "vercodeGetter": "Get Vercode"
+        },
+        "messages": {
+            "resetSuccess": "Reset Successful",
+            "resetFailed": "Reset Failed",
+            "noEmail": "Please enter your email",
+            "noPassword": "Please enter a new password",
+            "noVercode": "Please enter the verification code"
         }
     },
     "account": {
@@ -80,6 +104,13 @@
                 "nullAvatar": "Empty Image",
                 "uploadFailed": "Upload Failed"
             }
+        },
+        "security": {
+            "password": {
+                "newPassword": "New Password",
+                "oldPassword": "Old Password",
+                "newPasswordRepeat": "Confirm Password"
+            }
         }
     },
     "forum": {
@@ -90,9 +121,33 @@
                 "fans": "Followers",
                 "follow": "Follow",
                 "message": "Message"
-            }
+            },
+            "recommend": "Recommend",
+            "latest": "Latest"
         },
         "post": {
+            "panel": {
+                "like": {
+                    "success": "Like successful",
+                    "failed": "Like failed"
+                },
+                "nolike": {
+                    "success": "Unlike successful",
+                    "failed": "Unlike failed"
+                },
+                "favorite": {
+                    "success": "Favorite added successfully",
+                    "failed": "Failed to add favorite"
+                },
+                "nofavorite": {
+                    "success": "Favorite removed successfully",
+                    "failed": "Failed to remove favorite"
+                },
+                "copy": {
+                    "success": "Address copied to clipboard!",
+                    "failed": "Unable to copy to clipboard. Please try to copy manually."
+                }
+            },
             "reply": {
                 "open": "Reply",
                 "close": "Close Reply",
@@ -108,6 +163,59 @@
                 "title": "Reply",
                 "commit": "Commit"
             }
+        },
+        "announce": {
+            "title": "Announce",
+            "more": "More"
+        }
+    },
+    "tool": {
+        "empty": {
+            "description": "Please select a tool from the left menu."
+        },
+        "arknights": {
+            "gachaHistory": {
+                "title": "Arknights Gacha History Query",
+                "tokenPlaceholder": "Enter token here",
+                "generate": "Generate",
+                "charts": {
+                    "title": "Analysis Charts"
+                },
+                "history": {
+                    "title": "Raw History"
+                },
+                "messages": {
+                    "emptyToken": "Token cannot be empty",
+                    "invalidToken": "Token is invalid or expired",
+                    "emptyHistory": "History is empty"
+                }
+            }
+        },
+        "osu": {
+            "skin": {
+                "title": "Osu Skin.ini Reader",
+                "upload": {
+                    "drag": "Drag Skin.ini here or",
+                    "click": "Click to upload",
+                    "tips": "Note: This tool will remove comments from the file."
+                },
+                "editor": {
+                    "preview": "Preview",
+                    "download": "Download",
+                    "clear": "Go Back",
+                    "defaultValue": "Default Value",
+                    "description": "Description",
+                    "tips": "Note: Image asset-related entries have been hidden. Please modify the file manually if needed."
+                }
+            }
+        }
+    },
+    "edit": {
+        "title": "Editor",
+        "post": {
+            "title": "Post Editor",
+            "commit": "Commit",
+            "titlePlaceholder": "Enter title here"
         }
     },
     "warn": {
@@ -124,7 +232,13 @@
         },
         "forum": {
             "title": "Forum",
-            "description": "Forum"
+            "description": "Forum",
+            "edit": {
+                "post": {
+                    "title": "Post",
+                    "description": "Post a thread"
+                }
+            }
         },
         "account": {
             "title": "User Center",
@@ -141,6 +255,10 @@
         "about": {
             "title": "About us",
             "description": "About us"
+        },
+        "forgot": {
+            "title": "Forgot",
+            "description": "Forgot Password"
         }
     },
     "cloudea": {
@@ -150,6 +268,15 @@
             "next": "Next",
             "nextPages": "Next Pages",
             "prevPages": "Prev Pages"
+        },
+        "search": {
+            "nav": {
+                "user": "User",
+                "post": "Post"
+            },
+            "result": {
+                "emptyResult": "No content found"
+            }
         }
     }
 }

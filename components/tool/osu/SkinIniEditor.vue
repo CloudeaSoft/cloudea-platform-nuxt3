@@ -220,7 +220,7 @@ watch(
 
       button {
         cursor: pointer;
-        width: 50px;
+        width: 70px;
         margin-right: 10px;
 
         border-radius: 5px;

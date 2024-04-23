@@ -4,7 +4,7 @@ const list = ref([{ title: 'edit.topic.title', route: '/forum/edit/topic' }])
 
 <template>
   <div class="edit-content cloudea-area">
-    <div class="edit-title">编辑器</div>
+    <div class="edit-title">{{ $t('edit.title') }}</div>
     <div class="edit-content-body">
       <slot />
     </div>

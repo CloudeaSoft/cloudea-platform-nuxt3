@@ -64,7 +64,7 @@ const resetEditorContent = () => {
       <div class="title-area">
         <CloudeaFormInput
           v-model="postTitle"
-          placeholder="在此输入标题"
+          :placeholder="$t('edit.post.titlePlaceholder')"
           :label-placeholder="false"
           full-border
         />
@@ -81,11 +81,13 @@ const resetEditorContent = () => {
           </ProsemirrorAdapterProvider>
         </MilkdownProvider>
       </div>
-      <div class="label-area">标签区域</div>
-      <div class="setting-area">额外设置区域</div>
+      <div class="label-area">Label Area</div>
+      <div class="setting-area">Setting Area</div>
     </div>
     <div class="editor-footer">
-      <div class="editor-submit" @click.prevent="handlePost">发布帖子</div>
+      <div class="editor-submit" @click.prevent="handlePost">
+        <div class="submit-text">{{ $t('edit.post.commit') }}</div>
+      </div>
     </div>
   </form>
 </template>
@@ -176,13 +178,20 @@ const resetEditorContent = () => {
       color: var(--cloudea-white);
       font-size: 2rem;
       display: flex;
+
       justify-content: center;
       align-items: center;
+
       transition: background 0.3s;
 
       &:hover {
         background-color: var(--cloudea-trans-blue-2);
         color: var(--cloudea-white);
+      }
+
+      .submit-text {
+        writing-mode: vertical-lr;
+        text-orientation: sideways;
       }
     }
   }

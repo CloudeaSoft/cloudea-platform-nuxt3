@@ -135,7 +135,7 @@ const handleChangePassword = async () => {
       padding-right: 50px;
 
       .item-label {
-        width: 95px;
+        width: 120px;
         text-align: right;
         float: left;
         margin-right: 20px;
