@@ -1,24 +1,20 @@
 <script setup lang="ts">
-// import { useMouseInElement } from '@vueuse/nuxt'
 import { ref } from 'vue'
 
-const cardRef = ref<HTMLElement>()
 const cardHeaderRef = ref<HTMLElement>()
 
 const elementX = ref(0)
 const elementY = ref(0)
 
-onMounted(() => {
-  cardRef.value!.addEventListener('mousemove', (event) => {
-    const rect = cardHeaderRef.value!.getBoundingClientRect()
-    elementX.value = event.clientX - rect.left
-    elementY.value = event.clientY - rect.top
-  })
-})
+const handleMouseMove = (event: MouseEvent) => {
+  const rect = cardHeaderRef.value!.getBoundingClientRect()
+  elementX.value = event.clientX - rect.left
+  elementY.value = event.clientY - rect.top
+}
 </script>
 
 <template>
-  <div class="tool-card up" ref="cardRef">
+  <div class="tool-card up" @mousemove="handleMouseMove">
     <div class="tool-card-container">
       <div class="tool-card-header">
         <div
