@@ -28,7 +28,13 @@ const getSearchApi = async (query: string, page: number) => {
 }
 
 const onInput = async () => {
-  if (!searchValue.value || isSearching.value) return
+  if (!searchValue.value) {
+    searchResult.value = []
+    searchTotal.value = 0
+    return
+  }
+
+  if (isSearching.value) return
 
   if (searchType.value === 1) {
     isSearching.value = true

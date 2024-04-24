@@ -66,6 +66,7 @@ const onInputChange = (event: Event) => {
       ref="inputRef"
       type="file"
       class="skin-upload-input"
+      accept=".ini"
       @change="onInputChange"
     />
     <div class="skin-upload__tip">{{ $t('tool.osu.skin.upload.tips') }}</div>

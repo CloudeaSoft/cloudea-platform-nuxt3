@@ -439,9 +439,12 @@ const getTrans = (Section: string, item: string) => {
   if (item.match(/[0-9]/g)) {
     item = item.replace(/[0-9]/g, '')
   }
-  for (const keya in skinIniTransText) {
-    if (keya == Section) {
-      for (const keyb in skinIniTransText[keya]) {
+
+  let keya: keyof SkinIni
+  for (keya in skinIniTransText) {
+    if (keya == Section && !!skinIniTransText[keya]) {
+      const sub = skinIniTransText[keya]
+      for (const keyb in sub) {
         if (keyb == item) {
           const result = skinIniTransText[keya][keyb]
           return new UnitOption(
@@ -456,31 +459,36 @@ const getTrans = (Section: string, item: string) => {
 }
 
 // json to skin.ini
-const encode = (obj: object, opt: {} = {}) => {
-  if (typeof opt === 'string') {
-    opt = { section: opt }
-  }
+const encode = (
+  obj: any,
+  opt: {
+    align: boolean
+    newline: boolean
+    // Whether to sort the key of children
+    sort: boolean
+    // Whether to add whitespace before and after the ':' separator
+    whitespace: boolean
+    // Configure the environment platform
+    platform: NodeJS.Platform | undefined | false
+    bracketedArray: boolean
+    section: string
+  } = {} as any
+): string => {
   opt.align = opt.align === true
   opt.newline = opt.newline === true
   opt.sort = opt.sort === true
   opt.whitespace = opt.whitespace === true || opt.align === true
-  // The `typeof` check is required because accessing the `process` directly fails on browsers.
-  /* istanbul ignore next */
-  opt.platform = opt.platform || (typeof process !== 'undefined' && process.platform)
+
+  opt.platform =
+    opt.platform || (typeof process !== 'undefined' && process.platform)
   opt.bracketedArray = opt.bracketedArray !== false
 
-  /* istanbul ignore next */
-  // 换行符
   const eol = opt.platform === 'win32' ? '\r\n' : '\n'
-  // 键值对分隔符
   const separator = opt.whitespace ? ' : ' : ': '
-  // 子元素
   const children = []
-
-  // 获取子元素的键
   const keys = opt.sort ? Object.keys(obj).sort() : Object.keys(obj)
-
   let padToChars = 0
+
   // If aligning on the separator, then padToChars is determined as follows:
   // 1. Get the keys
   // 2. Exclude keys pointing to objects unless the value is null or an array
@@ -491,7 +499,12 @@ const encode = (obj: object, opt: {} = {}) => {
   if (opt.align) {
     padToChars = safe(
       keys
-        .filter((k) => obj[k] === null || Array.isArray(obj[k]) || typeof obj[k] !== 'object')
+        .filter(
+          (k) =>
+            obj[k] === null ||
+            Array.isArray(obj[k]) ||
+            typeof obj[k] !== 'object'
+        )
         .map((k) => (Array.isArray(obj[k]) ? `${k}[]` : k))
         .concat([''])
         .reduce((a, b) => (safe(a).length >= safe(b).length ? a : b))
@@ -577,58 +590,66 @@ function splitSections(str: string, separator: string) {
 }
 
 // skin.ini to json
-const decode = (str: String) => {
-  // 1. 初始化容器
+const decode = (str: string): object => {
+  // 1. Initial Container
   const out = Object.create(null)
-  // [section]指针
+  // [section] Pointer
   let p = out
   // Section
   let section = null
 
-  // 2. 分割ini文件字符串
-  const lines = str.split(/[\r\n]+/g) // 分割后的字符串数组
-  //          section          |key      : value
-  const re = /^\[([^\]]*)\]\s*$|^([^:]+)(:(.*))?$/i // 判断用的正则表达式
+  // 2. Split the INI file string into an array of lines
+  const lines = str.split(/[\r\n]+/g)
+  /* Define a regular expression to match:
+   *    section header in the format [section]
+   *    key-value pair in the format key:value
+   */
+  //             section            |      key:value
+  const regular = /^\[([^\]]*)\]\s*$|^([^:]+)(:(.*))?$/i
 
-  // 区分各个Mania集的后缀
+  // Use index to distinguish between different Mania objects
   let maniaIndex: number = 0
 
-  // 3. 遍历字符串数组的行
+  // 3. Traverse all lines in the string array
   for (const line of lines) {
-    // 检查：line为空  /  若干个空白字符开头并包含;和#  / 全部是空白字符 / 注释
-    if (!line || line.match(/^\s*[;#]/) || line.match(/^\s*$/) || line.match(/^\/\//)) {
+    if (
+      // Check if the line is null or undefined
+      !line ||
+      // Check if the header contains empty characters, ';' or '#'
+      line.match(/^\s*[;#]/) ||
+      // Check if the line is empty (consisting of all empty characters)
+      line.match(/^\s*$/) ||
+      // Check if the line is a comment
+      line.match(/^\/\//)
+    ) {
       continue
     }
 
-    // 检查：是否为[section]或是key:value的格式
-    const match = line.match(re)
+    // Check if the line is in the format of [section] | key:value
+    const match = line.match(regular)
     if (!match) {
       continue
     }
-    // console.log(match)
 
-    // 解析：[Section]
+    // [Section]
     if (match[1] !== undefined) {
       section = unsafe(match[1])
-      // 如果是Mania，则在Mania后加个数字以区别
+      // If it is a [Mania] section, append a number to distinguish it from others
       if (section === 'Mania') {
-        p = out['Mania' + maniaIndex] = out['Mania' + maniaIndex] || Object.create(null)
+        p = out['Mania' + maniaIndex] =
+          out['Mania' + maniaIndex] || Object.create(null)
         maniaIndex++
-        continue
+      } else {
+        p = out[section] = out[section] || Object.create(null)
       }
-      p = out[section] = out[section] || Object.create(null)
-      continue
     }
-
-    // 解析：键:值
-    const key = unsafe(match[2])
-    const nativeValue = match[4].split('//')[0] // 分割注释
-    const value = unsafe(nativeValue) // 格式化值
-    // 赋值
-    p[key] = value
-
-    // 控制台输出
-    // console.log(section, key, value)
+    // key:value
+    else {
+      const key = unsafe(match[2])
+      const nativeValue = match[4].split('//')[0] // Delete comments
+      const value = unsafe(nativeValue)
+      p[key] = value
+    }
   }
 
   return out
@@ -636,7 +657,10 @@ const decode = (str: String) => {
 
 // 检查引号
 const isQuoted = (val: string) => {
-  return (val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))
+  return (
+    (val.startsWith('"') && val.endsWith('"')) ||
+    (val.startsWith("'") && val.endsWith("'"))
+  )
 }
 
 // 编码时修正字符串

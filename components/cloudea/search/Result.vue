@@ -49,7 +49,7 @@ const isScrollAtBottom = () => {
         >
           <div class="item-header">
             <div class="title">{{ item.Title }}</div>
-            <!-- <div class="creator">{{ item.Creator.DisplayName }}</div> -->
+            <div class="creator">{{ item.Creator.DisplayName }}</div>
           </div>
           <div class="item-body">
             {{ markdownToText(item.Content) }}
@@ -152,6 +152,7 @@ const isScrollAtBottom = () => {
           height: 24px;
           display: flex;
           align-items: baseline;
+          justify-content: space-between;
 
           .title {
             font-size: 1.2rem;
@@ -175,6 +176,10 @@ const isScrollAtBottom = () => {
 
           & > * {
             margin-left: 10px;
+
+            &:first-child {
+              margin-left: 0;
+            }
           }
 
           .time {
