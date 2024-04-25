@@ -99,14 +99,9 @@ interface Mania {
   ColourBreak: UnitOption
 }
 
-class UnitOption {
+interface UnitOption {
   defaultVal: string | boolean
   profile: string
-
-  constructor(newDefault: string | boolean, newProfile: string) {
-    this.defaultVal = newDefault
-    this.profile = newProfile
-  }
 }
 
 const skinIniTransText: SkinIni = {
@@ -430,32 +425,37 @@ const skinIniTransText: SkinIni = {
   }
 }
 
-const getTrans = (Section: string, item: string) => {
-  // Mania修正
-  if (Section.match(/^Mania/)) {
-    Section = 'Mania'
+const getTrans = (section: string, item: string): UnitOption => {
+  // Mania section
+  if (section.match(/^Mania/)) {
+    section = 'Mania'
   }
-  // 数字修正
+  // item number
   if (item.match(/[0-9]/g)) {
     item = item.replace(/[0-9]/g, '')
   }
 
-  let keya: keyof SkinIni
-  for (keya in skinIniTransText) {
-    if (keya == Section && !!skinIniTransText[keya]) {
-      const sub = skinIniTransText[keya]
-      for (const keyb in sub) {
-        if (keyb == item) {
-          const result = skinIniTransText[keya][keyb]
-          return new UnitOption(
-            result.defaultVal == '' ? '无' : result.defaultVal,
-            result.profile == '' ? '无' : result.profile
-          )
-        }
+  const sectionObj:
+    | General
+    | Colours
+    | Fonts
+    | CatchTheBeat
+    | Mania
+    | undefined = Reflect.get(skinIniTransText, section)
+  if (sectionObj) {
+    const itemObj: UnitOption | undefined = Reflect.get(sectionObj, item)
+    if (itemObj) {
+      return {
+        defaultVal: itemObj.defaultVal == '' ? '无' : itemObj.defaultVal,
+        profile: itemObj.profile == '' ? '无' : itemObj.profile
       }
     }
   }
-  return new UnitOption('无', '无')
+
+  return {
+    defaultVal: '无',
+    profile: '无'
+  }
 }
 
 // json to skin.ini
