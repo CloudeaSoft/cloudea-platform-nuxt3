@@ -78,6 +78,7 @@ const initCarousel = () => {
 
 onMounted(() => {
   imageCount.value = itemRefs.value.length
+  currentIndex.value = useSettingStore().getCurrentBackgroundIndex() - 1
   initCarousel()
 })
 </script>

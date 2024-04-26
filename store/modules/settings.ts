@@ -57,6 +57,9 @@ export const useSettingStore = defineStore({
       }
       return `/bg/pc-${this.systemBackground}.webp`
     },
+    getCurrentBackgroundIndex() {
+      return this.systemBackground
+    },
     // Reset to default
     async setSettingsDefault() {
       this.$reset()
