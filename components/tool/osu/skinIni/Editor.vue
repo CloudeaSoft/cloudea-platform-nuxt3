@@ -5,7 +5,7 @@ const skin = defineModel<any>()
 // 选择的Section
 const sectionOption = ref('General')
 // 预览窗口开关
-const previewVisible = ref(true)
+const previewVisible = ref(false)
 
 // 生成文件
 const buildSkin = () => {
