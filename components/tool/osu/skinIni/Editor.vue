@@ -126,6 +126,7 @@ const skinFileExist = computed(() => {
     <div
       class="skin-editor__preview"
       title="Skin.ini文件预览"
+      v-if="skinFileExist"
       v-show="previewVisible"
     >
       <div class="text-area">
