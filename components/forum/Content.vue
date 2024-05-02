@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { getPostApi } from '~/api'
+import { getPostApi, getRecommendApi } from '~/api'
 import { GUID_EMPTY } from '~/types/api/base-model.d'
+import type { PostInfo } from '~/types/api/forum-model'
 
 const sectionId = ref(GUID_EMPTY)
 const isRecommend = ref(true)
@@ -9,32 +10,27 @@ const forumIndexRef = ref<HTMLElement>()
 const pageIndex = ref(1)
 const pageSize = ref(15)
 
-const resData = await getPostApi(undefined, {
-  PageIndex: pageIndex.value,
-  PageSize: pageSize.value
-})
-
-const postList = ref(resData.value?.Data.Rows)
+const postList = ref<PostInfo[]>([])
 const maxPage = ref(1)
-maxPage.value = resData.value?.Data.Total
-  ? resData.value?.Data.Total / pageSize.value
-  : maxPage.value
 
 const handleGetPostList = async () => {
   if (!isRecommend.value) {
-    var res = await getPostApi(
+    const res = await getPostApi(
       sectionId.value !== GUID_EMPTY ? sectionId.value : undefined,
       { PageIndex: pageIndex.value, PageSize: pageSize.value }
     )
-    postList.value = res.value?.Data.Rows!
+    postList.value = postList.value?.concat(res.value?.Data.Rows!)
+    maxPage.value = res.value?.Data.Total! / pageSize.value
   } else {
-    var res = await getPostApi(
-      sectionId.value !== GUID_EMPTY ? sectionId.value : undefined,
-      { PageIndex: pageIndex.value, PageSize: pageSize.value }
-    )
-    postList.value = res.value?.Data.Rows!
+    const res = await getRecommendApi()
+    const listRes = res.value?.Data
+    if (!listRes) {
+      useMessage('', 'error')
+      return
+    }
+    postList.value = postList.value?.concat(listRes)
+    maxPage.value = 9999
   }
-  maxPage.value = res.value?.Data.Total! / pageSize.value
 }
 
 const handleSectionChange = async () => {
@@ -44,6 +40,7 @@ const handleSectionChange = async () => {
     isRecommend.value = true
   }
   pageIndex.value = 1
+  postList.value = []
   await handleGetPostList()
 
   const target = forumIndexRef.value
@@ -55,26 +52,18 @@ const handleSectionChange = async () => {
 
 const handleIsRecommendChange = async (status: boolean) => {
   isRecommend.value = status
+  postList.value = []
   await handleGetPostList()
 }
 
 const handleMorePostPage = async () => {
   pageIndex.value++
-  if (!isRecommend.value) {
-    var res = await getPostApi(
-      sectionId.value !== GUID_EMPTY ? sectionId.value : undefined,
-      { PageIndex: pageIndex.value, PageSize: pageSize.value }
-    )
-    postList.value = postList.value?.concat(res.value?.Data.Rows!)
-  } else {
-    var res = await getPostApi(
-      sectionId.value !== GUID_EMPTY ? sectionId.value : undefined,
-      { PageIndex: pageIndex.value, PageSize: pageSize.value }
-    )
-    postList.value = postList.value?.concat(res.value?.Data.Rows!)
-  }
-  console.log(postList.value)
+  await handleGetPostList()
 }
+
+onMounted(async () => {
+  await handleGetPostList()
+})
 </script>
 
 <template>

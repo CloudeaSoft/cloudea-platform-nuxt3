@@ -17,7 +17,8 @@ enum Api {
   POST_LIKE = '/forum/post/:id/like',
   POST_DISLIKE = '/forum/post/:id/dislike',
   POST_FAVORITE = '/forum/post/:id/favorite',
-  SEARCH = '/forum/search'
+  SEARCH = '/forum/search',
+  RECOMMEND = '/forum/recommend'
 }
 
 const baseAPI = useRuntimeConfig().public.CLOUDEA_API
@@ -271,6 +272,18 @@ export const getSearchApi = async (query: string, page: number) => {
     query: {
       query,
       page
+    },
+    method: 'GET',
+    ...responseHandler
+  })
+  return data
+}
+
+export const getRecommendApi = async () => {
+  const { data } = await useFetch<Result<PostInfo[]>>(Api.RECOMMEND, {
+    baseURL: baseAPI,
+    headers: {
+      Authorization: `Bearer ${useUserStore().getToken()}`
     },
     method: 'GET',
     ...responseHandler
