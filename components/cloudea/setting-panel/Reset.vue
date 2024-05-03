@@ -14,7 +14,7 @@ const handleSetDefault = async () => {
 .reset {
   font-size: 15px;
   cursor: pointer;
-  margin-top: 20px;
+  margin: 20px 0;
   color: var(--cloudea-red-5);
   border: 1px solid var(--cloudea-red-5);
   background-color: var(--cloudea-trans-white-9);

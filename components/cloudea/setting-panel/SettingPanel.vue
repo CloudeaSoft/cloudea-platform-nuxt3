@@ -75,6 +75,7 @@ const props = defineProps<{
 
   overflow: hidden;
   transition: right 0.5s;
+  padding: 0 20px;
 }
 
 .setting-panel.active {
@@ -83,7 +84,7 @@ const props = defineProps<{
 
 .container {
   position: relative;
-  margin: 20px;
+  margin-top: 20px;
   font-size: 17px;
 }
 
