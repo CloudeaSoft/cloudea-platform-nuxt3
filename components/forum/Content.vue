@@ -51,9 +51,11 @@ const handleSectionChange = async () => {
 }
 
 const handleIsRecommendChange = async (status: boolean) => {
-  isRecommend.value = status
-  postList.value = []
-  await handleGetPostList()
+  if (isRecommend.value != status) {
+    isRecommend.value = status
+    postList.value = []
+    await handleGetPostList()
+  }
 }
 
 const handleMorePostPage = async () => {

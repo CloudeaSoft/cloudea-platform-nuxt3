@@ -11,8 +11,11 @@ const sectionList = await getSectionApi()
 const sectionIdModel = defineModel<string>()
 
 const handleSelect = (sectionId: string) => {
-  sectionIdModel.value = sectionId
-  emits('change')
+  if (sectionIdModel.value !== sectionId) {
+    console.log(sectionIdModel.value, sectionId)
+    sectionIdModel.value = sectionId
+    emits('change')
+  }
 }
 </script>
 
