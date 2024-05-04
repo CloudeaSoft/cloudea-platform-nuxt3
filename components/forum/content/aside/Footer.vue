@@ -13,7 +13,7 @@ const info = ref({
         <NuxtLinkLocale to="/" rel="nofollow">使用指南</NuxtLinkLocale>
       </li>
       <li class="item">
-        <NuxtLinkLocale to="/" rel="nofollow">用户协议</NuxtLinkLocale>
+        <NuxtLinkLocale to="/agreement" rel="nofollow">用户协议</NuxtLinkLocale>
       </li>
       <li class="item">
         <NuxtLinkLocale to="/privacy" rel="nofollow">隐私政策</NuxtLinkLocale>
