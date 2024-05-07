@@ -45,6 +45,8 @@ const props = defineProps<{
 
   .content-body {
     padding: 0 20px;
+    // overflow-y: auto;
+    height: calc(100% - 50px);
   }
 }
 </style>

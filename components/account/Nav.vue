@@ -26,6 +26,24 @@ const navItemList = ref([
     icon: 'mail'
   }
 ])
+
+const forumNavItemList = ref([
+  {
+    name: 'history',
+    route: '/account/history',
+    icon: 'history'
+  },
+  {
+    name: 'likes',
+    route: '/account/likes',
+    icon: 'thumbs-up'
+  },
+  {
+    name: 'favorites',
+    route: '/account/favorites',
+    icon: 'star'
+  }
+])
 </script>
 
 <template>
@@ -44,6 +62,20 @@ const navItemList = ref([
           <span class="nav-item-name">
             {{ $t(`account.nav.${item.name}`) }}
           </span>
+        </li>
+      </NuxtLinkLocale>
+    </ul>
+    <ul class="nav-ul">
+      <NuxtLinkLocale
+        v-for="(item, index) in forumNavItemList"
+        :key="index"
+        :to="item.route"
+      >
+        <li class="nav-item">
+          <i class="nav-item-icon"><Icon :name="'lucide:' + item.icon" /></i>
+          <span class="nav-item-name">
+            {{ $t(`account.nav.${item.name}`) }}</span
+          >
         </li>
       </NuxtLinkLocale>
     </ul>

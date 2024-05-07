@@ -6,6 +6,10 @@ useHead({
     {
       name: 'description',
       content: t('meta.home.description')
+    },
+    {
+      name: 'msvalidate.01',
+      content: '85939193CA616FE26C0A5996AF494D83'
     }
   ]
 })

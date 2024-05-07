@@ -88,7 +88,10 @@
             "setting": "我的信息",
             "avatar": "我的头像",
             "security": "账号安全",
-            "notice": "消息通知"
+            "notice": "消息通知",
+            "history": "浏览历史",
+            "likes": "点赞过的",
+            "favorites": "收藏过的"
         },
         "setting": {
             "displayName": "昵称",

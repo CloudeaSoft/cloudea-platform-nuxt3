@@ -116,7 +116,11 @@ const handleCleanAvatar = () => {
       >
         {{ $t('account.avatar.upload') }}
       </CloudeaForumButton>
-      <CloudeaForumButton @click="handleCleanAvatar" :disabled="showDragger()">
+      <CloudeaForumButton
+        type="danger"
+        @click="handleCleanAvatar"
+        :disabled="showDragger()"
+      >
         {{ $t('account.avatar.clean') }}
       </CloudeaForumButton>
     </div>

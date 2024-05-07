@@ -18,7 +18,10 @@ enum Api {
   POST_DISLIKE = '/forum/post/:id/dislike',
   POST_FAVORITE = '/forum/post/:id/favorite',
   SEARCH = '/forum/search',
-  RECOMMEND = '/forum/recommend'
+  RECOMMEND = '/forum/recommend',
+  USER_HISTORY = '/forum/user/history',
+  USER_LIKE = '/forum/user/likes',
+  USER_FAVORITE = '/forum/user/favorites'
 }
 
 const baseAPI = useRuntimeConfig().public.CLOUDEA_API
@@ -288,5 +291,62 @@ export const getRecommendApi = async () => {
     method: 'GET',
     ...responseHandler
   })
+  return data
+}
+
+export const getUserHistoryApi = async (request: PageRequest) => {
+  const { data } = await useFetch<Result<PageResponse<PostInfo>>>(
+    Api.USER_HISTORY,
+    {
+      baseURL: baseAPI,
+      headers: {
+        Authorization: `Bearer ${useUserStore().getToken()}`
+      },
+      params: {
+        page: request.PageIndex,
+        limit: request.PageSize
+      },
+      method: 'GET',
+      ...responseHandler
+    }
+  )
+  return data
+}
+
+export const getUserLikeApi = async (request: PageRequest) => {
+  const { data } = await useFetch<Result<PageResponse<PostInfo>>>(
+    Api.USER_LIKE,
+    {
+      baseURL: baseAPI,
+      headers: {
+        Authorization: `Bearer ${useUserStore().getToken()}`
+      },
+      params: {
+        page: request.PageIndex,
+        limit: request.PageSize
+      },
+      method: 'GET',
+      ...responseHandler
+    }
+  )
+  return data
+}
+
+export const getUserFavoriteApi = async (request: PageRequest) => {
+  const { data } = await useFetch<Result<PageResponse<PostInfo>>>(
+    Api.USER_FAVORITE,
+    {
+      baseURL: baseAPI,
+      headers: {
+        Authorization: `Bearer ${useUserStore().getToken()}`
+      },
+      params: {
+        page: request.PageIndex,
+        limit: request.PageSize
+      },
+      method: 'GET',
+      ...responseHandler
+    }
+  )
   return data
 }
