@@ -2,37 +2,46 @@
 import * as echarts from 'echarts'
 import type { PoolInfo, RarityInfo } from '~/types/api/arknights-model'
 
+const colorMode = useColorMode()
+
+const theme = colorMode.value
+
 const { data } = defineProps<{ data: PoolInfo }>()
 
 type EChartsOption = echarts.EChartsOption
 
 const echartRef = ref<HTMLElement>()
 
+watch(colorMode, async () => {
+  await getEchart()
+})
+
 onMounted(async () => {
   await getEchart()
 })
 
-// 饼图相关 - 生成
+// 生成饼图
 const getEchart = async () => {
-  await nextTick()
   try {
-    var myChart = echarts.init(echartRef.value)
+    const themeStr = theme
+    var myChart = echarts.init(echartRef.value, themeStr)
     var opt = initPoolOption(data)
     hideEmpty(opt)
     myChart.clear()
     myChart.setOption(opt, true)
-    window.addEventListener(
-      'resize',
-      () => {
-        myChart.resize()
-      },
-      { passive: true }
-    )
+    // window.addEventListener(
+    //   'resize',
+    //   () => {
+    //     myChart.resize()
+    //   },
+    //   { passive: true }
+    // )
   } catch (err) {
     console.log('生成图表时发送错误')
   }
 }
-// 饼图相关 - 隐藏值为0的条目的相关内容
+
+// 隐藏值为0的条目的相关内容
 const hideEmpty = (opt: EChartsOption) => {
   if (!Array.isArray(opt.series)) {
     return
@@ -52,7 +61,8 @@ const hideEmpty = (opt: EChartsOption) => {
     }
   })
 }
-// 饼图相关 - 初始化的卡池图表参数对象
+
+// 初始化的卡池图表参数对象
 const initPoolOption = (poolData: PoolInfo): EChartsOption => {
   const option: echarts.EChartsOption = {
     title: {
@@ -60,7 +70,7 @@ const initPoolOption = (poolData: PoolInfo): EChartsOption => {
       left: 'center',
       top: 25,
       textStyle: {
-        color: '#000'
+        // color: '#000'
       }
     },
     grid: {
@@ -110,11 +120,7 @@ const initPoolOption = (poolData: PoolInfo): EChartsOption => {
   <div class="card-container">
     <div class="card-content">
       <div class="echart">
-        <div
-          ref="echartRef"
-          class="echart-main"
-          :style="{ width: '328px', height: '330px' }"
-        ></div>
+        <div ref="echartRef" class="echart-main"></div>
         <div class="echart-text">
           <div>
             {{
@@ -167,7 +173,7 @@ const initPoolOption = (poolData: PoolInfo): EChartsOption => {
             <span v-else>{{ data.sixAvg }}</span>
           </div>
           <div>
-            <ul>
+            <ul style="white-space: wrap">
               <li style="display: inline-block">六星历史记录:</li>
               <li
                 v-if="data.sixStarList.length == 0"
@@ -194,8 +200,9 @@ const initPoolOption = (poolData: PoolInfo): EChartsOption => {
 <style lang="scss" scoped>
 .card-container {
   width: 300px;
-  height: 490px;
-  background-color: #dbe8ff;
+  height: 540px;
+  background-color: var(--cloudea-white);
+  // background-color: #100C2A;
   box-shadow: var(--cloudea-shadow-0);
   border-radius: 10px;
   display: flex;
@@ -207,26 +214,18 @@ const initPoolOption = (poolData: PoolInfo): EChartsOption => {
   .card-content {
     .echart {
       margin-bottom: 10px;
-      /* border: 1px solid #999; */
-      box-shadow: 10px 5px 10px #dbe8ff;
       border-radius: 5px;
-      overflow: hidden;
+    }
+
+    .echart-main {
+      width: 300px;
+      height: 330px;
+      color: var(--cloudea-font-color-3);
     }
 
     .echart-text {
-      padding-left: 60px;
-      padding-top: 20px;
-      padding-bottom: 20px;
-      background-color: #dbe8ff;
-      color: #000;
-    }
-
-    header h2 {
-      font-size: 30px;
-      background: linear-gradient(to right, pink 15%, blue);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
+      padding: 30px 60px 20px;
+      color: var(--cloudea-font-color-3);
     }
   }
 }

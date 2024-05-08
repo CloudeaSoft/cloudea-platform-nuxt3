@@ -168,8 +168,9 @@ onMounted(() => {
       margin: auto;
       border-radius: 8px;
       transition: transform 1s ease-in-out;
-      background-color: #fff;
+      background-color: var(--cloudea-white);
       box-shadow: var(--cloudea-shadow);
+      border: 3px solid var(--cloudea-blue-5);
       overflow: hidden;
 
       &.is-front {

@@ -114,6 +114,8 @@ const analyzeGacha = () => {
     })
     element.sixAvg = Math.trunc(sixSum / element.sixStarList.length)
   })
+
+  analyzedData.value = reverseArr(analyzedData.value)
 }
 // 卡池分析 - 构造 新增卡池并返回卡池的index
 const initPool = (name = '未知卡池') => {
@@ -362,17 +364,23 @@ const onChartBoardEnter = () => {
 
     .gacha-chart__main {
       justify-content: center;
-      width: 100%;
-      display: flex;
+      // width: 100%;
+      // display: flex;
       transition: height 0.5s;
 
       .main-content {
         margin: 20px;
-        display: flex;
-        overflow-x: scroll;
+        white-space: nowrap;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        transform-style: preserve-3d;
 
-        & > *:last-child {
-          margin-right: 0;
+        & > * {
+          display: inline-block;
+          transform: translateZ(200px);
+          &:last-child {
+            margin-right: 0;
+          }
         }
       }
     }
