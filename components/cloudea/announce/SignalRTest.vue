@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import * as signalR from '@microsoft/signalr'
 
+const { showAnnounce } = storeToRefs(useTempSettingStore())
+
 const connection = ref<signalR.HubConnection>()
 
 const state = ref({
@@ -32,7 +34,15 @@ onMounted(async () => {
 })
 </script>
 
-<template><Teleport to="body"><div class="mask"><button @click="txtMsgOnkeypress">xxx</button></div></Teleport></template>
+<template>
+  <Teleport to="body">
+    <Transition name="search">
+      <div class="mask" v-show="showAnnounce">
+        <button @click="txtMsgOnkeypress">xxx</button>
+      </div>
+    </Transition>
+  </Teleport>
+</template>
 
 <style lang="scss" scoped>
 .mask {
