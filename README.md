@@ -1,39 +1,11 @@
-# Nuxt 3 Minimal Starter
+# cloudea-platform-nuxt3
+Cloudea Platform Front-End
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
-## Setup
-
-Make sure to install the dependencies:
-
+## Getting started
 ```bash
-# pnpm
+// install dependencies
 pnpm install
-```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# pnpm
+// run development server
 pnpm run dev
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-# pnpm
-pnpm run build
-```
-
-Locally preview production build:
-
-```bash
-# pnpm
-pnpm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
