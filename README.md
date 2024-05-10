@@ -1,5 +1,5 @@
 # cloudea-platform-nuxt3
-Cloudea Platform Front-End
+[Cloudea Platform](https://github.com/CloudeaSoft/cloudea-platform) Front-End
 
 ## Getting started
 ```bash
