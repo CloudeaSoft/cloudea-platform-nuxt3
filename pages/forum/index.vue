@@ -17,7 +17,7 @@ useHead({
 </script>
 
 <template>
-  <div class="view forum-index-view" @scroll="console.log(1)">
+  <div class="view forum-index-view">
     <ForumContent></ForumContent>
     <ForumEditLink />
   </div>
