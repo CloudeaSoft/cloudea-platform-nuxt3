@@ -1,12 +1,11 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' }
   },
-  ssr: false,
+  ssr: true,
   router: {
     options: {
-      hashMode: true
+      hashMode: false
     }
   },
   build: {
@@ -75,46 +74,46 @@ export default defineNuxtConfig({
     classPrefix: 'cloudea-',
     classSuffix: '-mode',
     storageKey: 'cloudea-color-mode'
+  },
+  pwa: {
+    registerType: 'autoUpdate',
+    // Disable pwa in development environment
+    disable: process.env.NODE_ENV === 'development',
+    manifest: {
+      name: 'Cloudea Platform',
+      short_name: 'Cloudea',
+      theme_color: '#218bff',
+      icons: [
+        {
+          src: 'pwa/pwa-192x192.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: 'pwa/pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png'
+        },
+        {
+          src: 'pwa/pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'any maskable'
+        }
+      ]
+    },
+    workbox: {
+      globPatterns: ['**/*.{js,css,png,webp,svg,ico}'],
+      navigateFallback: null
+    },
+    client: {
+      installPrompt: true
+    },
+    devOptions: {
+      enabled: true,
+      suppressWarnings: true,
+      navigateFallbackAllowlist: [/^\/$/],
+      type: 'module'
+    }
   }
-  // pwa: {
-  //   registerType: 'autoUpdate',
-  //   // Disable pwa in development environment
-  //   disable: process.env.NODE_ENV === 'development',
-  //   manifest: {
-  //     name: 'KUN Visual Novel',
-  //     short_name: 'KunGal',
-  //     theme_color: '#218bff',
-  //     icons: [
-  //       {
-  //         src: 'pwa/pwa-192x192.png',
-  //         sizes: '192x192',
-  //         type: 'image/png'
-  //       },
-  //       {
-  //         src: 'pwa/pwa-512x512.png',
-  //         sizes: '512x512',
-  //         type: 'image/png'
-  //       },
-  //       {
-  //         src: 'pwa/pwa-512x512.png',
-  //         sizes: '512x512',
-  //         type: 'image/png',
-  //         purpose: 'any maskable'
-  //       }
-  //     ]
-  //   },
-  //   workbox: {
-  //     globPatterns: ['**/*.{js,css,png,webp,svg,ico}'],
-  //     navigateFallback: null
-  //   },
-  //   client: {
-  //     installPrompt: true
-  //   },
-  //   devOptions: {
-  //     enabled: true,
-  //     suppressWarnings: true,
-  //     navigateFallbackAllowlist: [/^\/$/],
-  //     type: 'module'
-  //   }
-  // }
 })
