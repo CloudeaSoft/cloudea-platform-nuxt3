@@ -9,9 +9,12 @@ export default defineNuxtConfig({
     }
   },
   build: {
-    transpile: ['pinia-plugin-persistedstate']
+    // transpile: ['pinia-plugin-persistedstate']
   },
-  devtools: { enabled: true },
+  nitro: {},
+  devtools: {
+    enabled: true
+  },
   modules: [
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
