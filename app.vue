@@ -19,6 +19,8 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
 </template>
 
 <style lang="scss">
+@import url('@/assets/css/index.scss');
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;
