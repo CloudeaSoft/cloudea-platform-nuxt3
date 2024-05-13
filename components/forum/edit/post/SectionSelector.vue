@@ -3,13 +3,25 @@ import { getSectionApi } from '~/api'
 
 const sectionList = await getSectionApi()
 
-const model = defineModel<string>({ required: true })
-
-model.value = sectionList.value?.Data.Rows[0]?.Id!
+const model = ref<string>('')
 
 const handleSelect = (id: string) => {
   model.value = id
 }
+
+watch(model, (newValue) => {
+  const { postSection } = storeToRefs(useForumStore())
+  postSection.value = model.value
+})
+
+onMounted(() => {
+  const pS = useForumStore().postSection
+  if (!!pS.trim()) {
+    model.value = pS
+  } else {
+    model.value = sectionList.Data.Rows[0]?.Id!
+  }
+})
 </script>
 <template>
   <div class="label-selector">
@@ -54,12 +66,9 @@ const handleSelect = (id: string) => {
       }
 
       &.active {
-        // background-color: var(--cloudea-blue-5);
         cursor: inherit;
         background-color: var(--cloudea-blue-5);
-        * {
-          color: var(--cloudea-white);
-        }
+        color: var(--cloudea-white);
       }
     }
   }

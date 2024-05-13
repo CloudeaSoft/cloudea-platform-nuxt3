@@ -4,11 +4,7 @@ import { postPostApi } from '~/api'
 import { MilkdownProvider } from '@milkdown/vue'
 import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
 
-const postSection = ref('')
-
-const postTitle = ref('')
-
-const postContent = ref('')
+const {postTitle,postContent} = storeToRefs(useForumStore())
 
 const milkdownFocused = ref<boolean>()
 
@@ -22,7 +18,7 @@ const handlePost = async () => {
     return
   }
   var createRes = await postPostApi({
-    SectionId: postSection.value,
+    SectionId: useForumStore().postSection,
     Title: postTitle.value,
     Content: postContent.value
   })
@@ -34,11 +30,12 @@ const handlePost = async () => {
     useMessage('', 'error')
     return
   }
-  resetEditorContent()
+  useForumStore().$reset()
   navigateTo(useNuxtApp().$localePath(`/forum/posts/${createRes.value.Data}`))
 }
 
 const handleSave = (editorValue: string) => {
+  const { postContent } = storeToRefs(useForumStore())
   postContent.value = editorValue
 }
 
@@ -49,17 +46,13 @@ const handleFocus = () => {
 const handleBlur = () => {
   milkdownFocused.value = false
 }
-
-const resetEditorContent = () => {
-  postTitle.value = ''
-}
 </script>
 
 <template>
   <form class="topic-editor">
     <div class="editor-main">
       <div class="section-area">
-        <ForumEditPostSectionSelector v-model="postSection" />
+        <ForumEditPostSectionSelector />
       </div>
       <div class="title-area">
         <CloudeaFormInput
