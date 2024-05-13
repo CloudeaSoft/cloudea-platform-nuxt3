@@ -88,7 +88,10 @@
             "setting": "Profile",
             "avatar": "Avatar",
             "security": "Security",
-            "notice": "Message"
+            "notice": "Message",
+            "history": "History",
+            "likes": "Like",
+            "favorites": "Favorite"
         },
         "setting": {
             "displayName": "DisplayName",
