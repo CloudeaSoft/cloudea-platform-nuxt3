@@ -11,11 +11,14 @@ useHead({
 })
 </script>
 
-<template><div class="book-view view">With books we are living.</div></template>
+<template>
+  <div class="book-view view"><BookContent /></div>
+</template>
 
 <style lang="scss" scoped>
 .book-view {
   height: calc(100dvh - 6.66rem);
   color: var(--cloudea-font-color-3);
+  // display: flex;
 }
 </style>
