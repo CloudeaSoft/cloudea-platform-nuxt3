@@ -22,7 +22,7 @@ const handleLogout = () => {
   navigateTo(useNuxtApp().$localePath('/'))
 }
 
-const jumpToHome = ()=>{
+const jumpToHome = () => {
   navigateTo(useNuxtApp().$localePath('/account/home'))
 }
 </script>
@@ -38,7 +38,7 @@ const jumpToHome = ()=>{
       <div class="user-panel-container" v-show="showUserPanel" @click.prevent>
         <div class="user-panel-content">
           <div class="user-panel-list">
-            <div class="list-item">
+            <div class="list-item" @click="jumpToHome">
               {{ $t('header.avatar.center') }}
             </div>
             <div class="list-item">---</div>
