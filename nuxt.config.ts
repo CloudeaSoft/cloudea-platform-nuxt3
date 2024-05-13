@@ -8,9 +8,6 @@ export default defineNuxtConfig({
       hashMode: false
     }
   },
-  build: {
-    // transpile: ['pinia-plugin-persistedstate']
-  },
   nitro: {},
   devtools: {
     enabled: true
@@ -38,7 +35,7 @@ export default defineNuxtConfig({
   },
 
   // Development configuration
-  css: ['~/assets/css/index.scss'],
+  css: ['@/assets/css/index.scss'],
   piniaPersistedstate: {
     cookieOptions: {
       maxAge: 60 * 60 * 24 * 7,
