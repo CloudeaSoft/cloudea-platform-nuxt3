@@ -1,14 +1,3 @@
-import type { MessageStatus } from '~/types/utils/message'
-
-interface PageName {
-  index: number
-  topic: number
-  edit: number
-  pool: number
-  bylaw: number
-  technique: number
-}
-
 export interface SettingsStorePersist {
   systemPageTransparency: number
   systemFontFamily: string
