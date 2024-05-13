@@ -10,7 +10,7 @@ enum Api {
   MYPROFILE_AVATAR = '/user/profile/avatar'
 }
 
-const baseAPI = useRuntimeConfig().public.CLOUDEA_API
+const baseAPI = "https://api.cloudea.work/api"
 
 export const getProfileApi = async (id: string) => {
   const { data } = await useFetch<Result<UserProfile>>(
@@ -40,6 +40,7 @@ export const getMyProfileApi = async () => {
 }
 
 export const putMyProfileApi = async (request: UpdateUserProfileRequest) => {
+  
   const { data } = await useFetch<Result<UserProfile>>(Api.MYPROFILE, {
     baseURL: baseAPI,
     headers: {

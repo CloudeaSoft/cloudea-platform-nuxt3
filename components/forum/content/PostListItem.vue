@@ -14,6 +14,10 @@ const handleClickTag = (tag: string) => {
   console.log('tag:', tag)
 }
 
+const jumpToUser = () => {
+  navigateTo(useNuxtApp().$localePath(userLink.value))
+}
+
 const props = defineProps<{
   post: PostInfo
 }>()
@@ -49,9 +53,9 @@ const {
       <div class="entry-footer">
         <ul class="action-list">
           <li class="item meta-container">
-            <NuxtLinkLocale
+            <div
               class="user-info"
-              :to="userLink"
+              @click="jumpToUser"
               @mouseenter="showUserArea = true"
               @mouseleave="showUserArea = false"
             >
@@ -65,7 +69,7 @@ const {
                   />
                 </Transition>
               </div>
-            </NuxtLinkLocale>
+            </div>
             <div class="footer-divider"></div>
           </li>
           <li class="item date">
@@ -86,12 +90,9 @@ const {
           </li>
         </ul>
         <div class="entry-footer-tags" @click.stop="handleClickTag('test')">
-          <NuxtLinkLocale
-            class="footer-tag footer-tag-only width-limited"
-            to="/forum"
-          >
+          <div class="footer-tag footer-tag-only width-limited">
             {{ 'Linux' }}
-          </NuxtLinkLocale>
+          </div>
         </div>
       </div>
     </NuxtLinkLocale>

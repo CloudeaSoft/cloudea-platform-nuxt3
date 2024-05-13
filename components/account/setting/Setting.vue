@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { putMyProfileApi } from '~/api/user'
 
-const user = useUserStore().profile
-let oldDisplayName = user?.DisplayName
-let oldSignature = user?.Signature
-const displayName = ref(user?.DisplayName)
-const userName = ref(user?.UserName)
-const signature = ref(user?.Signature)
-const leaves = ref(user?.Leaves)
+const { profile } = storeToRefs(useUserStore())
+let oldDisplayName = profile!.value!.DisplayName
+let oldSignature = profile!.value!.Signature
+const displayName = ref(profile!.value!.DisplayName)
+const userName = ref(profile!.value!.UserName)
+const signature = ref(profile!.value!.Signature)
+const leaves = ref(profile!.value!.Leaves)
 
 const handleCommitSetting = async () => {
   if (displayName.value == oldDisplayName && signature.value == oldSignature) {

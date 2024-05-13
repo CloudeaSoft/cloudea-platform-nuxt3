@@ -71,7 +71,7 @@ const handleStatus = (status: number) => {
 }
 
 export const onResponse = (context: OnResponseContext) => {
-  handleStatus(context.response.status)
+  // handleStatus(context.response.status)
 }
 
 const onResponseError = (context: OnResponseErrorContext) => {

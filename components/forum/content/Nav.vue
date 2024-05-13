@@ -6,17 +6,21 @@ const emits = defineEmits<{
   change: []
 }>()
 
-const sectionList = await getSectionApi()
+const sectionList = ref()
 
 const sectionIdModel = defineModel<string>()
 
 const handleSelect = (sectionId: string) => {
   if (sectionIdModel.value !== sectionId) {
-    console.log(sectionIdModel.value, sectionId)
     sectionIdModel.value = sectionId
     emits('change')
   }
 }
+
+onMounted(async () => {
+  const response = await getSectionApi()
+  sectionList.value = response.Data
+})
 </script>
 
 <template>
@@ -35,7 +39,7 @@ const handleSelect = (sectionId: string) => {
         'nav-item-wrap',
         sectionIdModel === sectionItem.Id ? 'active' : ''
       ]"
-      v-for="sectionItem in sectionList?.Data.Rows"
+      v-for="sectionItem in sectionList?.Rows"
     >
       <div :class="['nav-item-content']" @click="handleSelect(sectionItem.Id)">
         <NuxtLinkLocale to="/forum" class="nav-item">

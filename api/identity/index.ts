@@ -13,7 +13,8 @@ enum Api {
   PASSWORD = '/identity/user/password'
 }
 
-const baseAPI = useRuntimeConfig().public.CLOUDEA_API
+const baseAPI = "https://api.cloudea.work/api"
+// const baseAPI = useRuntimeConfig().public.CLOUDEA_API
 
 export const vercodePostApi = async (
   email: string,

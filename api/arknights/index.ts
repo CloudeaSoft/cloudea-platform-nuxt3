@@ -5,7 +5,7 @@ enum Api {
   GACHA = '/arknights/gacha'
 }
 
-const baseAPI = useRuntimeConfig().public.CLOUDEA_API
+const baseAPI = "https://api.cloudea.work/api"
 
 export const gachaGetApi = async (token: string, channelId: number) => {
   const { data } = await useFetch<Result<GachaHistory>>(Api.GACHA, {

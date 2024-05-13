@@ -76,7 +76,7 @@ const handleChangePassword = async () => {
     <li class="security-content">
       <div class="security-content-item">
         <div class="item-label">
-          {{ `${$t('account.security.password.oldPassword')}&nbsp:&nbsp` }}
+          {{ `${$t('account.security.password.oldPassword')}` }}
         </div>
         <div class="item-content">
           <CloudeaFormInput v-model="oldPwd" />
@@ -84,7 +84,7 @@ const handleChangePassword = async () => {
       </div>
       <div class="security-content-item">
         <div class="item-label">
-          {{ `${$t('account.security.password.newPassword')}&nbsp:&nbsp` }}
+          {{ `${$t('account.security.password.newPassword')}` }}
         </div>
         <div class="item-content">
           <CloudeaFormInput v-model="newPwd" />
@@ -93,7 +93,7 @@ const handleChangePassword = async () => {
       <div class="security-content-item">
         <div class="item-label">
           {{
-            `${$t('account.security.password.newPasswordRepeat')}&nbsp:&nbsp`
+            `${$t('account.security.password.newPasswordRepeat')}`
           }}
         </div>
         <div class="item-content">

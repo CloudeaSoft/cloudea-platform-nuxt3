@@ -23,7 +23,7 @@ const handleGetPostList = async () => {
     maxPage.value = res.value?.Data.Total! / pageSize.value
   } else {
     const res = await getRecommendApi()
-    const listRes = res.value?.Data
+    const listRes = res.Data
     if (!listRes) {
       useMessage('', 'error')
       return

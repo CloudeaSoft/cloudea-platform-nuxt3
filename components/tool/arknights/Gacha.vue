@@ -1,21 +1,16 @@
 <script setup lang="ts">
 import { ChannelId } from '~/types/arknights.d'
 import { gachaGetApi } from '~/api/arknights'
-import { gachaHistoryTestData } from './gacha/TestData'
 import type { Char, GachaItem, PoolInfo } from '~/types/api/arknights-model'
 import { reverseArr } from '~/utils/array'
 
 const { t } = useI18n()
 
 // 账号令牌信息 - 保存在浏览器本地
-const gachaTokenFull = ref(
-  JSON.parse(localStorage.getItem('gachaTokenFull')!) || ''
-)
+const gachaTokenFull = ref('')
 
 // 服务器信息 - 保存在浏览器本地
-const gachaChannelId = ref<ChannelId>(
-  JSON.parse(localStorage.getItem('gachaChannelId')!) || ChannelId.Hypergraph
-)
+const gachaChannelId = ref<ChannelId>(ChannelId.Hypergraph)
 
 const showChart = ref<boolean>(false)
 const showTable = ref<boolean>(false)
@@ -238,6 +233,11 @@ const onChartBoardEnter = () => {
     chartBoardRef.value!.style.height = chartBoardHeight.value + 'px'
   }, 10)
 }
+
+onMounted(() => {
+  gachaTokenFull.value = JSON.parse(localStorage.getItem('gachaTokenFull')!)
+  gachaChannelId.value = JSON.parse(localStorage.getItem('gachaChannelId')!)
+})
 </script>
 
 <template>

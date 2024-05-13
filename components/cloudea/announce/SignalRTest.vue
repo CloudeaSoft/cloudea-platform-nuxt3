@@ -21,7 +21,7 @@ const txtMsgOnkeypress = async (e: any) => {
 
 onMounted(async () => {
   connection.value = new signalR.HubConnectionBuilder()
-    .withUrl('https://www.cloudea.work/ChatRoomHub', {
+    .withUrl('https://api.cloudea.work/ChatRoomHub', {
       skipNegotiation: true,
       transport: signalR.HttpTransportType.WebSockets
     })

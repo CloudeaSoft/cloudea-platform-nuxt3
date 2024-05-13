@@ -2,7 +2,7 @@
 import ini from '~/utils/osu-tool'
 
 // 文件内容
-const skin = ref(JSON.parse(localStorage.getItem('osu-skin')!) || null)
+const skin = ref<any>()
 
 // 选择文件
 const getSkin = (file: File) => {
@@ -32,6 +32,10 @@ watch(
   },
   { deep: true, immediate: false }
 )
+
+onMounted(() => {
+  skin.value = JSON.parse(localStorage.getItem('osu-skin')!)
+})
 </script>
 
 <template>

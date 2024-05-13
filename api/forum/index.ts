@@ -24,24 +24,21 @@ enum Api {
   USER_FAVORITE = '/forum/user/favorites'
 }
 
-const baseAPI = useRuntimeConfig().public.CLOUDEA_API
+const baseAPI = 'https://api.cloudea.work/api'
 
 export const getSectionApi = async () => {
-  const { data } = await useFetch<Result<PageResponse<ForumSection>>>(
-    Api.SECTION,
-    {
-      baseURL: baseAPI,
-      headers: {
-        Authorization: `Bearer ${useUserStore().getToken()}`
-      },
-      params: {
-        page: 1,
-        limit: 15
-      },
-      method: 'GET',
-      ...responseHandler
-    }
-  )
+  const data = await $fetch<Result<PageResponse<ForumSection>>>(Api.SECTION, {
+    baseURL: baseAPI,
+    headers: {
+      Authorization: `Bearer ${useUserStore().getToken()}`
+    },
+    params: {
+      page: 1,
+      limit: 15
+    },
+    method: 'GET',
+    ...responseHandler
+  })
   return data
 }
 
@@ -283,7 +280,7 @@ export const getSearchApi = async (query: string, page: number) => {
 }
 
 export const getRecommendApi = async () => {
-  const { data } = await useFetch<Result<PostInfo[]>>(Api.RECOMMEND, {
+  const data = await $fetch<Result<PostInfo[]>>(Api.RECOMMEND, {
     baseURL: baseAPI,
     headers: {
       Authorization: `Bearer ${useUserStore().getToken()}`

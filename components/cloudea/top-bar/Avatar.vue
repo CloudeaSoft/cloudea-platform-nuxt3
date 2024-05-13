@@ -1,8 +1,10 @@
 <script setup lang="ts">
 const showUserPanel = ref<boolean>(false)
 
+const { profile } = storeToRefs(useUserStore())
+
 const avatarStyle = () =>
-  useUserStore().profile?.AvatarUrl
+  profile!.value?.AvatarUrl
     ? `background-image: url(${useUserStore().profile?.AvatarUrl})`
     : 'background: var(--cloudea-black)'
 
@@ -19,6 +21,10 @@ const handleLogout = () => {
   useUserStore().removeToken()
   navigateTo(useNuxtApp().$localePath('/'))
 }
+
+const jumpToHome = ()=>{
+  navigateTo(useNuxtApp().$localePath('/account/home'))
+}
 </script>
 
 <template>
@@ -33,9 +39,7 @@ const handleLogout = () => {
         <div class="user-panel-content">
           <div class="user-panel-list">
             <div class="list-item">
-              <NuxtLinkLocale to="/account/home">
-                {{ $t('header.avatar.center') }}
-              </NuxtLinkLocale>
+              {{ $t('header.avatar.center') }}
             </div>
             <div class="list-item">---</div>
             <div class="list-item">---</div>
