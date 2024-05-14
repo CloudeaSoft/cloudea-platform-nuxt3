@@ -1,5 +1,9 @@
 export default defineNuxtConfig({
   app: {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1'
+    },
     pageTransition: { name: 'page', mode: 'out-in' }
   },
   ssr: true,
@@ -8,7 +12,6 @@ export default defineNuxtConfig({
       hashMode: false
     }
   },
-  nitro: {},
   devtools: {
     enabled: true
   },
