@@ -17,8 +17,6 @@ useHead({
 
 <style lang="scss" scoped>
 .book-view {
-  height: calc(100dvh - 6.66rem);
   color: var(--cloudea-font-color-3);
-  // display: flex;
 }
 </style>
