@@ -1,4 +1,48 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const status = ref<number>(0)
+const statusList = [
+  {
+    value: 0,
+    name: '全部'
+  },
+  {
+    value: 1,
+    name: '连载中'
+  },
+  {
+    value: 2,
+    name: '已完结'
+  },
+  {
+    value: 3,
+    name: '短篇'
+  }
+]
+
+const update = ref<number>(0)
+const updateList = [
+  {
+    value: 0,
+    name: '全部'
+  },
+  {
+    value: 1,
+    name: '三日内'
+  },
+  {
+    value: 2,
+    name: '七日内'
+  },
+  {
+    value: 3,
+    name: '半月内'
+  },
+  {
+    value: 4,
+    name: '一月内'
+  }
+]
+</script>
 
 <template>
   <div class="range-sidebar">
@@ -6,19 +50,25 @@
       <div class="work-filter">
         <h3 class="filter-title">状态</h3>
         <ul class="filter-body">
-          <li class="active">全部</li>
-          <li>连载</li>
-          <li>完本</li>
+          <li
+            :class="status === item.value ? 'active' : ''"
+            @click="status = item.value"
+            v-for="item in statusList"
+          >
+            {{ item.name }}
+          </li>
         </ul>
       </div>
       <div class="work-filter">
         <h3 class="filter-title">更新时间</h3>
         <ul class="filter-body">
-          <li class="active">全部</li>
-          <li>三日内</li>
-          <li>七日内</li>
-          <li>半月内</li>
-          <li>一月内</li>
+          <li
+            :class="update === item.value ? 'active' : ''"
+            @click="update = item.value"
+            v-for="item in updateList"
+          >
+            {{ item.name }}
+          </li>
         </ul>
       </div>
     </div>
@@ -55,6 +105,7 @@
         min-height: 27px;
 
         li {
+          cursor: pointer;
           float: left;
           height: 20px;
           margin-bottom: 8px;
@@ -63,9 +114,13 @@
           text-align: center;
           line-height: 20px;
 
+          &:hover {
+            background-color: var(--cloudea-blue-2);
+          }
+
           &.active {
-            background-color: black;
-            color: white;
+            background-color: var(--cloudea-black);
+            color: var(--cloudea-white);
           }
         }
       }

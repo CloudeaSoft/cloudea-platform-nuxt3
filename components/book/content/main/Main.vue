@@ -40,13 +40,15 @@
         </div>
       </li>
     </ul>
-    <div class="page-box">page</div>
+    <div class="page-box">
+      <!-- <CloudeaPagination/> -->
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .main-content-wrap {
-  width: 914px;
+  width: 894px;
 
   .tool-bar {
     background-color: #f7f6f2;
@@ -125,7 +127,7 @@
 
     li {
       float: left;
-      width: 457px;
+      width: 447px;
       display: flex;
 
       border-top: 1px solid #c6c6c6;
@@ -139,9 +141,8 @@
       }
 
       .book-mid-info {
-        width: 324px;
+        width: 314px;
         margin-right: 16px;
-        //background-color: green;
 
         .title {
           font:

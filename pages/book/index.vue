@@ -18,5 +18,6 @@ useHead({
 <style lang="scss" scoped>
 .book-view {
   color: var(--cloudea-font-color-3);
+  padding-bottom: 20px;
 }
 </style>
