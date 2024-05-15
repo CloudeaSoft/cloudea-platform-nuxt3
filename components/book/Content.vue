@@ -12,6 +12,7 @@
 <style lang="scss" scoped>
 .book-container {
   padding: 20px 30px;
+  min-width: 1200px;
 
   .book-content {
     display: flex;

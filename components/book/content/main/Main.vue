@@ -1,14 +1,43 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const bookListStyle = ref<boolean>(true)
+
+const list = ref<any[]>([])
+onMounted(() => {
+  for (let i = 0; i < 20; i++) {
+    list.value.push({
+      name: '标题aa',
+      author: '作者aa',
+      intro:
+        '在此填写文章的简介描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述。',
+      status: 0,
+      coverUrl: '',
+      total: '总字数a',
+      type: '类别a',
+      update: '最后更新时间aa',
+      latestChapter: {
+        title: '最新章节aa',
+        link: '链接'
+      }
+    })
+  }
+})
+</script>
 
 <template>
   <div class="main-content-wrap">
     <div class="tool-bar">
       <div class="view-mode">
-        <a class="iconfont active">
+        <a
+          :class="['iconfont', bookListStyle ? 'active' : '']"
+          @click="bookListStyle = true"
+        >
           <Icon name="lucide:layout-grid" />
         </a>
         <em>|</em>
-        <a class="iconfont">
+        <a
+          :class="['iconfont', bookListStyle ? '' : 'active']"
+          @click="bookListStyle = false"
+        >
           <Icon name="lucide:text" />
         </a>
       </div>
@@ -19,29 +48,11 @@
         <div class="sort-count">共10000本相关作品</div>
       </div>
     </div>
-    <ul class="all-book-list">
-      <li v-for="bookItem in 20" :key="bookItem">
-        <div class="book-img-box"></div>
-        <div class="book-mid-info">
-          <h2 class="title"><a>title</a></h2>
-          <p class="author">
-            <a href="" class="name">作者</a>
-            <em>|</em>
-            <span>连载中</span>
-          </p>
-          <p class="intro">
-            在此填写文章的简介描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述。
-          </p>
-          <p class="update">
-            <span>字数</span>
-            <em>|</em>
-            <a>卷号</a>
-          </p>
-        </div>
-      </li>
-    </ul>
+    <BookContentMainImgTextList :book-list="list" v-if="bookListStyle" />
+    <BookContentMainOnlyTextList :book-list="list" v-else />
     <div class="page-box">
       <!-- <CloudeaPagination/> -->
+      pagination
     </div>
   </div>
 </template>
@@ -77,6 +88,15 @@
         min-width: 16px;
 
         display: flex;
+
+        transition:
+          color 0.3s ease-out,
+          background-color 0.3s;
+        cursor: pointer;
+
+        &:hover {
+          color: #666;
+        }
 
         &.active {
           color: #262626;
@@ -119,110 +139,9 @@
     }
   }
 
-  .all-book-list {
-    :first-child,
-    :first-child + li {
-      border: none;
-    }
-
-    li {
-      float: left;
-      width: 447px;
-      display: flex;
-
-      border-top: 1px solid #c6c6c6;
-      padding: 25px 0;
-
-      .book-img-box {
-        height: 136px;
-        width: 102px;
-        margin-right: 16px;
-        background-color: #fff;
-      }
-
-      .book-mid-info {
-        width: 314px;
-        margin-right: 16px;
-
-        .title {
-          font:
-            18px / 24px PingFangSC-Regular,
-            HelveticaNeue-Light,
-            Helvetica Neue Light,
-            Microsoft YaHei,
-            'sans-serif';
-          height: 24px;
-          margin-bottom: 8px;
-          overflow: hidden;
-        }
-
-        .author {
-          height: 16px;
-          margin-bottom: 6px;
-          overflow: hidden;
-
-          a {
-            color: #a6a6a6;
-            float: left;
-            line-height: 16px;
-          }
-
-          em {
-            color: #e6e6e6;
-            float: left;
-            font-family: Arial;
-            margin: 1px 8px 0;
-          }
-
-          span {
-            color: #a6a6a6;
-            float: left;
-            line-height: 16px;
-          }
-        }
-
-        .intro {
-          color: #666;
-          font-size: 14px;
-          height: 48px;
-          line-height: 24px;
-          margin-bottom: 8px;
-
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        .update {
-          line-height: 22px;
-          white-space: nowrap;
-
-          span {
-            vertical-align: middle;
-          }
-
-          em {
-            color: #b5b5b5;
-            display: inline-block;
-            vertical-align: middle;
-            font-family: Arial;
-            margin: 0 5px;
-          }
-
-          a {
-            color: #3f5a93;
-            display: inline-block;
-            max-width: 150px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            vertical-align: middle;
-            white-space: nowrap;
-          }
-        }
-      }
-    }
+  .page-box {
+    min-height: 25px;
+    padding: 40px 0;
   }
 }
 </style>

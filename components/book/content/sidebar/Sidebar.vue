@@ -16,6 +16,10 @@ const statusList = [
   {
     value: 3,
     name: '短篇'
+  },
+  {
+    value: 4,
+    name: '长篇'
   }
 ]
 
@@ -106,7 +110,7 @@ const updateList = [
 
         li {
           cursor: pointer;
-          float: left;
+          display: inline-block;
           height: 20px;
           margin-bottom: 8px;
           margin-right: 8px;
