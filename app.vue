@@ -8,7 +8,7 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
     <CloudeaSearch />
     <CloudeaAnnounceSignalRTest />
     <NuxtPwaManifest />
-    <NuxtLoadingIndicator
+    <CloudeaLoadingIndicator
       :height="3"
       color="repeating-linear-gradient(90deg, #2ae0c8, #cbf5fb)"
       :duration="2000"
