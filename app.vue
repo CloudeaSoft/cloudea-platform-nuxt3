@@ -7,6 +7,7 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
     <CloudeaSettingPanel :show="showSettingPanel" />
     <CloudeaSearch />
     <CloudeaAnnounceSignalRTest />
+    <NuxtPwaManifest />
     <NuxtLoadingIndicator
       :height="3"
       color="repeating-linear-gradient(90deg, #2ae0c8, #cbf5fb)"
@@ -43,6 +44,6 @@ const { showSettingPanel } = storeToRefs(useTempSettingStore())
 
 .fold-enter-active,
 .fold-leave-active {
-  transition: height 0.5s ease; /* 设置过渡效果 */
+  transition: height 0.5s ease;
 }
 </style>

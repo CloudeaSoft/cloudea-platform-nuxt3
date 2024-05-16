@@ -59,7 +59,7 @@ export default defineNuxtConfig({
         file: 'en-us.json'
       }
     ],
-    baseUrl: process.env.CLOUDEA_PLATFORM_URL,
+    baseUrl: process.env.CLOUDEA_URL,
     defaultLocale: 'zh-cn',
     strategy: 'prefix_except_default',
     detectBrowserLanguage: {
@@ -80,31 +80,14 @@ export default defineNuxtConfig({
   },
   pwa: {
     registerType: 'autoUpdate',
-    // Disable pwa in development environment
     disable: process.env.NODE_ENV === 'development',
     manifest: {
       name: 'Cloudea Platform',
       short_name: 'Cloudea',
       theme_color: '#218bff',
-      icons: [
-        {
-          src: 'pwa/pwa-192x192.png',
-          sizes: '192x192',
-          type: 'image/png'
-        },
-        {
-          src: 'pwa/pwa-512x512.png',
-          sizes: '512x512',
-          type: 'image/png'
-        },
-        {
-          src: 'pwa/pwa-512x512.png',
-          sizes: '512x512',
-          type: 'image/png',
-          purpose: 'any maskable'
-        }
-      ]
+      icons: undefined
     },
+    strategies: 'generateSW',
     workbox: {
       globPatterns: ['**/*.{js,css,png,webp,svg,ico}'],
       navigateFallback: null
@@ -112,11 +95,12 @@ export default defineNuxtConfig({
     client: {
       installPrompt: true
     },
-    devOptions: {
-      enabled: true,
-      suppressWarnings: true,
-      navigateFallbackAllowlist: [/^\/$/],
-      type: 'module'
-    }
+    injectRegister: 'auto'
+    // devOptions: {
+    //   enabled: true,
+    //   suppressWarnings: true,
+    //   navigateFallbackAllowlist: [/^\/$/],
+    //   type: 'module'
+    // }
   }
 })
