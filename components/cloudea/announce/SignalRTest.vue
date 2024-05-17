@@ -3,20 +3,19 @@ import * as signalR from '@microsoft/signalr'
 
 const { showAnnounce } = storeToRefs(useTempSettingStore())
 
+showAnnounce.value = true
+
 const connection = ref<signalR.HubConnection>()
 
-const state = ref({
-  userMsg: '123',
-  messages: []
-})
+const userMsg = ref<string>('')
+const msgHistory = ref<string[]>(['消息列表'])
 
-const txtMsgOnkeypress = async (e: any) => {
-  if (e.keyCode != 13) return
-  if (!connection.value) {
-    return
-  }
-  await connection.value.invoke('SendMessage', state.value.userMsg)
-  state.value.userMsg = ''
+const txtMsgOnkeypress = async (e: KeyboardEvent) => {
+  if (!connection.value) return
+
+  await connection.value.invoke('SendMessage', userMsg.value)
+
+  userMsg.value = ''
 }
 
 onMounted(async () => {
@@ -28,8 +27,9 @@ onMounted(async () => {
     .withAutomaticReconnect()
     .build()
   await connection.value.start()
-  connection.value.on('PublicMsgReceived', (msg: never) => {
-    state.value.messages.push(msg)
+  connection.value.on('SendMessage', (data) => {
+    console.log(data)
+    msgHistory.value.push(data)
   })
 })
 </script>
@@ -38,7 +38,18 @@ onMounted(async () => {
   <Teleport to="body">
     <Transition name="search">
       <div class="mask" v-show="showAnnounce">
-        <button @click="txtMsgOnkeypress">xxx</button>
+        <input
+          type="text"
+          v-model="userMsg"
+          @keypress.enter="txtMsgOnkeypress"
+        />
+        <div>
+          <ul>
+            <li v-for="(msg, index) in msgHistory" :key="index">
+              {{ msg }}
+            </li>
+          </ul>
+        </div>
       </div>
     </Transition>
   </Teleport>
@@ -58,5 +69,13 @@ onMounted(async () => {
 
   transition: opacity 0.3s ease-in-out;
   background-color: var(--cloudea-mask-color-0);
+
+  button {
+    height: 100px;
+  }
+
+  input {
+    height: 100px;
+  }
 }
 </style>
