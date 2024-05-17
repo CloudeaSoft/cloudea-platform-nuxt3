@@ -27,7 +27,7 @@ onMounted(async () => {
     .withAutomaticReconnect()
     .build()
   await connection.value.start()
-  connection.value.on('SendMessage', (data) => {
+  connection.value.on('PublicMsgReceived', (data) => {
     console.log(data)
     msgHistory.value.push(data)
   })
