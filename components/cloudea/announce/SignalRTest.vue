@@ -3,8 +3,6 @@ import * as signalR from '@microsoft/signalr'
 
 const { showAnnounce } = storeToRefs(useTempSettingStore())
 
-showAnnounce.value = true
-
 const connection = ref<signalR.HubConnection>()
 
 const userMsg = ref<string>('')

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const isShowTransparency = ref(true)
 
-const { showSettingPanel } = storeToRefs(useTempSettingStore())
+const { showSettingPanel, showAnnounce } = storeToRefs(useTempSettingStore())
 
 const props = defineProps<{
   show: boolean
@@ -52,6 +52,11 @@ const props = defineProps<{
       </div>
 
       <CloudeaSettingPanelBackground />
+
+      <div>
+        <span>Show Announce</span>
+        <input type="checkbox" v-model="showAnnounce" />
+      </div>
 
       <CloudeaSettingPanelReset />
     </div>
